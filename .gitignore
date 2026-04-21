@@ -1,0 +1,11 @@
+node_modules
+.next
+out
+.env*.local
+.DS_Store
+*.log
+.vercel
+
+# Local SQLite store for the CMS
+/data/*.db
+/data/*.db-journal

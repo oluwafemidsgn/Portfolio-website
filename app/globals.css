@@ -1,0 +1,271 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens
+ * ---------------------------------------------------------------
+ * Palette values live directly on the Tailwind-generated
+ * `--color-*` variables so every `bg-ink`, `text-paper`, etc.
+ * resolves through them. To theme the site we just override the
+ * same variables on `:root[data-theme="dark"]`.
+ */
+@theme {
+  --color-ink: #000000;
+  --color-paper: #ffffff;
+  --color-strong: #484848;
+  --color-body: #bcbcbc;
+  --color-mute: #d9d9d9;
+
+  --font-display: var(--font-nohemi), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-nohemi), ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: light;
+  --rule: #e5e5e5;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-ink: #ffffff;
+  --color-paper: #0b0b0b;
+  --color-strong: #c8c8c8;
+  --color-body: #7a7a7a;
+  --color-mute: #1c1c1c;
+  --rule: #262626;
+}
+
+html,
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "ss02", "kern", "liga", "calt";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transition: background-color 350ms ease, color 350ms ease;
+}
+
+/*
+ * Typography tokens
+ * ---------------------------------------------------------------
+ * These mirror the exact settings captured from the Figma file.
+ * Use the utility classes below on block-level text elements.
+ */
+
+/* Display titles — 36px uppercase Extra Bold with -0.36px tracking.
+   -0.36 / 36 = -0.01em (applied as tracking-tight). */
+.t-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(28px, 2.5vw, 36px);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+/* Hero display — larger than section titles, still Extra Bold.
+   Tracking tightens slightly as size grows. */
+.t-hero {
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(40px, 4.5vw, 64px);
+  line-height: 0.95;
+  letter-spacing: -0.015em;
+}
+
+/* Mega display — the giant email banner. Figma is 118.063px with
+   -1.1806px tracking which equals -0.01em exactly. */
+.t-mega {
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-size: clamp(40px, 8.6vw, 118px);
+  white-space: nowrap;
+}
+
+/* Body copy — 16px Medium, line-height 1.4, neutral tracking (0). */
+.t-body {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+
+/* Lead paragraph used in About — 20px Medium, same rhythm. */
+.t-lead {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
+/* Nav/eyebrow labels — 16px Medium, normal line-height, no tracking. */
+.t-nav {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: normal;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+/* Micro labels — 12px Medium uppercase, slight optical loosening so the
+   small caps breathe without becoming airy. */
+.t-micro {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+/*
+ * Layout utilities
+ * -------------------------------------------------------------- */
+
+.page-gutter {
+  padding-left: clamp(16px, 3.33vw, 64px);
+  padding-right: clamp(16px, 3.33vw, 64px);
+}
+
+/* Rule color shared by every grid line so they read as one system. */
+.rule {
+  border-color: var(--rule);
+}
+
+/* Grid frame: top + bottom hairlines for a section card. */
+.grid-frame {
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+/* Vertical rules between columns in a grid. Each direct child (except the
+   first) gets a left rule. The rule starts collapsed along its long axis
+   and grows in via CSS transition once the nearest ancestor flips
+   `data-revealed="true"` (set by the <Frame> component on view-enter). */
+.grid-col-rules > * {
+  position: relative;
+}
+.grid-col-rules > * + *::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 1px;
+  background: var(--rule);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1) 400ms;
+}
+[data-revealed="true"] .grid-col-rules > * + *::before {
+  transform: scaleY(1);
+}
+
+/* Same cascade for any horizontal divider marked `.rule-h` inside a
+   Frame. Use in place of plain `border-b` when you want it to participate
+   in the scroll-reveal choreography. */
+.rule-h {
+  position: relative;
+  border-bottom: 0 !important;
+}
+.rule-h::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--rule);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1) 500ms;
+}
+[data-revealed="true"] .rule-h::after {
+  transform: scaleX(1);
+}
+
+/* Thumbnail placeholder surface. */
+.thumb {
+  background: var(--color-mute);
+}
+
+/*
+ * CMS ink-hover — same language as the <NextCaseStudy> pill. Fills the
+ * row/card from the left with ink and inverts every text utility to
+ * paper. Implemented via background-image + background-size so it works
+ * on <tr> (which can't carry overflow:hidden) as well as plain <div>s,
+ * with no wrapper markup.
+ */
+.cms-ink-hover {
+  background-image: linear-gradient(
+    to right,
+    var(--color-ink),
+    var(--color-ink)
+  );
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  background-position: left center;
+  transition:
+    background-size 550ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 320ms ease;
+}
+.cms-ink-hover:hover {
+  background-size: 100% 100%;
+  color: var(--color-paper);
+}
+.cms-ink-hover:hover .text-ink,
+.cms-ink-hover:hover .text-body,
+.cms-ink-hover:hover .text-strong,
+.cms-ink-hover:hover .text-mute,
+.cms-ink-hover:hover a,
+.cms-ink-hover:hover button,
+.cms-ink-hover:hover cite,
+.cms-ink-hover:hover em {
+  color: var(--color-paper);
+}
+/* Keep disabled reorder arrows legible against the ink fill. */
+.cms-ink-hover:hover button:disabled {
+  color: var(--color-paper);
+  opacity: 0.35;
+}
+/* Let the row's own horizontal divider disappear into the ink fill so
+   the black reads as one solid block rather than a stripe + rule. */
+.cms-ink-hover:hover.rule-h::after,
+.cms-ink-hover:hover .rule-h::after {
+  opacity: 0;
+}
+/* Flip any solid-ink fill (e.g. the "LIVE" status dot) to paper on
+   hover so it stays visible against the black background. */
+.cms-ink-hover:hover .bg-ink {
+  background-color: var(--color-paper);
+}
+
+/* When the custom cursor is active (fine pointer, no reduced motion),
+   hide the native cursor over interactive elements so the follower is
+   the only cue. Non-fine pointers keep the native cursor. */
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  a,
+  button,
+  .thumb-card,
+  [data-cursor] {
+    cursor: none;
+  }
+}
+
+/* Fallback reveal keyframe for very old browsers or quick non-motion paths. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
