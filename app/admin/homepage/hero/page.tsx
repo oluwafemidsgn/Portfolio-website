@@ -17,10 +17,13 @@ export const dynamic = "force-dynamic";
 
 export default async function HeroAdminList() {
   if (!(await isAuthed())) redirect("/admin/login");
-  ensureSeed();
+  await ensureSeed();
 
-  const tiles = listHeroProjects();
-  const studiesById = new Map(listAll().map((s) => [s.id, s]));
+  const [tiles, allStudies] = await Promise.all([
+    listHeroProjects(),
+    listAll(),
+  ]);
+  const studiesById = new Map(allStudies.map((s) => [s.id, s]));
 
   return (
     <div className="flex flex-col gap-10">

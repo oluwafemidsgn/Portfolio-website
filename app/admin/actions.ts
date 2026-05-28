@@ -97,7 +97,7 @@ export async function createCaseStudy(formData: FormData): Promise<void> {
   await assertAuth();
   const input = parseCaseStudy(formData);
   if (!input.title) redirect("/admin/new?error=title");
-  const created = repoCreate(input);
+  const created = await repoCreate(input);
   revalidateAll(created.slug);
   redirect(`/admin/${created.id}/edit?saved=1`);
 }
@@ -109,7 +109,7 @@ export async function updateCaseStudy(
   await assertAuth();
   const input = parseCaseStudy(formData);
   if (!input.title) redirect(`/admin/${id}/edit?error=title`);
-  const updated = repoUpdate(id, input);
+  const updated = await repoUpdate(id, input);
   if (!updated) redirect("/admin");
   revalidateAll(updated!.slug);
   redirect(`/admin/${id}/edit?saved=1`);
@@ -117,22 +117,22 @@ export async function updateCaseStudy(
 
 export async function deleteCaseStudy(id: string): Promise<void> {
   await assertAuth();
-  const existing = getById(id);
-  repoRemove(id);
+  const existing = await getById(id);
+  await repoRemove(id);
   revalidateAll(existing?.slug);
   redirect("/admin");
 }
 
 export async function publishCaseStudy(id: string): Promise<void> {
   await assertAuth();
-  const updated = repoSetStatus(id, "published");
+  const updated = await repoSetStatus(id, "published");
   revalidateAll(updated?.slug);
   redirect("/admin");
 }
 
 export async function unpublishCaseStudy(id: string): Promise<void> {
   await assertAuth();
-  const updated = repoSetStatus(id, "draft");
+  const updated = await repoSetStatus(id, "draft");
   revalidateAll(updated?.slug);
   redirect("/admin");
 }
@@ -145,7 +145,7 @@ export async function unpublishCaseStudy(id: string): Promise<void> {
  */
 export async function duplicateCaseStudy(id: string): Promise<void> {
   await assertAuth();
-  const copy = repoDuplicate(id);
+  const copy = await repoDuplicate(id);
   revalidateAll(copy?.slug);
   if (!copy) redirect("/admin");
   redirect(`/admin/${copy!.id}/edit?saved=1`);

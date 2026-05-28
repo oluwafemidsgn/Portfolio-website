@@ -1,4 +1,3 @@
-import { getDb } from "./db";
 import { create, getBySlug } from "./case-studies";
 import {
   createHeroProject,
@@ -593,16 +592,17 @@ const RECOMMENDATION_SEEDS: Omit<RecommendationInput, "displayOrder">[] = [
  * seeded when their table is empty — once an admin starts editing,
  * reseeding would fight them.
  */
-export function ensureSeed() {
-  getDb();
+export async function ensureSeed(): Promise<void> {
   for (const item of ITEMS) {
-    if (!getBySlug(item.slug)) create(item);
+    if (!(await getBySlug(item.slug))) await create(item);
   }
 
-  if (listHeroProjects().length === 0) {
-    HERO_SEEDS.forEach((seed, i) => {
-      const study = seed.caseStudySlug ? getBySlug(seed.caseStudySlug) : null;
-      createHeroProject({
+  if ((await listHeroProjects()).length === 0) {
+    for (const [i, seed] of HERO_SEEDS.entries()) {
+      const study = seed.caseStudySlug
+        ? await getBySlug(seed.caseStudySlug)
+        : null;
+      await createHeroProject({
         year: seed.year,
         name: seed.name,
         discipline: seed.discipline,
@@ -612,18 +612,18 @@ export function ensureSeed() {
         caseStudyId: study?.id ?? null,
         displayOrder: i,
       });
-    });
+    }
   }
 
-  if (listPlaygroundItems().length === 0) {
-    PLAYGROUND_SEEDS.forEach((seed, i) => {
-      createPlaygroundItem({ ...seed, displayOrder: i });
-    });
+  if ((await listPlaygroundItems()).length === 0) {
+    for (const [i, seed] of PLAYGROUND_SEEDS.entries()) {
+      await createPlaygroundItem({ ...seed, displayOrder: i });
+    }
   }
 
-  if (listRecommendations().length === 0) {
-    RECOMMENDATION_SEEDS.forEach((seed, i) => {
-      createRecommendation({ ...seed, displayOrder: i });
-    });
+  if ((await listRecommendations()).length === 0) {
+    for (const [i, seed] of RECOMMENDATION_SEEDS.entries()) {
+      await createRecommendation({ ...seed, displayOrder: i });
+    }
   }
 }

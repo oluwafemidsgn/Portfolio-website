@@ -1,11 +1,6 @@
-import { getDb } from "./db";
+import { getReadyDb } from "./db";
 import type { CaseStudy, CaseStudyInput, Status } from "./types";
 import { randomUUID } from "node:crypto";
-
-/**
- * Repository for the case_studies table. All SQLite-specific concerns
- * live in this file; the rest of the app speaks pure domain types.
- */
 
 type Row = {
   id: string;
@@ -64,64 +59,69 @@ export function slugify(input: string): string {
     .slice(0, 80);
 }
 
-export function listAll(): CaseStudy[] {
-  const rows = getDb()
-    .prepare(
-      `SELECT * FROM case_studies
-       ORDER BY COALESCE(published_at, updated_at) DESC`,
-    )
-    .all() as Row[];
-  return rows.map(fromRow);
+export async function listAll(): Promise<CaseStudy[]> {
+  const db = await getReadyDb();
+  const result = await db.execute({
+    sql: `SELECT * FROM case_studies ORDER BY COALESCE(published_at, updated_at) DESC`,
+    args: [],
+  });
+  return (result.rows as unknown as Row[]).map(fromRow);
 }
 
-export function listPublished(): CaseStudy[] {
-  const rows = getDb()
-    .prepare(
-      `SELECT * FROM case_studies
-       WHERE status = 'published'
-       ORDER BY published_at DESC`,
-    )
-    .all() as Row[];
-  return rows.map(fromRow);
+export async function listPublished(): Promise<CaseStudy[]> {
+  const db = await getReadyDb();
+  const result = await db.execute({
+    sql: `SELECT * FROM case_studies WHERE status = 'published' ORDER BY published_at DESC`,
+    args: [],
+  });
+  return (result.rows as unknown as Row[]).map(fromRow);
 }
 
-export function getById(id: string): CaseStudy | null {
-  const row = getDb()
-    .prepare("SELECT * FROM case_studies WHERE id = ?")
-    .get(id) as Row | undefined;
+export async function getById(id: string): Promise<CaseStudy | null> {
+  const db = await getReadyDb();
+  const result = await db.execute({
+    sql: "SELECT * FROM case_studies WHERE id = ?",
+    args: [id],
+  });
+  const row = result.rows[0] as unknown as Row | undefined;
   return row ? fromRow(row) : null;
 }
 
-export function getBySlug(slug: string): CaseStudy | null {
-  const row = getDb()
-    .prepare("SELECT * FROM case_studies WHERE slug = ?")
-    .get(slug) as Row | undefined;
+export async function getBySlug(slug: string): Promise<CaseStudy | null> {
+  const db = await getReadyDb();
+  const result = await db.execute({
+    sql: "SELECT * FROM case_studies WHERE slug = ?",
+    args: [slug],
+  });
+  const row = result.rows[0] as unknown as Row | undefined;
   return row ? fromRow(row) : null;
 }
 
-function uniqueSlug(base: string, excludeId?: string): string {
-  const db = getDb();
+async function uniqueSlug(base: string, excludeId?: string): Promise<string> {
+  const db = await getReadyDb();
   let candidate = base || "untitled";
   let n = 1;
-  const stmt = db.prepare(
-    "SELECT id FROM case_studies WHERE slug = ? AND id IS NOT ?",
-  );
-  while ((stmt.get(candidate, excludeId ?? "") as { id: string } | undefined)) {
+  while (true) {
+    const result = await db.execute({
+      sql: "SELECT id FROM case_studies WHERE slug = ? AND id IS NOT ?",
+      args: [candidate, excludeId ?? ""],
+    });
+    if (result.rows.length === 0) break;
     n += 1;
     candidate = `${base}-${n}`;
   }
   return candidate;
 }
 
-export function create(input: CaseStudyInput): CaseStudy {
-  const db = getDb();
+export async function create(input: CaseStudyInput): Promise<CaseStudy> {
+  const db = await getReadyDb();
   const now = new Date().toISOString();
   const id = randomUUID();
-  const slug = uniqueSlug(input.slug || slugify(input.title));
+  const slug = await uniqueSlug(input.slug || slugify(input.title));
   const publishedAt = input.status === "published" ? now : null;
 
-  db.prepare(
-    `INSERT INTO case_studies
+  await db.execute({
+    sql: `INSERT INTO case_studies
        (id, slug, title, subtitle, client, role, year, type,
         cover_image, overview, accordion, blocks, status,
         created_at, updated_at, published_at)
@@ -129,43 +129,46 @@ export function create(input: CaseStudyInput): CaseStudy {
        (@id, @slug, @title, @subtitle, @client, @role, @year, @type,
         @cover_image, @overview, @accordion, @blocks, @status,
         @created_at, @updated_at, @published_at)`,
-  ).run({
-    id,
-    slug,
-    title: input.title,
-    subtitle: input.subtitle,
-    client: input.client,
-    role: input.role,
-    year: input.year,
-    type: input.type,
-    cover_image: input.coverImage,
-    overview: input.overview,
-    accordion: JSON.stringify(input.accordion),
-    blocks: JSON.stringify(input.blocks),
-    status: input.status,
-    created_at: now,
-    updated_at: now,
-    published_at: publishedAt,
+    args: {
+      id,
+      slug,
+      title: input.title,
+      subtitle: input.subtitle,
+      client: input.client,
+      role: input.role,
+      year: input.year,
+      type: input.type,
+      cover_image: input.coverImage,
+      overview: input.overview,
+      accordion: JSON.stringify(input.accordion),
+      blocks: JSON.stringify(input.blocks),
+      status: input.status,
+      created_at: now,
+      updated_at: now,
+      published_at: publishedAt,
+    },
   });
 
-  return getById(id)!;
+  return (await getById(id))!;
 }
 
-export function update(id: string, input: CaseStudyInput): CaseStudy | null {
-  const db = getDb();
-  const existing = getById(id);
+export async function update(
+  id: string,
+  input: CaseStudyInput,
+): Promise<CaseStudy | null> {
+  const existing = await getById(id);
   if (!existing) return null;
 
   const now = new Date().toISOString();
-  const slug = uniqueSlug(input.slug || slugify(input.title), id);
+  const slug = await uniqueSlug(input.slug || slugify(input.title), id);
 
-  // Preserve first-published timestamp; set it on publish if not already.
   let publishedAt = existing.publishedAt;
   if (input.status === "published" && !publishedAt) publishedAt = now;
   if (input.status === "draft") publishedAt = null;
 
-  db.prepare(
-    `UPDATE case_studies SET
+  const db = await getReadyDb();
+  await db.execute({
+    sql: `UPDATE case_studies SET
        slug = @slug,
        title = @title,
        subtitle = @subtitle,
@@ -181,41 +184,39 @@ export function update(id: string, input: CaseStudyInput): CaseStudy | null {
        updated_at = @updated_at,
        published_at = @published_at
      WHERE id = @id`,
-  ).run({
-    id,
-    slug,
-    title: input.title,
-    subtitle: input.subtitle,
-    client: input.client,
-    role: input.role,
-    year: input.year,
-    type: input.type,
-    cover_image: input.coverImage,
-    overview: input.overview,
-    accordion: JSON.stringify(input.accordion),
-    blocks: JSON.stringify(input.blocks),
-    status: input.status,
-    updated_at: now,
-    published_at: publishedAt,
+    args: {
+      id,
+      slug,
+      title: input.title,
+      subtitle: input.subtitle,
+      client: input.client,
+      role: input.role,
+      year: input.year,
+      type: input.type,
+      cover_image: input.coverImage,
+      overview: input.overview,
+      accordion: JSON.stringify(input.accordion),
+      blocks: JSON.stringify(input.blocks),
+      status: input.status,
+      updated_at: now,
+      published_at: publishedAt,
+    },
   });
 
   return getById(id);
 }
 
-export function remove(id: string): boolean {
-  const res = getDb().prepare("DELETE FROM case_studies WHERE id = ?").run(id);
-  return res.changes > 0;
+export async function remove(id: string): Promise<boolean> {
+  const db = await getReadyDb();
+  const result = await db.execute({
+    sql: "DELETE FROM case_studies WHERE id = ?",
+    args: [id],
+  });
+  return result.rowsAffected > 0;
 }
 
-/**
- * Clone an existing case study. The copy gets a new id + slug, the title
- * has "(Copy)" appended, and the status is forced back to draft so a
- * freshly duplicated study is never accidentally live. `uniqueSlug`
- * inside `create` handles slug collisions when a study is duplicated
- * multiple times in a row.
- */
-export function duplicate(id: string): CaseStudy | null {
-  const existing = getById(id);
+export async function duplicate(id: string): Promise<CaseStudy | null> {
+  const existing = await getById(id);
   if (!existing) return null;
   const title = existing.title
     ? `${existing.title} (Copy)`
@@ -236,21 +237,22 @@ export function duplicate(id: string): CaseStudy | null {
   });
 }
 
-export function setStatus(id: string, status: Status): CaseStudy | null {
-  const existing = getById(id);
+export async function setStatus(
+  id: string,
+  status: Status,
+): Promise<CaseStudy | null> {
+  const existing = await getById(id);
   if (!existing) return null;
   const now = new Date().toISOString();
   let publishedAt = existing.publishedAt;
   if (status === "published" && !publishedAt) publishedAt = now;
   if (status === "draft") publishedAt = null;
 
-  getDb()
-    .prepare(
-      `UPDATE case_studies
-         SET status = ?, updated_at = ?, published_at = ?
-       WHERE id = ?`,
-    )
-    .run(status, now, publishedAt, id);
+  const db = await getReadyDb();
+  await db.execute({
+    sql: `UPDATE case_studies SET status = ?, updated_at = ?, published_at = ? WHERE id = ?`,
+    args: [status, now, publishedAt, id],
+  });
 
   return getById(id);
 }

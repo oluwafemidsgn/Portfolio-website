@@ -19,10 +19,10 @@ export default async function EditHeroTile({
   const { id } = await params;
   const { saved, error } = await searchParams;
 
-  const tile = getHeroProject(id);
+  const [tile, allStudies] = await Promise.all([getHeroProject(id), listAll()]);
   if (!tile) notFound();
 
-  const studies = listAll().map((s) => ({
+  const studies = allStudies.map((s) => ({
     id: s.id,
     title: s.title,
     status: s.status,

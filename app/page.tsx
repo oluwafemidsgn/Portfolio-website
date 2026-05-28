@@ -23,7 +23,7 @@ import { listAll } from "@/lib/case-studies";
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  ensureSeed();
+  await ensureSeed();
 
   const [heroTiles, playgroundItems, recommendations, caseStudies] =
     await Promise.all([

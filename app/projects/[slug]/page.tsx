@@ -16,8 +16,8 @@ type Params = Promise<{ slug: string }>;
 
 export async function generateMetadata({ params }: { params: Params }) {
   const { slug } = await params;
-  ensureSeed();
-  const study = getBySlug(slug);
+  await ensureSeed();
+  const study = await getBySlug(slug);
   if (!study) return { title: "Case study — Oduneye Oluwafemi" };
   return {
     title: `${study.title} — Case study`,
@@ -29,11 +29,11 @@ export const dynamic = "force-dynamic";
 
 export default async function CaseStudyPage({ params }: { params: Params }) {
   const { slug } = await params;
-  ensureSeed();
-  const study = getBySlug(slug);
+  await ensureSeed();
+  const study = await getBySlug(slug);
   if (!study || study.status !== "published") notFound();
 
-  const published = listPublished();
+  const published = await listPublished();
   const idx = published.findIndex((s) => s.id === study.id);
   const next = idx >= 0 ? published[(idx + 1) % published.length] : null;
 

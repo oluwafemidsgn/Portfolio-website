@@ -16,8 +16,8 @@ export const dynamic = "force-dynamic";
 
 export default async function AdminHome() {
   if (!(await isAuthed())) redirect("/admin/login");
-  ensureSeed();
-  const all = listAll();
+  await ensureSeed();
+  const all = await listAll();
   const drafts = all.filter((s) => s.status === "draft").length;
   const published = all.filter((s) => s.status === "published").length;
 

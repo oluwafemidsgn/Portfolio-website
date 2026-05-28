@@ -18,8 +18,8 @@ export const metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function ProjectsIndexPage() {
-  ensureSeed();
-  const studies = listPublished();
+  await ensureSeed();
+  const studies = await listPublished();
 
   return (
     <>

@@ -16,7 +16,7 @@ export const metadata = {
 };
 
 export default async function PlaygroundPage() {
-  ensureSeed();
+  await ensureSeed();
   const items = await listPlaygroundItems();
 
   return (

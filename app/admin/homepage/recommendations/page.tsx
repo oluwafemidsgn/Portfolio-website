@@ -15,9 +15,9 @@ export const dynamic = "force-dynamic";
 
 export default async function RecommendationsAdminList() {
   if (!(await isAuthed())) redirect("/admin/login");
-  ensureSeed();
+  await ensureSeed();
 
-  const items = listRecommendations();
+  const items = await listRecommendations();
 
   return (
     <div className="flex flex-col gap-10">

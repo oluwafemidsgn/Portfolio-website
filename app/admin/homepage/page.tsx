@@ -13,11 +13,13 @@ export const dynamic = "force-dynamic";
 
 export default async function HomepageAdmin() {
   if (!(await isAuthed())) redirect("/admin/login");
-  ensureSeed();
+  await ensureSeed();
 
-  const hero = listHeroProjects();
-  const playground = listPlaygroundItems();
-  const recommendations = listRecommendations();
+  const [hero, playground, recommendations] = await Promise.all([
+    listHeroProjects(),
+    listPlaygroundItems(),
+    listRecommendations(),
+  ]);
 
   const sections: Section[] = [
     {

@@ -18,7 +18,7 @@ export default async function EditPlaygroundItem({
   const { id } = await params;
   const { saved, error } = await searchParams;
 
-  const item = getPlaygroundItem(id);
+  const item = await getPlaygroundItem(id);
   if (!item) notFound();
 
   return (

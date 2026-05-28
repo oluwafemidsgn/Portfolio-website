@@ -17,7 +17,7 @@ export default async function EditCaseStudyPage({
   if (!(await isAuthed())) redirect("/admin/login");
   const { id } = await params;
   const { saved } = await searchParams;
-  const study = getById(id);
+  const study = await getById(id);
   if (!study) notFound();
 
   const bound = async (formData: FormData) => {

@@ -76,7 +76,7 @@ export async function createHeroAction(formData: FormData): Promise<void> {
   if (!input.name) redirect("/admin/homepage/hero/new?error=name");
   // Force a tail-of-list displayOrder for new rows — the repo handles the
   // max+1 lookup when displayOrder is a negative number.
-  createHeroProject({ ...input, displayOrder: -1 });
+  await createHeroProject({ ...input, displayOrder: -1 });
   revalidateHome();
   redirect("/admin/homepage/hero?saved=1");
 }
@@ -88,14 +88,14 @@ export async function updateHeroAction(
   await assertAuth();
   const input = parseHero(formData);
   if (!input.name) redirect(`/admin/homepage/hero/${id}?error=name`);
-  updateHeroProject(id, input);
+  await updateHeroProject(id, input);
   revalidateHome();
   redirect(`/admin/homepage/hero/${id}?saved=1`);
 }
 
 export async function deleteHeroAction(id: string): Promise<void> {
   await assertAuth();
-  removeHeroProject(id);
+  await removeHeroProject(id);
   revalidateHome();
   redirect("/admin/homepage/hero");
 }
@@ -105,14 +105,14 @@ export async function moveHeroAction(
   dir: "up" | "down",
 ): Promise<void> {
   await assertAuth();
-  moveHeroProject(id, dir);
+  await moveHeroProject(id, dir);
   revalidateHome();
   redirect("/admin/homepage/hero");
 }
 
 export async function duplicateHeroAction(id: string): Promise<void> {
   await assertAuth();
-  duplicateHeroProject(id);
+  await duplicateHeroProject(id);
   revalidateHome();
   redirect("/admin/homepage/hero?saved=1");
 }
@@ -138,7 +138,7 @@ export async function createPlaygroundAction(formData: FormData): Promise<void> 
   await assertAuth();
   const input = parsePlayground(formData);
   if (!input.name) redirect("/admin/homepage/playground/new?error=name");
-  createPlaygroundItem({ ...input, displayOrder: -1 });
+  await createPlaygroundItem({ ...input, displayOrder: -1 });
   revalidateHome();
   redirect("/admin/homepage/playground?saved=1");
 }
@@ -150,14 +150,14 @@ export async function updatePlaygroundAction(
   await assertAuth();
   const input = parsePlayground(formData);
   if (!input.name) redirect(`/admin/homepage/playground/${id}?error=name`);
-  updatePlaygroundItem(id, input);
+  await updatePlaygroundItem(id, input);
   revalidateHome();
   redirect(`/admin/homepage/playground/${id}?saved=1`);
 }
 
 export async function deletePlaygroundAction(id: string): Promise<void> {
   await assertAuth();
-  removePlaygroundItem(id);
+  await removePlaygroundItem(id);
   revalidateHome();
   redirect("/admin/homepage/playground");
 }
@@ -167,14 +167,14 @@ export async function movePlaygroundAction(
   dir: "up" | "down",
 ): Promise<void> {
   await assertAuth();
-  movePlaygroundItem(id, dir);
+  await movePlaygroundItem(id, dir);
   revalidateHome();
   redirect("/admin/homepage/playground");
 }
 
 export async function duplicatePlaygroundAction(id: string): Promise<void> {
   await assertAuth();
-  duplicatePlaygroundItem(id);
+  await duplicatePlaygroundItem(id);
   revalidateHome();
   redirect("/admin/homepage/playground?saved=1");
 }
@@ -202,7 +202,7 @@ export async function createRecommendationAction(
   if (!input.quote || !input.author) {
     redirect("/admin/homepage/recommendations/new?error=required");
   }
-  createRecommendation({ ...input, displayOrder: -1 });
+  await createRecommendation({ ...input, displayOrder: -1 });
   revalidateHome();
   redirect("/admin/homepage/recommendations?saved=1");
 }
@@ -216,14 +216,14 @@ export async function updateRecommendationAction(
   if (!input.quote || !input.author) {
     redirect(`/admin/homepage/recommendations/${id}?error=required`);
   }
-  updateRecommendation(id, input);
+  await updateRecommendation(id, input);
   revalidateHome();
   redirect(`/admin/homepage/recommendations/${id}?saved=1`);
 }
 
 export async function deleteRecommendationAction(id: string): Promise<void> {
   await assertAuth();
-  removeRecommendation(id);
+  await removeRecommendation(id);
   revalidateHome();
   redirect("/admin/homepage/recommendations");
 }
@@ -233,14 +233,14 @@ export async function moveRecommendationAction(
   dir: "up" | "down",
 ): Promise<void> {
   await assertAuth();
-  moveRecommendation(id, dir);
+  await moveRecommendation(id, dir);
   revalidateHome();
   redirect("/admin/homepage/recommendations");
 }
 
 export async function duplicateRecommendationAction(id: string): Promise<void> {
   await assertAuth();
-  duplicateRecommendation(id);
+  await duplicateRecommendation(id);
   revalidateHome();
   redirect("/admin/homepage/recommendations?saved=1");
 }

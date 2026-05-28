@@ -1,4 +1,4 @@
-import { getDb } from "./db";
+import { getReadyDb } from "./db";
 import { randomUUID } from "node:crypto";
 import type {
   HeroProject,
@@ -10,17 +10,6 @@ import type {
   MediaKind,
 } from "./types";
 
-/**
- * Repositories for the three home-page CMS entities — hero projects,
- * playground items, recommendations. All three live in this single file
- * because they share the same shape (small, flat rows ordered by
- * display_order) and reusing the helpers keeps the boilerplate down.
- */
-
-/* -------------------------------------------------------------------------- */
-/* Shared helpers                                                             */
-/* -------------------------------------------------------------------------- */
-
 function now(): string {
   return new Date().toISOString();
 }
@@ -31,15 +20,13 @@ function normalizeMediaKind(raw: unknown): MediaKind {
   return "image";
 }
 
-/**
- * Returns the next display_order for a table — the maximum existing
- * value + 1, or 0 if the table is empty. Keeps new rows appended to the
- * end without the admin having to pick an order manually.
- */
-function nextOrder(table: string): number {
-  const row = getDb()
-    .prepare(`SELECT COALESCE(MAX(display_order), -1) + 1 AS n FROM ${table}`)
-    .get() as { n: number };
+async function nextOrder(table: string): Promise<number> {
+  const db = await getReadyDb();
+  const result = await db.execute({
+    sql: `SELECT COALESCE(MAX(display_order), -1) + 1 AS n FROM ${table}`,
+    args: [],
+  });
+  const row = result.rows[0] as unknown as { n: number };
   return row.n;
 }
 
@@ -77,66 +64,71 @@ function heroFromRow(r: HeroRow): HeroProject {
   };
 }
 
-export function listHeroProjects(): HeroProject[] {
-  const rows = getDb()
-    .prepare(
-      `SELECT * FROM hero_projects
-       ORDER BY display_order ASC, created_at ASC`,
-    )
-    .all() as HeroRow[];
-  return rows.map(heroFromRow);
+export async function listHeroProjects(): Promise<HeroProject[]> {
+  const db = await getReadyDb();
+  const result = await db.execute({
+    sql: `SELECT * FROM hero_projects ORDER BY display_order ASC, created_at ASC`,
+    args: [],
+  });
+  return (result.rows as unknown as HeroRow[]).map(heroFromRow);
 }
 
-export function getHeroProject(id: string): HeroProject | null {
-  const row = getDb()
-    .prepare(`SELECT * FROM hero_projects WHERE id = ?`)
-    .get(id) as HeroRow | undefined;
+export async function getHeroProject(id: string): Promise<HeroProject | null> {
+  const db = await getReadyDb();
+  const result = await db.execute({
+    sql: `SELECT * FROM hero_projects WHERE id = ?`,
+    args: [id],
+  });
+  const row = result.rows[0] as unknown as HeroRow | undefined;
   return row ? heroFromRow(row) : null;
 }
 
-export function createHeroProject(input: HeroProjectInput): HeroProject {
-  const db = getDb();
+export async function createHeroProject(
+  input: HeroProjectInput,
+): Promise<HeroProject> {
+  const db = await getReadyDb();
   const t = now();
   const id = randomUUID();
   const order =
     typeof input.displayOrder === "number" && input.displayOrder >= 0
       ? input.displayOrder
-      : nextOrder("hero_projects");
+      : await nextOrder("hero_projects");
 
-  db.prepare(
-    `INSERT INTO hero_projects
+  await db.execute({
+    sql: `INSERT INTO hero_projects
        (id, year, name, discipline, media_kind, media_url, poster_url,
         case_study_id, display_order, created_at, updated_at)
      VALUES
        (@id, @year, @name, @discipline, @media_kind, @media_url, @poster_url,
         @case_study_id, @display_order, @created_at, @updated_at)`,
-  ).run({
-    id,
-    year: input.year,
-    name: input.name,
-    discipline: input.discipline,
-    media_kind: normalizeMediaKind(input.mediaKind),
-    media_url: input.mediaUrl,
-    poster_url: input.posterUrl,
-    case_study_id: input.caseStudyId || null,
-    display_order: order,
-    created_at: t,
-    updated_at: t,
+    args: {
+      id,
+      year: input.year,
+      name: input.name,
+      discipline: input.discipline,
+      media_kind: normalizeMediaKind(input.mediaKind),
+      media_url: input.mediaUrl,
+      poster_url: input.posterUrl,
+      case_study_id: input.caseStudyId || null,
+      display_order: order,
+      created_at: t,
+      updated_at: t,
+    },
   });
 
-  return getHeroProject(id)!;
+  return (await getHeroProject(id))!;
 }
 
-export function updateHeroProject(
+export async function updateHeroProject(
   id: string,
   input: HeroProjectInput,
-): HeroProject | null {
-  const existing = getHeroProject(id);
+): Promise<HeroProject | null> {
+  const existing = await getHeroProject(id);
   if (!existing) return null;
 
-  getDb()
-    .prepare(
-      `UPDATE hero_projects SET
+  const db = await getReadyDb();
+  await db.execute({
+    sql: `UPDATE hero_projects SET
          year = @year,
          name = @name,
          discipline = @discipline,
@@ -147,8 +139,7 @@ export function updateHeroProject(
          display_order = @display_order,
          updated_at = @updated_at
        WHERE id = @id`,
-    )
-    .run({
+    args: {
       id,
       year: input.year,
       name: input.name,
@@ -159,22 +150,25 @@ export function updateHeroProject(
       case_study_id: input.caseStudyId || null,
       display_order: input.displayOrder,
       updated_at: now(),
-    });
+    },
+  });
 
   return getHeroProject(id);
 }
 
-export function removeHeroProject(id: string): boolean {
-  const res = getDb().prepare(`DELETE FROM hero_projects WHERE id = ?`).run(id);
-  return res.changes > 0;
+export async function removeHeroProject(id: string): Promise<boolean> {
+  const db = await getReadyDb();
+  const result = await db.execute({
+    sql: `DELETE FROM hero_projects WHERE id = ?`,
+    args: [id],
+  });
+  return result.rowsAffected > 0;
 }
 
-/**
- * Clone a hero tile. The copy is appended to the end of the grid
- * (displayOrder = -1 triggers `nextOrder` inside create).
- */
-export function duplicateHeroProject(id: string): HeroProject | null {
-  const existing = getHeroProject(id);
+export async function duplicateHeroProject(
+  id: string,
+): Promise<HeroProject | null> {
+  const existing = await getHeroProject(id);
   if (!existing) return null;
   return createHeroProject({
     year: existing.year,
@@ -188,13 +182,11 @@ export function duplicateHeroProject(id: string): HeroProject | null {
   });
 }
 
-/**
- * Swaps display_order between the target row and its neighbour in the
- * requested direction. No-ops at the edges. Used by the admin "move up /
- * down" buttons.
- */
-export function moveHeroProject(id: string, dir: "up" | "down"): void {
-  swapOrder("hero_projects", id, dir);
+export async function moveHeroProject(
+  id: string,
+  dir: "up" | "down",
+): Promise<void> {
+  return swapOrder("hero_projects", id, dir);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -231,68 +223,73 @@ function playgroundFromRow(r: PlaygroundRow): PlaygroundItem {
   };
 }
 
-export function listPlaygroundItems(): PlaygroundItem[] {
-  const rows = getDb()
-    .prepare(
-      `SELECT * FROM playground_items
-       ORDER BY display_order ASC, created_at ASC`,
-    )
-    .all() as PlaygroundRow[];
-  return rows.map(playgroundFromRow);
+export async function listPlaygroundItems(): Promise<PlaygroundItem[]> {
+  const db = await getReadyDb();
+  const result = await db.execute({
+    sql: `SELECT * FROM playground_items ORDER BY display_order ASC, created_at ASC`,
+    args: [],
+  });
+  return (result.rows as unknown as PlaygroundRow[]).map(playgroundFromRow);
 }
 
-export function getPlaygroundItem(id: string): PlaygroundItem | null {
-  const row = getDb()
-    .prepare(`SELECT * FROM playground_items WHERE id = ?`)
-    .get(id) as PlaygroundRow | undefined;
+export async function getPlaygroundItem(
+  id: string,
+): Promise<PlaygroundItem | null> {
+  const db = await getReadyDb();
+  const result = await db.execute({
+    sql: `SELECT * FROM playground_items WHERE id = ?`,
+    args: [id],
+  });
+  const row = result.rows[0] as unknown as PlaygroundRow | undefined;
   return row ? playgroundFromRow(row) : null;
 }
 
-export function createPlaygroundItem(
+export async function createPlaygroundItem(
   input: PlaygroundItemInput,
-): PlaygroundItem {
-  const db = getDb();
+): Promise<PlaygroundItem> {
+  const db = await getReadyDb();
   const t = now();
   const id = randomUUID();
   const order =
     typeof input.displayOrder === "number" && input.displayOrder >= 0
       ? input.displayOrder
-      : nextOrder("playground_items");
+      : await nextOrder("playground_items");
 
-  db.prepare(
-    `INSERT INTO playground_items
+  await db.execute({
+    sql: `INSERT INTO playground_items
        (id, date, name, label, media_kind, media_url, poster_url, live_url,
         display_order, created_at, updated_at)
      VALUES
        (@id, @date, @name, @label, @media_kind, @media_url, @poster_url, @live_url,
         @display_order, @created_at, @updated_at)`,
-  ).run({
-    id,
-    date: input.date,
-    name: input.name,
-    label: input.label,
-    media_kind: normalizeMediaKind(input.mediaKind),
-    media_url: input.mediaUrl,
-    poster_url: input.posterUrl,
-    live_url: input.liveUrl ?? "",
-    display_order: order,
-    created_at: t,
-    updated_at: t,
+    args: {
+      id,
+      date: input.date,
+      name: input.name,
+      label: input.label,
+      media_kind: normalizeMediaKind(input.mediaKind),
+      media_url: input.mediaUrl,
+      poster_url: input.posterUrl,
+      live_url: input.liveUrl ?? "",
+      display_order: order,
+      created_at: t,
+      updated_at: t,
+    },
   });
 
-  return getPlaygroundItem(id)!;
+  return (await getPlaygroundItem(id))!;
 }
 
-export function updatePlaygroundItem(
+export async function updatePlaygroundItem(
   id: string,
   input: PlaygroundItemInput,
-): PlaygroundItem | null {
-  const existing = getPlaygroundItem(id);
+): Promise<PlaygroundItem | null> {
+  const existing = await getPlaygroundItem(id);
   if (!existing) return null;
 
-  getDb()
-    .prepare(
-      `UPDATE playground_items SET
+  const db = await getReadyDb();
+  await db.execute({
+    sql: `UPDATE playground_items SET
          date = @date,
          name = @name,
          label = @label,
@@ -303,8 +300,7 @@ export function updatePlaygroundItem(
          display_order = @display_order,
          updated_at = @updated_at
        WHERE id = @id`,
-    )
-    .run({
+    args: {
       id,
       date: input.date,
       name: input.name,
@@ -315,20 +311,25 @@ export function updatePlaygroundItem(
       live_url: input.liveUrl ?? "",
       display_order: input.displayOrder,
       updated_at: now(),
-    });
+    },
+  });
 
   return getPlaygroundItem(id);
 }
 
-export function removePlaygroundItem(id: string): boolean {
-  const res = getDb()
-    .prepare(`DELETE FROM playground_items WHERE id = ?`)
-    .run(id);
-  return res.changes > 0;
+export async function removePlaygroundItem(id: string): Promise<boolean> {
+  const db = await getReadyDb();
+  const result = await db.execute({
+    sql: `DELETE FROM playground_items WHERE id = ?`,
+    args: [id],
+  });
+  return result.rowsAffected > 0;
 }
 
-export function duplicatePlaygroundItem(id: string): PlaygroundItem | null {
-  const existing = getPlaygroundItem(id);
+export async function duplicatePlaygroundItem(
+  id: string,
+): Promise<PlaygroundItem | null> {
+  const existing = await getPlaygroundItem(id);
   if (!existing) return null;
   return createPlaygroundItem({
     date: existing.date,
@@ -342,8 +343,11 @@ export function duplicatePlaygroundItem(id: string): PlaygroundItem | null {
   });
 }
 
-export function movePlaygroundItem(id: string, dir: "up" | "down"): void {
-  swapOrder("playground_items", id, dir);
+export async function movePlaygroundItem(
+  id: string,
+  dir: "up" | "down",
+): Promise<void> {
+  return swapOrder("playground_items", id, dir);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -376,66 +380,71 @@ function recFromRow(r: RecommendationRow): Recommendation {
   };
 }
 
-export function listRecommendations(): Recommendation[] {
-  const rows = getDb()
-    .prepare(
-      `SELECT * FROM recommendations
-       ORDER BY display_order ASC, created_at ASC`,
-    )
-    .all() as RecommendationRow[];
-  return rows.map(recFromRow);
+export async function listRecommendations(): Promise<Recommendation[]> {
+  const db = await getReadyDb();
+  const result = await db.execute({
+    sql: `SELECT * FROM recommendations ORDER BY display_order ASC, created_at ASC`,
+    args: [],
+  });
+  return (result.rows as unknown as RecommendationRow[]).map(recFromRow);
 }
 
-export function getRecommendation(id: string): Recommendation | null {
-  const row = getDb()
-    .prepare(`SELECT * FROM recommendations WHERE id = ?`)
-    .get(id) as RecommendationRow | undefined;
+export async function getRecommendation(
+  id: string,
+): Promise<Recommendation | null> {
+  const db = await getReadyDb();
+  const result = await db.execute({
+    sql: `SELECT * FROM recommendations WHERE id = ?`,
+    args: [id],
+  });
+  const row = result.rows[0] as unknown as RecommendationRow | undefined;
   return row ? recFromRow(row) : null;
 }
 
-export function createRecommendation(
+export async function createRecommendation(
   input: RecommendationInput,
-): Recommendation {
-  const db = getDb();
+): Promise<Recommendation> {
+  const db = await getReadyDb();
   const t = now();
   const id = randomUUID();
   const order =
     typeof input.displayOrder === "number" && input.displayOrder >= 0
       ? input.displayOrder
-      : nextOrder("recommendations");
+      : await nextOrder("recommendations");
 
-  db.prepare(
-    `INSERT INTO recommendations
+  await db.execute({
+    sql: `INSERT INTO recommendations
        (id, quote, author, role, company, avatar_url,
         display_order, created_at, updated_at)
      VALUES
        (@id, @quote, @author, @role, @company, @avatar_url,
         @display_order, @created_at, @updated_at)`,
-  ).run({
-    id,
-    quote: input.quote,
-    author: input.author,
-    role: input.role,
-    company: input.company,
-    avatar_url: input.avatarUrl,
-    display_order: order,
-    created_at: t,
-    updated_at: t,
+    args: {
+      id,
+      quote: input.quote,
+      author: input.author,
+      role: input.role,
+      company: input.company,
+      avatar_url: input.avatarUrl,
+      display_order: order,
+      created_at: t,
+      updated_at: t,
+    },
   });
 
-  return getRecommendation(id)!;
+  return (await getRecommendation(id))!;
 }
 
-export function updateRecommendation(
+export async function updateRecommendation(
   id: string,
   input: RecommendationInput,
-): Recommendation | null {
-  const existing = getRecommendation(id);
+): Promise<Recommendation | null> {
+  const existing = await getRecommendation(id);
   if (!existing) return null;
 
-  getDb()
-    .prepare(
-      `UPDATE recommendations SET
+  const db = await getReadyDb();
+  await db.execute({
+    sql: `UPDATE recommendations SET
          quote = @quote,
          author = @author,
          role = @role,
@@ -444,8 +453,7 @@ export function updateRecommendation(
          display_order = @display_order,
          updated_at = @updated_at
        WHERE id = @id`,
-    )
-    .run({
+    args: {
       id,
       quote: input.quote,
       author: input.author,
@@ -454,20 +462,25 @@ export function updateRecommendation(
       avatar_url: input.avatarUrl,
       display_order: input.displayOrder,
       updated_at: now(),
-    });
+    },
+  });
 
   return getRecommendation(id);
 }
 
-export function removeRecommendation(id: string): boolean {
-  const res = getDb()
-    .prepare(`DELETE FROM recommendations WHERE id = ?`)
-    .run(id);
-  return res.changes > 0;
+export async function removeRecommendation(id: string): Promise<boolean> {
+  const db = await getReadyDb();
+  const result = await db.execute({
+    sql: `DELETE FROM recommendations WHERE id = ?`,
+    args: [id],
+  });
+  return result.rowsAffected > 0;
 }
 
-export function duplicateRecommendation(id: string): Recommendation | null {
-  const existing = getRecommendation(id);
+export async function duplicateRecommendation(
+  id: string,
+): Promise<Recommendation | null> {
+  const existing = await getRecommendation(id);
   if (!existing) return null;
   return createRecommendation({
     quote: existing.quote,
@@ -479,50 +492,56 @@ export function duplicateRecommendation(id: string): Recommendation | null {
   });
 }
 
-export function moveRecommendation(id: string, dir: "up" | "down"): void {
-  swapOrder("recommendations", id, dir);
+export async function moveRecommendation(
+  id: string,
+  dir: "up" | "down",
+): Promise<void> {
+  return swapOrder("recommendations", id, dir);
 }
 
 /* -------------------------------------------------------------------------- */
 /* Reorder helper                                                             */
 /* -------------------------------------------------------------------------- */
 
-/**
- * Swap display_order between the target row and its neighbour. Wrapped
- * in a transaction so we never end up with two rows sharing an order.
- */
-function swapOrder(table: string, id: string, dir: "up" | "down"): void {
-  const db = getDb();
-  const target = db
-    .prepare(`SELECT id, display_order FROM ${table} WHERE id = ?`)
-    .get(id) as { id: string; display_order: number } | undefined;
-  if (!target) return;
+async function swapOrder(
+  table: string,
+  id: string,
+  dir: "up" | "down",
+): Promise<void> {
+  const db = await getReadyDb();
 
-  const neighbour = db
-    .prepare(
-      dir === "up"
-        ? `SELECT id, display_order FROM ${table}
-             WHERE display_order < ?
-             ORDER BY display_order DESC LIMIT 1`
-        : `SELECT id, display_order FROM ${table}
-             WHERE display_order > ?
-             ORDER BY display_order ASC LIMIT 1`,
-    )
-    .get(target.display_order) as
+  const targetResult = await db.execute({
+    sql: `SELECT id, display_order FROM ${table} WHERE id = ?`,
+    args: [id],
+  });
+  const target = targetResult.rows[0] as unknown as
     | { id: string; display_order: number }
     | undefined;
+  if (!target) return;
 
+  const neighbourResult = await db.execute({
+    sql:
+      dir === "up"
+        ? `SELECT id, display_order FROM ${table} WHERE display_order < ? ORDER BY display_order DESC LIMIT 1`
+        : `SELECT id, display_order FROM ${table} WHERE display_order > ? ORDER BY display_order ASC LIMIT 1`,
+    args: [target.display_order],
+  });
+  const neighbour = neighbourResult.rows[0] as unknown as
+    | { id: string; display_order: number }
+    | undefined;
   if (!neighbour) return;
 
-  const swap = db.transaction(() => {
-    db.prepare(`UPDATE ${table} SET display_order = ? WHERE id = ?`).run(
-      neighbour.display_order,
-      target.id,
-    );
-    db.prepare(`UPDATE ${table} SET display_order = ? WHERE id = ?`).run(
-      target.display_order,
-      neighbour.id,
-    );
-  });
-  swap();
+  await db.batch(
+    [
+      {
+        sql: `UPDATE ${table} SET display_order = ? WHERE id = ?`,
+        args: [neighbour.display_order, target.id],
+      },
+      {
+        sql: `UPDATE ${table} SET display_order = ? WHERE id = ?`,
+        args: [target.display_order, neighbour.id],
+      },
+    ],
+    "write",
+  );
 }

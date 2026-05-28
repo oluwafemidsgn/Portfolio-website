@@ -14,7 +14,7 @@ export default async function NewHeroTile({
 }) {
   if (!(await isAuthed())) redirect("/admin/login");
   const { error } = await searchParams;
-  const studies = listAll().map((s) => ({
+  const studies = (await listAll()).map((s) => ({
     id: s.id,
     title: s.title,
     status: s.status,

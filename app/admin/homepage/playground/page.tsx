@@ -16,9 +16,9 @@ export const dynamic = "force-dynamic";
 
 export default async function PlaygroundAdminList() {
   if (!(await isAuthed())) redirect("/admin/login");
-  ensureSeed();
+  await ensureSeed();
 
-  const items = listPlaygroundItems();
+  const items = await listPlaygroundItems();
 
   return (
     <div className="flex flex-col gap-10">

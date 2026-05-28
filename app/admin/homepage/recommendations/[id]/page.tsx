@@ -18,7 +18,7 @@ export default async function EditRecommendation({
   const { id } = await params;
   const { saved, error } = await searchParams;
 
-  const rec = getRecommendation(id);
+  const rec = await getRecommendation(id);
   if (!rec) notFound();
 
   return (
