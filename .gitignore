@@ -5,6 +5,7 @@ out
 .DS_Store
 *.log
 .vercel
+tsconfig.tsbuildinfo
 
 # Local SQLite store for the CMS
 /data/*.db
