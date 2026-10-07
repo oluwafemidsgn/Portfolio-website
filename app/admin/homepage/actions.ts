@@ -26,6 +26,7 @@ import type {
   PlaygroundItemInput,
   RecommendationInput,
 } from "@/lib/types";
+import { resolveMediaKind } from "@/lib/media";
 
 async function assertAuth() {
   if (!(await isAuthed())) redirect("/admin/login");
@@ -41,10 +42,10 @@ function revalidateHome() {
   revalidatePath("/admin/homepage");
 }
 
-function mediaKind(v: unknown): MediaKind {
+function mediaKind(v: unknown, url = ""): MediaKind {
   const s = String(v ?? "").toLowerCase();
-  if (s === "video" || s === "gif") return s;
-  return "image";
+  const kind: MediaKind = s === "video" || s === "gif" ? s : "image";
+  return resolveMediaKind(kind, url);
 }
 
 function num(v: FormDataEntryValue | null, fallback: number): number {
@@ -62,7 +63,10 @@ function parseHero(form: FormData): HeroProjectInput {
     year: String(form.get("year") ?? "").trim(),
     name: String(form.get("name") ?? "").trim(),
     discipline: String(form.get("discipline") ?? "").trim(),
-    mediaKind: mediaKind(form.get("mediaKind")),
+    mediaKind: mediaKind(
+      form.get("mediaKind"),
+      String(form.get("mediaUrl") ?? "").trim(),
+    ),
     mediaUrl: String(form.get("mediaUrl") ?? "").trim(),
     posterUrl: String(form.get("posterUrl") ?? "").trim(),
     caseStudyId: caseStudyId || null,
@@ -126,7 +130,10 @@ function parsePlayground(form: FormData): PlaygroundItemInput {
     date: String(form.get("date") ?? "").trim(),
     name: String(form.get("name") ?? "").trim(),
     label: String(form.get("label") ?? "").trim(),
-    mediaKind: mediaKind(form.get("mediaKind")),
+    mediaKind: mediaKind(
+      form.get("mediaKind"),
+      String(form.get("mediaUrl") ?? "").trim(),
+    ),
     mediaUrl: String(form.get("mediaUrl") ?? "").trim(),
     posterUrl: String(form.get("posterUrl") ?? "").trim(),
     liveUrl: String(form.get("liveUrl") ?? "").trim(),

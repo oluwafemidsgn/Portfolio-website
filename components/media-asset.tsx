@@ -1,4 +1,5 @@
 import type { MediaKind } from "@/lib/types";
+import { resolveMediaKind } from "@/lib/media";
 
 type Props = {
   kind: MediaKind;
@@ -38,7 +39,7 @@ export function MediaAsset({
 
   const fitClass = objectFit === "contain" ? "object-contain" : "object-cover";
 
-  if (kind === "video") {
+  if (resolveMediaKind(kind, url) === "video") {
     return (
       <video
         className={`absolute inset-0 w-full h-full ${fitClass} ${className}`}

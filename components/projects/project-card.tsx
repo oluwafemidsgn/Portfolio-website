@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { EASE_OUT_EXPO } from "../motion/easing";
 import type { CaseStudy } from "@/lib/types";
+import { MediaAsset } from "../media-asset";
 
 type Props = {
   study: CaseStudy;
@@ -45,18 +46,13 @@ export function ProjectCard({ study, i }: Props) {
           {/* Cover image, scales subtly on hover. */}
           <motion.div
             className="absolute inset-0 bg-mute"
-            style={
-              study.coverImage
-                ? {
-                    backgroundImage: `url(${study.coverImage})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }
-                : undefined
-            }
             variants={{ rest: { scale: 1 }, hover: { scale: 1.04 } }}
             transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
-          />
+          >
+            {study.coverImage && (
+              <MediaAsset kind="image" url={study.coverImage} alt={study.title} />
+            )}
+          </motion.div>
           {/* Ink overlay. */}
           <motion.div
             className="absolute inset-0 bg-ink pointer-events-none"

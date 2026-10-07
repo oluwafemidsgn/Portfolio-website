@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import type { Block } from "@/lib/types";
 import { EASE_OUT_EXPO } from "../motion/easing";
+import { isVideoUrl } from "@/lib/media";
 
 type ImgProps = {
   src?: string;
@@ -12,7 +13,7 @@ type ImgProps = {
 };
 
 function Img({ src, alt = "", placeholder = true }: ImgProps) {
-  // Using a regular <img> because admin-entered URLs will be arbitrary
+  // Using plain <img>/<video> because admin-entered URLs will be arbitrary
   // hosts — next/image would need remotePatterns config for each one.
   if (!src) {
     return (
@@ -24,6 +25,21 @@ function Img({ src, alt = "", placeholder = true }: ImgProps) {
       />
     );
   }
+  if (isVideoUrl(src)) {
+    return (
+      <video
+        src={src}
+        className="w-full h-auto object-cover block"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        aria-label={alt || undefined}
+      />
+    );
+  }
+  // Images and GIFs share <img>; browsers animate GIFs natively.
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img

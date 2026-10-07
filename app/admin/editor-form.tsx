@@ -213,7 +213,7 @@ export function EditorForm({
               placeholder="2025"
             />
           </Field>
-          <Field label="COVER IMAGE URL">
+          <Field label="COVER MEDIA URL (IMAGE, GIF OR VIDEO)">
             <input
               name="coverImage"
               defaultValue={initial?.coverImage ?? ""}
@@ -354,7 +354,7 @@ export function EditorForm({
                 <div className="flex flex-col gap-3">
                   <input
                     className={inputCls}
-                    placeholder="Image URL"
+                    placeholder="Image / GIF / video URL"
                     value={b.image}
                     onChange={(e) =>
                       updateBlock(idx, { image: e.target.value })
@@ -374,7 +374,7 @@ export function EditorForm({
                   <div className="flex flex-col gap-3">
                     <input
                       className={inputCls}
-                      placeholder="Left image URL"
+                      placeholder="Left image / GIF / video URL"
                       value={b.left}
                       onChange={(e) =>
                         updateBlock(idx, { left: e.target.value })
@@ -392,7 +392,7 @@ export function EditorForm({
                   <div className="flex flex-col gap-3">
                     <input
                       className={inputCls}
-                      placeholder="Right image URL"
+                      placeholder="Right image / GIF / video URL"
                       value={b.right}
                       onChange={(e) =>
                         updateBlock(idx, { right: e.target.value })
