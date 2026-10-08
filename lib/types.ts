@@ -109,6 +109,8 @@ export type HeroProject = {
   posterUrl: string;
   /** Optional FK to case_studies.id. NULL = non-clickable tile. */
   caseStudyId: string | null;
+  /** Show the tile with a COMING SOON badge and no link. */
+  comingSoon: boolean;
   displayOrder: number;
   createdAt: string;
   updatedAt: string;
@@ -116,8 +118,8 @@ export type HeroProject = {
 
 export type HeroProjectInput = Omit<
   HeroProject,
-  "id" | "createdAt" | "updatedAt"
->;
+  "id" | "createdAt" | "updatedAt" | "comingSoon"
+> & { comingSoon?: boolean };
 
 /**
  * A tile in the Playground grid. Simpler than HeroProject — no case-study

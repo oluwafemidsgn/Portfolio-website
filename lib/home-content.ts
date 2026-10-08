@@ -52,6 +52,7 @@ type HeroRow = {
   media_url: string;
   poster_url: string;
   case_study_id: string | null;
+  coming_soon: number;
   display_order: number;
   created_at: string;
   updated_at: string;
@@ -67,6 +68,7 @@ function heroFromRow(r: HeroRow): HeroProject {
     mediaUrl: r.media_url,
     posterUrl: r.poster_url,
     caseStudyId: r.case_study_id,
+    comingSoon: Number(r.coming_soon) === 1,
     displayOrder: r.display_order,
     createdAt: r.created_at,
     updatedAt: r.updated_at,
@@ -106,10 +108,10 @@ export async function createHeroProject(
   await db.execute({
     sql: `INSERT INTO hero_projects
        (id, year, name, discipline, media_kind, media_url, poster_url,
-        case_study_id, display_order, created_at, updated_at)
+        case_study_id, coming_soon, display_order, created_at, updated_at)
      VALUES
        (@id, @year, @name, @discipline, @media_kind, @media_url, @poster_url,
-        @case_study_id, @display_order, @created_at, @updated_at)`,
+        @case_study_id, @coming_soon, @display_order, @created_at, @updated_at)`,
     args: {
       id,
       year: input.year,
@@ -119,6 +121,7 @@ export async function createHeroProject(
       media_url: input.mediaUrl,
       poster_url: input.posterUrl,
       case_study_id: input.caseStudyId || null,
+      coming_soon: input.comingSoon ? 1 : 0,
       display_order: order,
       created_at: t,
       updated_at: t,
@@ -145,6 +148,7 @@ export async function updateHeroProject(
          media_url = @media_url,
          poster_url = @poster_url,
          case_study_id = @case_study_id,
+         coming_soon = @coming_soon,
          display_order = @display_order,
          updated_at = @updated_at
        WHERE id = @id`,
@@ -157,6 +161,7 @@ export async function updateHeroProject(
       media_url: input.mediaUrl,
       poster_url: input.posterUrl,
       case_study_id: input.caseStudyId || null,
+      coming_soon: input.comingSoon ? 1 : 0,
       display_order: input.displayOrder,
       updated_at: now(),
     },
@@ -187,6 +192,7 @@ export async function duplicateHeroProject(
     mediaUrl: existing.mediaUrl,
     posterUrl: existing.posterUrl,
     caseStudyId: existing.caseStudyId,
+    comingSoon: existing.comingSoon,
     displayOrder: -1,
   });
 }

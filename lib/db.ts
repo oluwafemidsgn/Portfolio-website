@@ -121,6 +121,12 @@ async function _applySchema(): Promise<void> {
     "coming_soon",
     "INTEGER NOT NULL DEFAULT 0",
   );
+  await addColumnIfMissing(
+    db,
+    "hero_projects",
+    "coming_soon",
+    "INTEGER NOT NULL DEFAULT 0",
+  );
 }
 
 async function addColumnIfMissing(

@@ -63,8 +63,9 @@ export function ProjectsSection({ tiles, caseStudyHrefs, comingSoonIds = [] }: P
                     type={tile.discipline}
                     href={href}
                     comingSoon={
-                      !!tile.caseStudyId &&
-                      comingSoonIds.includes(tile.caseStudyId)
+                      tile.comingSoon ||
+                      (!!tile.caseStudyId &&
+                        comingSoonIds.includes(tile.caseStudyId))
                     }
                     media={{
                       kind: tile.mediaKind,
