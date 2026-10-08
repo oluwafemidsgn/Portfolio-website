@@ -109,7 +109,7 @@ export default async function AdminHome() {
                   {s.year || "—"}
                 </td>
                 <td className="p-4 md:p-6">
-                  <StatusDot status={s.status} />
+                  <StatusDot status={s.status} comingSoon={s.comingSoon} />
                 </td>
                 <td className="p-4 md:p-6 t-micro text-body tabular-nums hidden lg:table-cell">
                   {formatDate(s.updatedAt)}
@@ -188,7 +188,13 @@ function StatPill({ label, value }: { label: string; value: number }) {
   );
 }
 
-function StatusDot({ status }: { status: "draft" | "published" }) {
+function StatusDot({
+  status,
+  comingSoon,
+}: {
+  status: "draft" | "published";
+  comingSoon?: boolean;
+}) {
   const isPub = status === "published";
   return (
     <span className="inline-flex items-center gap-2 t-micro">
@@ -197,7 +203,7 @@ function StatusDot({ status }: { status: "draft" | "published" }) {
         aria-hidden
       />
       <span className={isPub ? "text-ink" : "text-body"}>
-        {isPub ? "LIVE" : "DRAFT"}
+        {isPub ? (comingSoon ? "COMING SOON" : "LIVE") : "DRAFT"}
       </span>
     </span>
   );

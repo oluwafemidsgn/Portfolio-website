@@ -115,6 +115,12 @@ async function _applySchema(): Promise<void> {
     "blocks",
     "TEXT NOT NULL DEFAULT '[]'",
   );
+  await addColumnIfMissing(
+    db,
+    "case_studies",
+    "coming_soon",
+    "INTEGER NOT NULL DEFAULT 0",
+  );
 }
 
 async function addColumnIfMissing(

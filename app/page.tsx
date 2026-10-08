@@ -35,9 +35,14 @@ export default async function HomePage() {
 
   // Only published case studies are reachable from home tiles. Draft
   // studies still exist but clicking a linked tile should not leak them.
+  // Coming-soon studies are published but not linkable; tiles pointing at
+  // them render with a badge instead of a link.
   const publishedHrefs: Record<string, string> = {};
+  const comingSoonIds: string[] = [];
   for (const cs of caseStudies) {
-    if (cs.status === "published") publishedHrefs[cs.id] = cs.slug;
+    if (cs.status !== "published") continue;
+    if (cs.comingSoon) comingSoonIds.push(cs.id);
+    else publishedHrefs[cs.id] = cs.slug;
   }
 
   return (
@@ -48,7 +53,11 @@ export default async function HomePage() {
         <SiteNav />
         <Hero />
         <div className="flex flex-col gap-2">
-          <ProjectsSection tiles={heroTiles} caseStudyHrefs={publishedHrefs} />
+          <ProjectsSection
+            tiles={heroTiles}
+            caseStudyHrefs={publishedHrefs}
+            comingSoonIds={comingSoonIds}
+          />
           <AboutSection />
           <ServicesSection />
           <PlaygroundSection items={playgroundItems} />

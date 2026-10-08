@@ -20,6 +20,8 @@ export type Project = {
     url: string;
     poster?: string;
   };
+  /** Shows a "COMING SOON" badge and forces the tile to be non-clickable. */
+  comingSoon?: boolean;
   children?: ReactNode;
 };
 
@@ -38,8 +40,11 @@ export function ProjectThumb({
   href,
   aspect = "wide",
   media,
+  comingSoon = false,
   children,
 }: Project) {
+  if (comingSoon) href = null;
+
   const aspectClass =
     aspect === "tall"
       ? "aspect-[3/4]"
@@ -68,6 +73,12 @@ export function ProjectThumb({
             children
           )}
         </motion.div>
+
+        {comingSoon && (
+          <span className="absolute top-3 left-3 bg-paper text-ink px-2 py-1 t-micro pointer-events-none">
+            COMING SOON
+          </span>
+        )}
 
         {/* Ink sweep on hover — only present when the tile is clickable. */}
         {href && (

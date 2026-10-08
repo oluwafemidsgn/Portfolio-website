@@ -63,6 +63,11 @@ export type CaseStudy = {
   accordion: AccordionItem[];
   blocks: Block[];
   status: Status;
+  /**
+   * Published but not yet readable: the thumbnail shows publicly with a
+   * "COMING SOON" badge, but the tile isn't a link and the detail route 404s.
+   */
+  comingSoon: boolean;
   createdAt: string;
   updatedAt: string;
   /** Timestamp when the study first went public. Null if still in draft. */

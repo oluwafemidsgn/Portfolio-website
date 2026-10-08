@@ -70,6 +70,7 @@ function parseCaseStudy(form: FormData): CaseStudyInput {
     accordion,
     blocks,
     status,
+    comingSoon: form.get("comingSoon") === "on",
   };
 }
 

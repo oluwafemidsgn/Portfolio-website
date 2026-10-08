@@ -50,6 +50,7 @@ export function EditorForm({
   );
   const [blocks, setBlocks] = useState<Block[]>(initial?.blocks ?? []);
   const [status, setStatus] = useState<Status>(initial?.status ?? "draft");
+  const [comingSoon, setComingSoon] = useState(initial?.comingSoon ?? false);
 
   const accordionJson = useMemo(() => JSON.stringify(accordion), [accordion]);
   const blocksJson = useMemo(() => JSON.stringify(blocks), [blocks]);
@@ -221,6 +222,15 @@ export function EditorForm({
               placeholder="https://..."
             />
           </Field>
+          <label className="flex items-center gap-3 t-micro text-body md:col-span-2 cursor-pointer">
+            <input
+              type="checkbox"
+              name="comingSoon"
+              checked={comingSoon}
+              onChange={(e) => setComingSoon(e.target.checked)}
+            />
+            COMING SOON (SHOW THUMBNAIL, DISABLE LINK — MUST BE PUBLISHED TO SHOW)
+          </label>
         </div>
       </Section>
 

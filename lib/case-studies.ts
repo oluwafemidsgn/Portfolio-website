@@ -16,6 +16,7 @@ type Row = {
   accordion: string;
   blocks: string;
   status: Status;
+  coming_soon: number;
   created_at: string;
   updated_at: string;
   published_at: string | null;
@@ -36,6 +37,7 @@ function fromRow(r: Row): CaseStudy {
     accordion: safeJson(r.accordion, []),
     blocks: safeJson(r.blocks, []),
     status: r.status,
+    comingSoon: Number(r.coming_soon) === 1,
     createdAt: r.created_at,
     updatedAt: r.updated_at,
     publishedAt: r.published_at,
@@ -123,11 +125,11 @@ export async function create(input: CaseStudyInput): Promise<CaseStudy> {
   await db.execute({
     sql: `INSERT INTO case_studies
        (id, slug, title, subtitle, client, role, year, type,
-        cover_image, overview, accordion, blocks, status,
+        cover_image, overview, accordion, blocks, status, coming_soon,
         created_at, updated_at, published_at)
      VALUES
        (@id, @slug, @title, @subtitle, @client, @role, @year, @type,
-        @cover_image, @overview, @accordion, @blocks, @status,
+        @cover_image, @overview, @accordion, @blocks, @status, @coming_soon,
         @created_at, @updated_at, @published_at)`,
     args: {
       id,
@@ -143,6 +145,7 @@ export async function create(input: CaseStudyInput): Promise<CaseStudy> {
       accordion: JSON.stringify(input.accordion),
       blocks: JSON.stringify(input.blocks),
       status: input.status,
+      coming_soon: input.comingSoon ? 1 : 0,
       created_at: now,
       updated_at: now,
       published_at: publishedAt,
@@ -181,6 +184,7 @@ export async function update(
        accordion = @accordion,
        blocks = @blocks,
        status = @status,
+       coming_soon = @coming_soon,
        updated_at = @updated_at,
        published_at = @published_at
      WHERE id = @id`,
@@ -198,6 +202,7 @@ export async function update(
       accordion: JSON.stringify(input.accordion),
       blocks: JSON.stringify(input.blocks),
       status: input.status,
+      coming_soon: input.comingSoon ? 1 : 0,
       updated_at: now,
       published_at: publishedAt,
     },
@@ -234,6 +239,7 @@ export async function duplicate(id: string): Promise<CaseStudy | null> {
     accordion: existing.accordion,
     blocks: existing.blocks,
     status: "draft",
+    comingSoon: existing.comingSoon,
   });
 }
 
