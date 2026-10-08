@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Accordion } from "../motion/accordion";
 import { Reveal } from "../motion/reveal";
 import { EASE_OUT_EXPO } from "../motion/easing";
+import { useStickySidebar } from "./use-sticky-sidebar";
 import type { AccordionItem } from "@/lib/types";
 
 type Props = {
@@ -27,6 +28,7 @@ export function CaseStudySidebar({
   type,
   accordion,
 }: Props) {
+  const asideRef = useStickySidebar<HTMLElement>(24);
   const meta = [
     { k: "CLIENT", v: client },
     { k: "ROLE", v: role },
@@ -35,7 +37,7 @@ export function CaseStudySidebar({
   ].filter((m) => m.v);
 
   return (
-    <aside className="p-5 sm:p-8 lg:p-6 xl:p-8 flex flex-col gap-6 lg:sticky! lg:top-6 lg:self-start lg:max-h-[calc(100dvh-3rem)] lg:overflow-y-auto lg:overscroll-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+    <aside ref={asideRef} className="p-5 sm:p-8 lg:p-6 xl:p-8 flex flex-col gap-6 lg:sticky! lg:top-6 lg:self-start">
       <div>
         <motion.span
           className="t-micro text-body"
