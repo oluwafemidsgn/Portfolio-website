@@ -134,6 +134,13 @@ export type PlaygroundItem = {
    * the modal just displays the media + metadata.
    */
   liveUrl: string;
+  /** Optional write-up shown in the modal under the item name. */
+  description: string;
+  /**
+   * Optional case-study-style content (images, duos, text sections)
+   * rendered below the main media in the playground modal.
+   */
+  blocks: Block[];
   displayOrder: number;
   createdAt: string;
   updatedAt: string;
@@ -141,8 +148,9 @@ export type PlaygroundItem = {
 
 export type PlaygroundItemInput = Omit<
   PlaygroundItem,
-  "id" | "createdAt" | "updatedAt"
->;
+  "id" | "createdAt" | "updatedAt" | "description" | "blocks"
+> &
+  Partial<Pick<PlaygroundItem, "description" | "blocks">>;
 
 /** A testimonial/quote block for the home page. */
 export type Recommendation = {

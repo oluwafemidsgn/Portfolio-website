@@ -21,6 +21,7 @@ import {
   moveRecommendation,
 } from "@/lib/home-content";
 import type {
+  Block,
   HeroProjectInput,
   MediaKind,
   PlaygroundItemInput,
@@ -46,6 +47,15 @@ function mediaKind(v: unknown, url = ""): MediaKind {
   const s = String(v ?? "").toLowerCase();
   const kind: MediaKind = s === "video" || s === "gif" ? s : "image";
   return resolveMediaKind(kind, url);
+}
+
+function parseBlocks(v: FormDataEntryValue | null): Block[] {
+  try {
+    const parsed = JSON.parse(String(v ?? "[]"));
+    return Array.isArray(parsed) ? (parsed as Block[]) : [];
+  } catch {
+    return [];
+  }
 }
 
 function num(v: FormDataEntryValue | null, fallback: number): number {
@@ -137,6 +147,8 @@ function parsePlayground(form: FormData): PlaygroundItemInput {
     mediaUrl: String(form.get("mediaUrl") ?? "").trim(),
     posterUrl: String(form.get("posterUrl") ?? "").trim(),
     liveUrl: String(form.get("liveUrl") ?? "").trim(),
+    description: String(form.get("description") ?? "").trim(),
+    blocks: parseBlocks(form.get("blocks")),
     displayOrder: num(form.get("displayOrder"), 0),
   };
 }

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import type { PlaygroundItem } from "@/lib/types";
 import { MediaAsset } from "@/components/media-asset";
+import { CaseStudyBlocks } from "@/components/projects/case-study-blocks";
 import { EASE_OUT_EXPO } from "../motion/easing";
 
 type Props = {
@@ -15,6 +16,7 @@ type Props = {
  * Full-viewport overlay that opens when a card is clicked. Presents the
  * media large and centred with metadata in a thin rail on the side; if
  * the item has a `liveUrl`, a "VIEW LIVE" button links out in a new tab.
+ * Any content blocks render below in a scrollable panel, case-study style.
  *
  * Closes on: Escape, clicking the scrim, or the close button.
  */
@@ -60,63 +62,92 @@ export function CardModal({ item, onClose }: Props) {
 
           {/* Panel */}
           <motion.div
-            className="relative w-full max-w-[1100px] grid grid-cols-1 md:grid-cols-[1fr_320px] gap-0 bg-paper border border-[var(--rule)] overflow-hidden"
+            className="relative w-full max-w-[1100px] max-h-[calc(100dvh-2rem)] md:max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain bg-paper border border-[var(--rule)]"
             initial={{ opacity: 0, y: 24, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.98 }}
             transition={{ duration: 0.45, ease: EASE_OUT_EXPO }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Media */}
-            <div className="relative aspect-[4/3] md:aspect-auto md:min-h-[480px] bg-mute overflow-hidden">
-              <MediaAsset
-                kind={item.mediaKind}
-                url={item.mediaUrl}
-                poster={item.posterUrl}
-                alt={item.name}
-              />
-            </div>
-
-            {/* Meta rail */}
-            <div className="flex flex-col p-6 md:p-8 border-t md:border-t-0 md:border-l border-[var(--rule)]">
-              <div className="flex items-center justify-between t-micro text-body">
-                <span className="tabular-nums">{item.date || "—"}</span>
+            {/* Floating close so long content can always be dismissed. */}
+            {item.blocks.length > 0 && (
+              <div className="sticky top-0 z-10 h-0 flex justify-end pointer-events-none">
                 <button
                   type="button"
                   onClick={onClose}
                   aria-label="Close"
-                  data-cursor="zoom"
-                  className="text-body hover:text-ink transition-colors"
+                  className="pointer-events-auto m-3 h-9 w-9 rounded-full bg-paper text-ink border border-[var(--rule)] flex items-center justify-center t-micro"
                 >
-                  CLOSE ✕
+                  ✕
                 </button>
               </div>
+            )}
 
-              <h2 className="mt-6 t-title">
-                {(item.name || "UNTITLED").toUpperCase()}
-              </h2>
-              {item.label && (
-                <p className="mt-2 t-micro text-body uppercase">{item.label}</p>
-              )}
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_320px]">
+              {/* Media */}
+              <div className="relative aspect-[4/3] md:aspect-auto md:min-h-[480px] bg-mute overflow-hidden">
+                <MediaAsset
+                  kind={item.mediaKind}
+                  url={item.mediaUrl}
+                  poster={item.posterUrl}
+                  alt={item.name}
+                />
+              </div>
 
-              <div className="mt-auto pt-8">
-                {item.liveUrl ? (
-                  <a
-                    href={item.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+              {/* Meta rail */}
+              <div className="flex flex-col p-6 md:p-8 border-t md:border-t-0 md:border-l border-[var(--rule)]">
+                <div className="flex items-center justify-between t-micro text-body">
+                  <span className="tabular-nums">{item.date || "—"}</span>
+                  <button
+                    type="button"
+                    onClick={onClose}
+                    aria-label="Close"
                     data-cursor="zoom"
-                    className="cms-ink-hover block text-center px-6 py-4 border border-ink text-ink t-nav"
+                    className="text-body hover:text-ink transition-colors"
                   >
-                    VIEW LIVE ↗
-                  </a>
-                ) : (
-                  <p className="t-body text-body">
-                    An in-progress sketch — no live build yet.
+                    CLOSE ✕
+                  </button>
+                </div>
+
+                <h2 className="mt-6 t-title">
+                  {(item.name || "UNTITLED").toUpperCase()}
+                </h2>
+                {item.label && (
+                  <p className="mt-2 t-micro text-body uppercase">
+                    {item.label}
                   </p>
                 )}
+                {item.description && (
+                  <p className="mt-6 t-body text-strong whitespace-pre-line">
+                    {item.description}
+                  </p>
+                )}
+
+                <div className="mt-auto pt-8">
+                  {item.liveUrl ? (
+                    <a
+                      href={item.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-cursor="zoom"
+                      className="cms-ink-hover block text-center px-6 py-4 border border-ink text-ink t-nav"
+                    >
+                      VIEW LIVE ↗
+                    </a>
+                  ) : (
+                    <p className="t-body text-body">
+                      An in-progress sketch — no live build yet.
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
+
+            {item.blocks.length > 0 && (
+              <div className="border-t border-[var(--rule)]">
+                <CaseStudyBlocks blocks={item.blocks} />
+              </div>
+            )}
           </motion.div>
         </motion.div>
       )}

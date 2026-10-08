@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { PlaygroundItem } from "@/lib/types";
 import { MediaAsset } from "@/components/media-asset";
+import { BlocksEditor } from "../../blocks-editor";
 
 type Props = {
   action: (formData: FormData) => void | Promise<void>;
@@ -26,7 +27,7 @@ export function PlaygroundForm({ action, initial, submitLabel = "SAVE" }: Props)
   const [liveUrl, setLiveUrl] = useState(initial?.liveUrl ?? "");
 
   return (
-    <form action={action} className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-8">
+    <form action={action} className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-8 items-start">
       <div className="flex flex-col gap-6">
         <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4">
           <Field label="DATE">
@@ -109,6 +110,27 @@ export function PlaygroundForm({ action, initial, submitLabel = "SAVE" }: Props)
           />
         </Field>
 
+        <Field label="DESCRIPTION (optional — shown in the modal)">
+          <textarea
+            name="description"
+            className={`${INPUT} resize-y leading-relaxed`}
+            rows={4}
+            placeholder="What it is, how it was made, what you were exploring…"
+            defaultValue={initial?.description ?? ""}
+          />
+        </Field>
+
+        <div className="flex flex-col gap-3 pt-4 border-t border-[var(--rule)]">
+          <div className="flex flex-col gap-1">
+            <span className={LABEL}>CONTENT BLOCKS (optional)</span>
+            <span className="t-micro text-body">
+              Extra images, GIFs, videos and text sections shown below the main
+              media when the card is opened — same blocks as case studies.
+            </span>
+          </div>
+          <BlocksEditor initial={initial?.blocks} />
+        </div>
+
         <div className="flex items-center justify-between pt-4 border-t border-[var(--rule)]">
           <span className="t-micro text-body">
             Order is controlled from the list page — use the ↑ ↓ arrows.
@@ -122,7 +144,7 @@ export function PlaygroundForm({ action, initial, submitLabel = "SAVE" }: Props)
         </div>
       </div>
 
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 lg:sticky lg:top-24">
         <span className={LABEL}>PREVIEW</span>
         <div className="border border-[var(--rule)] p-2">
           <div className="thumb w-full aspect-[432/298] overflow-hidden relative bg-mute">

@@ -1,6 +1,7 @@
 import { getReadyDb } from "./db";
 import { randomUUID } from "node:crypto";
 import type {
+  Block,
   HeroProject,
   HeroProjectInput,
   PlaygroundItem,
@@ -12,6 +13,14 @@ import type {
 
 function now(): string {
   return new Date().toISOString();
+}
+
+function safeJson<T>(s: string | null | undefined, fallback: T): T {
+  try {
+    return s ? (JSON.parse(s) as T) : fallback;
+  } catch {
+    return fallback;
+  }
 }
 
 function normalizeMediaKind(raw: unknown): MediaKind {
@@ -202,6 +211,8 @@ type PlaygroundRow = {
   media_url: string;
   poster_url: string;
   live_url: string;
+  description: string | null;
+  blocks: string | null;
   display_order: number;
   created_at: string;
   updated_at: string;
@@ -217,6 +228,8 @@ function playgroundFromRow(r: PlaygroundRow): PlaygroundItem {
     mediaUrl: r.media_url,
     posterUrl: r.poster_url,
     liveUrl: r.live_url ?? "",
+    description: r.description ?? "",
+    blocks: safeJson<Block[]>(r.blocks, []),
     displayOrder: r.display_order,
     createdAt: r.created_at,
     updatedAt: r.updated_at,
@@ -258,10 +271,10 @@ export async function createPlaygroundItem(
   await db.execute({
     sql: `INSERT INTO playground_items
        (id, date, name, label, media_kind, media_url, poster_url, live_url,
-        display_order, created_at, updated_at)
+        description, blocks, display_order, created_at, updated_at)
      VALUES
        (@id, @date, @name, @label, @media_kind, @media_url, @poster_url, @live_url,
-        @display_order, @created_at, @updated_at)`,
+        @description, @blocks, @display_order, @created_at, @updated_at)`,
     args: {
       id,
       date: input.date,
@@ -271,6 +284,8 @@ export async function createPlaygroundItem(
       media_url: input.mediaUrl,
       poster_url: input.posterUrl,
       live_url: input.liveUrl ?? "",
+      description: input.description ?? "",
+      blocks: JSON.stringify(input.blocks ?? []),
       display_order: order,
       created_at: t,
       updated_at: t,
@@ -297,6 +312,8 @@ export async function updatePlaygroundItem(
          media_url = @media_url,
          poster_url = @poster_url,
          live_url = @live_url,
+         description = @description,
+         blocks = @blocks,
          display_order = @display_order,
          updated_at = @updated_at
        WHERE id = @id`,
@@ -309,6 +326,8 @@ export async function updatePlaygroundItem(
       media_url: input.mediaUrl,
       poster_url: input.posterUrl,
       live_url: input.liveUrl ?? "",
+      description: input.description ?? "",
+      blocks: JSON.stringify(input.blocks ?? []),
       display_order: input.displayOrder,
       updated_at: now(),
     },
@@ -339,6 +358,8 @@ export async function duplicatePlaygroundItem(
     mediaUrl: existing.mediaUrl,
     posterUrl: existing.posterUrl,
     liveUrl: existing.liveUrl,
+    description: existing.description,
+    blocks: existing.blocks,
     displayOrder: -1,
   });
 }

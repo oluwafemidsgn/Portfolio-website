@@ -103,6 +103,18 @@ async function _applySchema(): Promise<void> {
     "live_url",
     "TEXT NOT NULL DEFAULT ''",
   );
+  await addColumnIfMissing(
+    db,
+    "playground_items",
+    "description",
+    "TEXT NOT NULL DEFAULT ''",
+  );
+  await addColumnIfMissing(
+    db,
+    "playground_items",
+    "blocks",
+    "TEXT NOT NULL DEFAULT '[]'",
+  );
 }
 
 async function addColumnIfMissing(
