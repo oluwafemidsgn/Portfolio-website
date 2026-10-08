@@ -31,9 +31,9 @@ export default async function CaseStudyPage({ params }: { params: Params }) {
   const { slug } = await params;
   await ensureSeed();
   const study = await getBySlug(slug);
-  if (!study || study.status !== "published") notFound();
+  if (!study || study.status !== "published" || study.comingSoon) notFound();
 
-  const published = await listPublished();
+  const published = (await listPublished()).filter((s) => !s.comingSoon);
   const idx = published.findIndex((s) => s.id === study.id);
   const next = idx >= 0 ? published[(idx + 1) % published.length] : null;
 

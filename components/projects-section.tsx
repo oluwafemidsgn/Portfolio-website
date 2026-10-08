@@ -14,6 +14,8 @@ type Props = {
    * href.
    */
   caseStudyHrefs: Record<string, string>;
+  /** Case studies marked "coming soon" — tiles show a badge, no link. */
+  comingSoonIds?: string[];
 };
 
 /**
@@ -23,7 +25,7 @@ type Props = {
  * the inter-column hairlines still fire with the same rhythm the Figma
  * comp was built around. Tile count is flexible — anything from 1 upward.
  */
-export function ProjectsSection({ tiles, caseStudyHrefs }: Props) {
+export function ProjectsSection({ tiles, caseStudyHrefs, comingSoonIds = [] }: Props) {
   if (tiles.length === 0) return null;
 
   const rows: HeroProject[][] = [];
@@ -60,6 +62,10 @@ export function ProjectsSection({ tiles, caseStudyHrefs }: Props) {
                     title={tile.name}
                     type={tile.discipline}
                     href={href}
+                    comingSoon={
+                      !!tile.caseStudyId &&
+                      comingSoonIds.includes(tile.caseStudyId)
+                    }
                     media={{
                       kind: tile.mediaKind,
                       url: tile.mediaUrl,

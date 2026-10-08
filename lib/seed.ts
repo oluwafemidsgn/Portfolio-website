@@ -136,6 +136,7 @@ const LUMEN: CaseStudyInput = {
     full("Motion stills — idle loop."),
   ],
   status: "published",
+  comingSoon: false,
 };
 
 const ARCHIA: CaseStudyInput = {
@@ -193,6 +194,7 @@ const ARCHIA: CaseStudyInput = {
     full("Dark mode — automatic, respects system preference."),
   ],
   status: "published",
+  comingSoon: false,
 };
 
 const FORM_STUDIO: CaseStudyInput = {
@@ -238,6 +240,7 @@ const FORM_STUDIO: CaseStudyInput = {
     full("Key frames — pulled at regular intervals."),
   ],
   status: "published",
+  comingSoon: false,
 };
 
 /* -------------------------------------------------------------------------- */
@@ -277,6 +280,7 @@ const NOIR: CaseStudyInput = {
     full("Print detail — city-wall installation."),
   ],
   status: "published",
+  comingSoon: false,
 };
 
 const PARAGON: CaseStudyInput = {
@@ -316,6 +320,7 @@ const PARAGON: CaseStudyInput = {
     duo("Mobile app — account vs. application flow."),
   ],
   status: "published",
+  comingSoon: false,
 };
 
 const METRIC: CaseStudyInput = {
@@ -345,6 +350,7 @@ const METRIC: CaseStudyInput = {
     full("Chart system — specimen sheet."),
   ],
   status: "published",
+  comingSoon: false,
 };
 
 const ORBIT: CaseStudyInput = {
@@ -376,6 +382,7 @@ const ORBIT: CaseStudyInput = {
     duo("Collected labels — customer submissions."),
   ],
   status: "published",
+  comingSoon: false,
 };
 
 const ECHO: CaseStudyInput = {
@@ -401,6 +408,7 @@ const ECHO: CaseStudyInput = {
     full("Episode page — long-form reading experience."),
   ],
   status: "published",
+  comingSoon: false,
 };
 
 const VESPER: CaseStudyInput = {
@@ -426,6 +434,7 @@ const VESPER: CaseStudyInput = {
     full("Packing slip — an unsung surface."),
   ],
   status: "published",
+  comingSoon: false,
 };
 
 const ATLAS: CaseStudyInput = {
@@ -451,6 +460,7 @@ const ATLAS: CaseStudyInput = {
     full("Print-to-motion handoff."),
   ],
   status: "published",
+  comingSoon: false,
 };
 
 const PRISM: CaseStudyInput = {
@@ -476,6 +486,7 @@ const PRISM: CaseStudyInput = {
     full("Final loop — frame 180."),
   ],
   status: "published",
+  comingSoon: false,
 };
 
 const SIGNAL: CaseStudyInput = {
@@ -501,6 +512,7 @@ const SIGNAL: CaseStudyInput = {
     full("Search — the only non-text interaction."),
   ],
   status: "published",
+  comingSoon: false,
 };
 
 /* -------------------------------------------------------------------------- */
