@@ -47,8 +47,8 @@ export default async function CaseStudyPage({ params }: { params: Params }) {
         {/* Breadcrumb / crumb trail above the 30/70 frame. */}
         <section className="page-gutter">
           <div className="mt-[30px] h-px bg-[var(--rule)]" />
-          <div className="pt-6 pb-6 flex items-center justify-between t-micro text-body">
-            <span>
+          <div className="pt-5 pb-5 md:pt-6 md:pb-6 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between t-micro text-body">
+            <span className="min-w-0 break-words">
               <Link href="/projects" className="hover:text-ink">
                 / PROJECTS
               </Link>
