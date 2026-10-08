@@ -80,6 +80,7 @@ function parseHero(form: FormData): HeroProjectInput {
     mediaUrl: String(form.get("mediaUrl") ?? "").trim(),
     posterUrl: String(form.get("posterUrl") ?? "").trim(),
     caseStudyId: caseStudyId || null,
+    comingSoon: form.get("comingSoon") === "on",
     displayOrder: num(form.get("displayOrder"), 0),
   };
 }

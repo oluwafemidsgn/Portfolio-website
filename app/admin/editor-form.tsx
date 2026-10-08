@@ -80,6 +80,7 @@ export function EditorForm({
     <form action={action} className="flex flex-col gap-10">
       <input type="hidden" name="accordion" value={accordionJson} />
       <input type="hidden" name="status" value={status} />
+      {comingSoon && <input type="hidden" name="comingSoon" value="on" />}
 
       {/* Top toolbar */}
       <div className="sticky top-0 z-20 -mx-[clamp(16px,3.33vw,64px)] px-[clamp(16px,3.33vw,64px)] py-4 bg-paper border-b border-[var(--rule)] flex items-center justify-between gap-4 flex-wrap">
@@ -88,6 +89,19 @@ export function EditorForm({
             {id ? "EDITING" : "NEW CASE STUDY"}
           </span>
           <StatusToggle value={status} onChange={setStatus} />
+          <button
+            type="button"
+            role="switch"
+            aria-checked={comingSoon}
+            onClick={() => setComingSoon(!comingSoon)}
+            title="Show the thumbnail with a COMING SOON badge and disable the link"
+            className={`admin-tab inline-flex items-center gap-2 border border-[var(--rule)] px-3 py-1.5 t-micro ${
+              comingSoon ? "bg-ink text-paper" : "text-body"
+            }`}
+          >
+            <span aria-hidden>{comingSoon ? "●" : "○"}</span>
+            COMING SOON: {comingSoon ? "ON" : "OFF"}
+          </button>
           {saved && <span className="text-ink">SAVED ✓</span>}
         </div>
         <div className="flex items-center gap-4">
@@ -176,15 +190,6 @@ export function EditorForm({
               placeholder="https://..."
             />
           </Field>
-          <label className="flex items-center gap-3 t-micro text-body md:col-span-2 cursor-pointer">
-            <input
-              type="checkbox"
-              name="comingSoon"
-              checked={comingSoon}
-              onChange={(e) => setComingSoon(e.target.checked)}
-            />
-            COMING SOON (SHOW THUMBNAIL, DISABLE LINK — MUST BE PUBLISHED TO SHOW)
-          </label>
         </div>
       </Section>
 

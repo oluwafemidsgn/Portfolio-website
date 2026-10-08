@@ -108,6 +108,11 @@ export default async function HeroAdminList() {
                     >
                       {t.name || <em className="text-body">Untitled</em>}
                     </Link>
+                    {t.comingSoon && (
+                      <span className="ml-3 t-micro text-body border border-[var(--rule)] px-2 py-0.5 align-middle">
+                        COMING SOON
+                      </span>
+                    )}
                   </td>
                   <td className="p-4 md:p-6 t-body text-strong tabular-nums hidden md:table-cell align-middle">
                     {t.year || "—"}

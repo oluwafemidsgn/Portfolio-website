@@ -40,9 +40,11 @@ export function HeroForm({
   const [name, setName] = useState(initial?.name ?? "");
   const [discipline, setDiscipline] = useState(initial?.discipline ?? "");
   const [caseStudyId, setCaseStudyId] = useState(initial?.caseStudyId ?? "");
+  const [comingSoon, setComingSoon] = useState(initial?.comingSoon ?? false);
 
   return (
     <form action={action} className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-8">
+      {comingSoon && <input type="hidden" name="comingSoon" value="on" />}
       <div className="flex flex-col gap-6">
         <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4">
           <Field label="YEAR">
@@ -131,6 +133,28 @@ export function HeroForm({
           </select>
         </Field>
 
+        <div className="flex items-center justify-between gap-4 flex-wrap border border-[var(--rule)] p-4">
+          <div className="flex flex-col gap-1">
+            <span className={LABEL}>COMING SOON</span>
+            <span className="t-micro text-body">
+              Shows the tile with a COMING SOON badge and removes the link.
+            </span>
+          </div>
+          <button
+            type="button"
+            role="switch"
+            aria-checked={comingSoon}
+            onClick={() => setComingSoon(!comingSoon)}
+            title="Show the thumbnail with a COMING SOON badge and disable the link"
+            className={`admin-tab inline-flex items-center gap-2 border border-[var(--rule)] px-3 py-1.5 t-micro ${
+              comingSoon ? "bg-ink text-paper" : "text-body"
+            }`}
+          >
+            <span aria-hidden>{comingSoon ? "●" : "○"}</span>
+            COMING SOON: {comingSoon ? "ON" : "OFF"}
+          </button>
+        </div>
+
         <div className="flex items-center justify-between pt-4 border-t border-[var(--rule)]">
           <span className="t-micro text-body">
             Tiles appear in the home grid in the order shown on the list page —
@@ -155,6 +179,11 @@ export function HeroForm({
               poster={posterUrl}
               alt={name}
             />
+            {comingSoon && (
+              <span className="absolute top-3 left-3 bg-paper text-ink px-2 py-1 t-micro pointer-events-none">
+                COMING SOON
+              </span>
+            )}
           </div>
           <div className="mt-2 flex items-center justify-between t-micro">
             <span className="text-mute tabular-nums">{year || "0000.00"}</span>
@@ -163,7 +192,7 @@ export function HeroForm({
             </span>
           </div>
         </div>
-        {caseStudyId && (
+        {caseStudyId && !comingSoon && (
           <span className="t-micro text-body">
             Clicks route to /projects/
             <em className="text-ink not-italic">{caseStudyId.slice(0, 8)}…</em>
