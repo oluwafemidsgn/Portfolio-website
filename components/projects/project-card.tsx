@@ -79,7 +79,11 @@ export function ProjectCard({ study, i }: Props) {
             transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
           >
             {study.coverImage && (
-              <MediaAsset kind="image" url={study.coverImage} alt={study.title} />
+              <MediaAsset
+                kind="image"
+                url={study.coverImage}
+                alt={study.title}
+              />
             )}
           </motion.div>
           {comingSoon && (
@@ -89,25 +93,25 @@ export function ProjectCard({ study, i }: Props) {
           )}
           {/* Ink overlay. */}
           {!comingSoon && (
-          <motion.div
-            className="absolute inset-0 bg-ink pointer-events-none"
-            variants={{ rest: { opacity: 0 }, hover: { opacity: 0.12 } }}
-            transition={{ duration: 0.5, ease: EASE_OUT_EXPO }}
-          />
+            <motion.div
+              className="absolute inset-0 bg-ink pointer-events-none"
+              variants={{ rest: { opacity: 0 }, hover: { opacity: 0.12 } }}
+              transition={{ duration: 0.5, ease: EASE_OUT_EXPO }}
+            />
           )}
           {/* Arrow badge. */}
           {!comingSoon && (
-          <motion.div
-            className="absolute top-3 right-3 h-8 w-8 rounded-full bg-paper text-ink flex items-center justify-center text-[14px]"
-            variants={{
-              rest: { opacity: 0, scale: 0.6, y: -4 },
-              hover: { opacity: 1, scale: 1, y: 0 },
-            }}
-            transition={{ duration: 0.35, ease: EASE_OUT_EXPO }}
-            aria-hidden
-          >
-            ↗
-          </motion.div>
+            <motion.div
+              className="absolute top-3 right-3 h-8 w-8 rounded-full bg-paper text-ink flex items-center justify-center text-[14px]"
+              variants={{
+                rest: { opacity: 0, scale: 0.6, y: -4 },
+                hover: { opacity: 1, scale: 1, y: 0 },
+              }}
+              transition={{ duration: 0.35, ease: EASE_OUT_EXPO }}
+              aria-hidden
+            >
+              ↗
+            </motion.div>
           )}
         </motion.div>
 

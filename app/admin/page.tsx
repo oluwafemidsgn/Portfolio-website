@@ -118,13 +118,15 @@ export default async function AdminHome() {
                   <div className="flex items-center gap-3 justify-end flex-wrap">
                     {s.status === "published" ? (
                       <>
-                        <Link
-                          href={`/projects/${s.slug}`}
-                          target="_blank"
-                          className="t-micro text-body hover:text-ink"
-                        >
-                          VIEW ↗
-                        </Link>
+                        {!s.comingSoon && (
+                          <Link
+                            href={`/projects/${s.slug}`}
+                            target="_blank"
+                            className="t-micro text-body hover:text-ink"
+                          >
+                            VIEW ↗
+                          </Link>
+                        )}
                         <form
                           action={unpublishCaseStudy.bind(null, s.id)}
                         >
