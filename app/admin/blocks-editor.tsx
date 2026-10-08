@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import type { Block } from "@/lib/types";
+import { UploadButton } from "./upload-button";
 
 /**
  * Content-block editor shared by the case-study and playground forms.
@@ -91,12 +92,17 @@ export function BlocksEditor({ initial = [], name = "blocks" }: Props) {
 
           {b.kind === "full" && (
             <div className="flex flex-col gap-3">
-              <input
-                className={inputCls}
-                placeholder="Image / GIF / video URL"
-                value={b.image}
-                onChange={(e) => updateBlock(idx, { image: e.target.value })}
-              />
+              <div className="flex flex-wrap gap-2">
+                <input
+                  className={`${inputCls} flex-1 min-w-0`}
+                  placeholder="Image / GIF / video URL"
+                  value={b.image}
+                  onChange={(e) => updateBlock(idx, { image: e.target.value })}
+                />
+                <UploadButton
+                  onUploaded={(url) => updateBlock(idx, { image: url })}
+                />
+              </div>
               <input
                 className={inputCls}
                 placeholder="Alt text"
@@ -109,12 +115,17 @@ export function BlocksEditor({ initial = [], name = "blocks" }: Props) {
           {b.kind === "duo" && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div className="flex flex-col gap-3">
-                <input
-                  className={inputCls}
-                  placeholder="Left image / GIF / video URL"
-                  value={b.left}
-                  onChange={(e) => updateBlock(idx, { left: e.target.value })}
-                />
+                <div className="flex flex-wrap gap-2">
+                  <input
+                    className={`${inputCls} flex-1 min-w-0`}
+                    placeholder="Left image / GIF / video URL"
+                    value={b.left}
+                    onChange={(e) => updateBlock(idx, { left: e.target.value })}
+                  />
+                  <UploadButton
+                    onUploaded={(url) => updateBlock(idx, { left: url })}
+                  />
+                </div>
                 <input
                   className={inputCls}
                   placeholder="Left alt text"
@@ -125,12 +136,17 @@ export function BlocksEditor({ initial = [], name = "blocks" }: Props) {
                 />
               </div>
               <div className="flex flex-col gap-3">
-                <input
-                  className={inputCls}
-                  placeholder="Right image / GIF / video URL"
-                  value={b.right}
-                  onChange={(e) => updateBlock(idx, { right: e.target.value })}
-                />
+                <div className="flex flex-wrap gap-2">
+                  <input
+                    className={`${inputCls} flex-1 min-w-0`}
+                    placeholder="Right image / GIF / video URL"
+                    value={b.right}
+                    onChange={(e) => updateBlock(idx, { right: e.target.value })}
+                  />
+                  <UploadButton
+                    onUploaded={(url) => updateBlock(idx, { right: url })}
+                  />
+                </div>
                 <input
                   className={inputCls}
                   placeholder="Right alt text"
