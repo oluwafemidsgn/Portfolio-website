@@ -37,7 +37,11 @@ export default async function LoginPage({
                 />
               </label>
               {error && (
-                <p className="t-micro text-ink">Incorrect password. Try again.</p>
+                <p className="t-micro text-ink">
+                  {error === "locked"
+                    ? "Too many attempts. Try again in 15 minutes."
+                    : "Incorrect password. Try again."}
+                </p>
               )}
               <button
                 type="submit"

@@ -80,8 +80,9 @@ function parseCaseStudy(form: FormData): CaseStudyInput {
 
 export async function loginAction(formData: FormData): Promise<void> {
   const password = String(formData.get("password") ?? "");
-  const ok = await signIn(password);
-  if (!ok) redirect("/admin/login?error=1");
+  const result = await signIn(password);
+  if (result === "locked") redirect("/admin/login?error=locked");
+  if (result !== "ok") redirect("/admin/login?error=1");
   redirect("/admin");
 }
 

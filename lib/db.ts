@@ -84,6 +84,12 @@ async function _applySchema(): Promise<void> {
       updated_at     TEXT NOT NULL
     );
 
+    CREATE TABLE IF NOT EXISTS login_attempts (
+      ip            TEXT NOT NULL,
+      attempted_at  INTEGER NOT NULL
+    );
+    CREATE INDEX IF NOT EXISTS login_attempts_ip ON login_attempts (ip, attempted_at);
+
     CREATE TABLE IF NOT EXISTS recommendations (
       id             TEXT PRIMARY KEY,
       quote          TEXT NOT NULL DEFAULT '',
