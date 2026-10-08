@@ -434,3 +434,13 @@ body {
 .admin-card:focus-within {
   border-color: var(--color-strong);
 }
+
+/* Nohemi draws ↑ ↓ tiny, which made the admin's reorder buttons nearly
+   invisible. Render those buttons in a system font, a size up. */
+.admin-root button[aria-label="Move up"],
+.admin-root button[aria-label="Move down"] {
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1;
+  color: var(--color-strong);
+}

@@ -33,8 +33,8 @@ export default async function HomepageAdmin() {
     {
       href: "/admin/homepage/playground",
       eyebrow: "/ PLAYGROUND",
-      title: "Sketchbook",
-      body: "Short, undated experiments. Images, videos, or gifs with a date and name — no case study link, no discipline.",
+      title: "Playground",
+      body: "Experiments for the playground page. Each entry has its main media plus optional description and case-study-style content blocks.",
       count: playground.length,
       countLabel: "ENTRIES",
     },

@@ -133,16 +133,20 @@ export function PlaygroundForm({ action, initial, submitLabel = "SAVE" }: Props)
           />
         </Field>
 
-        <div className="flex flex-col gap-3 pt-4 border-t border-[var(--rule)]">
-          <div className="flex flex-col gap-1">
-            <span className={LABEL}>CONTENT BLOCKS (optional)</span>
-            <span className="t-micro text-body">
-              Extra images, GIFs, videos and text sections shown below the main
-              media when the card is opened — same blocks as case studies.
-            </span>
+        <section
+          id="content"
+          className="flex flex-col gap-4 pt-8 mt-2 border-t border-[var(--rule)] scroll-mt-24"
+        >
+          <div className="flex flex-col gap-2">
+            <span className={LABEL}>/ PAGE CONTENT</span>
+            <h2 className="t-title text-ink">Content blocks</h2>
+            <p className="t-body text-body max-w-[60ch]">
+              Images, GIFs, videos and text sections shown below the main media
+              when someone opens this entry — same blocks as case studies.
+            </p>
           </div>
           <BlocksEditor initial={initial?.blocks} />
-        </div>
+        </section>
 
         <div className="flex items-center justify-between pt-4 border-t border-[var(--rule)]">
           <span className="t-micro text-body">
@@ -158,7 +162,10 @@ export function PlaygroundForm({ action, initial, submitLabel = "SAVE" }: Props)
       </div>
 
       <div className="flex flex-col gap-3 lg:sticky lg:top-24">
-        <span className={LABEL}>PREVIEW</span>
+        <a href="#content" className="admin-btn px-4 py-3 t-nav text-center">
+          ADD PAGE CONTENT
+        </a>
+        <span className={`${LABEL} mt-3`}>PREVIEW</span>
         <div className="border border-[var(--rule)] p-2">
           <div className="thumb w-full aspect-[432/298] overflow-hidden relative bg-mute">
             <MediaAsset

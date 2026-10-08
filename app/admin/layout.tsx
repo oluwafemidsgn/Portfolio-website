@@ -38,6 +38,12 @@ export default async function AdminLayout({
                   HOMEPAGE
                 </Link>
                 <Link
+                  href="/admin/homepage/playground"
+                  className="admin-link"
+                >
+                  PLAYGROUND
+                </Link>
+                <Link
                   href="/"
                   className="admin-link"
                   target="_blank"

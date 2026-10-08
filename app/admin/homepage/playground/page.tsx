@@ -142,6 +142,12 @@ export default async function PlaygroundAdminList() {
                     >
                       EDIT
                     </Link>
+                    <Link
+                      href={`/admin/homepage/playground/${p.id}#content`}
+                      className="t-micro admin-action admin-action-strong"
+                    >
+                      CONTENT{p.blocks.length > 0 ? ` (${p.blocks.length})` : " +"}
+                    </Link>
                     <form action={duplicatePlaygroundAction.bind(null, p.id)}>
                       <button
                         type="submit"
