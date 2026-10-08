@@ -96,14 +96,14 @@ export function EditorForm({
               href={previewHref}
               target="_blank"
               rel="noreferrer"
-              className="t-micro text-body hover:text-ink"
+              className="t-micro admin-action"
             >
               PREVIEW ↗
             </a>
           )}
           <button
             type="submit"
-            className="bg-ink text-paper px-5 py-2.5 t-nav hover:opacity-90 transition-opacity"
+            className="admin-btn-primary px-5 py-2.5 t-nav"
           >
             {status === "published" ? "SAVE & PUBLISH" : "SAVE DRAFT"}
           </button>
@@ -211,7 +211,7 @@ export function EditorForm({
           {accordion.map((item, idx) => (
             <div
               key={item.id}
-              className="border border-[var(--rule)] p-4 md:p-5 flex flex-col gap-3"
+              className="admin-card border border-[var(--rule)] p-4 md:p-5 flex flex-col gap-3"
             >
               <div className="flex items-center justify-between t-micro text-body">
                 <span>ROW {String(idx + 1).padStart(2, "0")}</span>
@@ -219,7 +219,7 @@ export function EditorForm({
                   <button
                     type="button"
                     onClick={() => moveAccordion(idx, -1)}
-                    className="hover:text-ink"
+                    className="admin-action"
                     aria-label="Move up"
                   >
                     ↑
@@ -227,7 +227,7 @@ export function EditorForm({
                   <button
                     type="button"
                     onClick={() => moveAccordion(idx, 1)}
-                    className="hover:text-ink"
+                    className="admin-action"
                     aria-label="Move down"
                   >
                     ↓
@@ -235,7 +235,7 @@ export function EditorForm({
                   <button
                     type="button"
                     onClick={() => removeAccordion(idx)}
-                    className="hover:text-ink"
+                    className="admin-action admin-action-danger"
                   >
                     REMOVE
                   </button>
@@ -263,7 +263,7 @@ export function EditorForm({
           <button
             type="button"
             onClick={addAccordion}
-            className="self-start t-nav text-ink border border-[var(--rule)] px-4 py-2.5 hover:bg-ink hover:text-paper transition-colors"
+            className="self-start admin-btn t-nav px-4 py-2.5"
           >
             + ADD ROW
           </button>
@@ -284,7 +284,7 @@ export function EditorForm({
         <span>End of editor.</span>
         <button
           type="submit"
-          className="bg-ink text-paper px-5 py-2.5 t-nav hover:opacity-90 transition-opacity"
+          className="admin-btn-primary px-5 py-2.5 t-nav"
         >
           {status === "published" ? "SAVE & PUBLISH" : "SAVE DRAFT"}
         </button>
@@ -366,10 +366,10 @@ function StatusToggle({
             role="tab"
             aria-selected={active}
             onClick={() => onChange(s)}
-            className={`px-3 py-1.5 t-micro transition-colors ${
+            className={`admin-tab px-3 py-1.5 t-micro ${
               active
                 ? "bg-ink text-paper"
-                : "text-body hover:text-ink"
+                : "text-body"
             }`}
           >
             {s === "draft" ? "DRAFT" : "LIVE"}

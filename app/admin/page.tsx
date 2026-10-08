@@ -44,7 +44,7 @@ export default async function AdminHome() {
         <div className="t-micro text-body">/ INDEX</div>
         <Link
           href="/admin/new"
-          className="bg-ink text-paper px-5 py-3 t-nav hover:opacity-90 transition-opacity"
+          className="admin-btn-primary px-5 py-3 t-nav"
         >
           NEW CASE STUDY +
         </Link>
@@ -122,7 +122,7 @@ export default async function AdminHome() {
                           <Link
                             href={`/projects/${s.slug}`}
                             target="_blank"
-                            className="t-micro text-body hover:text-ink"
+                            className="t-micro admin-action"
                           >
                             VIEW ↗
                           </Link>
@@ -132,7 +132,7 @@ export default async function AdminHome() {
                         >
                           <button
                             type="submit"
-                            className="t-micro text-body hover:text-ink"
+                            className="t-micro admin-action"
                           >
                             UNPUBLISH
                           </button>
@@ -142,7 +142,7 @@ export default async function AdminHome() {
                       <form action={publishCaseStudy.bind(null, s.id)}>
                         <button
                           type="submit"
-                          className="t-micro text-ink hover:underline"
+                          className="t-micro admin-action admin-action-strong"
                         >
                           PUBLISH →
                         </button>
@@ -150,14 +150,14 @@ export default async function AdminHome() {
                     )}
                     <Link
                       href={`/admin/${s.id}/edit`}
-                      className="t-micro text-body hover:text-ink"
+                      className="t-micro admin-action"
                     >
                       EDIT
                     </Link>
                     <form action={duplicateCaseStudy.bind(null, s.id)}>
                       <button
                         type="submit"
-                        className="t-micro text-body hover:text-ink"
+                        className="t-micro admin-action"
                       >
                         DUPLICATE
                       </button>

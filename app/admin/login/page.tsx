@@ -41,7 +41,7 @@ export default async function LoginPage({
               )}
               <button
                 type="submit"
-                className="mt-2 bg-ink text-paper px-5 py-3 t-nav hover:opacity-90 transition-opacity"
+                className="mt-2 admin-btn-primary px-5 py-3 t-nav"
               >
                 SIGN IN →
               </button>

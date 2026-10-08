@@ -23,7 +23,7 @@ const inputCls =
   "w-full bg-transparent border border-[var(--rule)] px-4 py-3 t-body text-ink placeholder:text-body focus:outline-none focus:border-ink transition-colors";
 
 const addBtnCls =
-  "t-nav text-ink border border-[var(--rule)] px-4 py-2.5 hover:bg-ink hover:text-paper transition-colors";
+  "admin-btn t-nav px-4 py-2.5";
 
 export function BlocksEditor({ initial = [], name = "blocks" }: Props) {
   const [blocks, setBlocks] = useState<Block[]>(initial);
@@ -55,7 +55,7 @@ export function BlocksEditor({ initial = [], name = "blocks" }: Props) {
       {blocks.map((b, idx) => (
         <div
           key={b.id}
-          className="border border-[var(--rule)] p-4 md:p-5 flex flex-col gap-3"
+          className="admin-card border border-[var(--rule)] p-4 md:p-5 flex flex-col gap-3"
         >
           <div className="flex items-center justify-between t-micro text-body">
             <span>
@@ -66,7 +66,7 @@ export function BlocksEditor({ initial = [], name = "blocks" }: Props) {
               <button
                 type="button"
                 onClick={() => moveBlock(idx, -1)}
-                className="hover:text-ink"
+                className="admin-action"
                 aria-label="Move up"
               >
                 ↑
@@ -74,7 +74,7 @@ export function BlocksEditor({ initial = [], name = "blocks" }: Props) {
               <button
                 type="button"
                 onClick={() => moveBlock(idx, 1)}
-                className="hover:text-ink"
+                className="admin-action"
                 aria-label="Move down"
               >
                 ↓
@@ -82,7 +82,7 @@ export function BlocksEditor({ initial = [], name = "blocks" }: Props) {
               <button
                 type="button"
                 onClick={() => removeBlock(idx)}
-                className="hover:text-ink"
+                className="admin-action admin-action-danger"
               >
                 REMOVE
               </button>

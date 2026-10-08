@@ -92,7 +92,7 @@ export function RecommendationForm({
           </span>
           <button
             type="submit"
-            className="bg-ink text-paper px-6 py-3 t-nav hover:opacity-90 transition-opacity"
+            className="admin-btn-primary px-6 py-3 t-nav"
           >
             {submitLabel}
           </button>

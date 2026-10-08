@@ -269,3 +269,168 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/*
+ * Admin interaction system
+ * ---------------------------------------------------------------
+ * Scoped to `.admin-root` (set on the /admin layout wrapper) so the
+ * public site and its custom cursor are untouched. These rules are
+ * deliberately unlayered: the global `a, button { cursor: none }`
+ * rule above and `.cms-ink-hover:hover button { color }` are
+ * unlayered too and would otherwise beat anything in a Tailwind layer.
+ */
+:root {
+  --admin-danger: #dc2626;
+  --admin-danger-ink: #ffffff;
+}
+
+/* Native cursor is always visible in admin, pointer on clickable things. */
+.admin-root,
+.admin-root [data-cursor] {
+  cursor: auto;
+}
+.admin-root a[href],
+.admin-root button,
+.admin-root select,
+.admin-root summary,
+.admin-root [role="tab"],
+.admin-root [role="button"],
+.admin-root label:has(input[type="checkbox"]),
+.admin-root input[type="checkbox"],
+.admin-root input[type="radio"] {
+  cursor: pointer;
+}
+.admin-root button:disabled,
+.admin-root input:disabled,
+.admin-root select:disabled {
+  cursor: not-allowed;
+}
+.admin-root input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
+.admin-root textarea {
+  cursor: text;
+}
+
+/* Keyboard focus ring for every control. */
+.admin-root :is(a[href], button, select, summary, [role="tab"], input[type="checkbox"]):focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+/* Inside an inverted (ink-filled) row the ring must flip to stay visible. */
+.admin-root .cms-ink-hover:hover :is(a[href], button):focus-visible {
+  outline-color: var(--color-paper);
+}
+
+/* Inputs: hover border, focus border (focus wins). */
+.admin-root :is(input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]), select, textarea) {
+  transition: border-color 150ms ease;
+}
+.admin-root :is(input:not([type="checkbox"]):not([type="radio"]), select, textarea):hover:not(:disabled) {
+  border-color: var(--color-strong);
+}
+.admin-root :is(input:not([type="checkbox"]):not([type="radio"]), select, textarea):focus {
+  border-color: var(--color-ink);
+}
+
+/* Shared base: short transition + press feedback. */
+.admin-btn,
+.admin-btn-primary,
+.admin-action,
+.admin-link,
+.admin-tab {
+  transition:
+    background-color 150ms ease,
+    color 150ms ease,
+    border-color 150ms ease,
+    transform 90ms ease;
+}
+.admin-btn:active:not(:disabled),
+.admin-btn-primary:active:not(:disabled),
+.admin-action:active:not(:disabled),
+.admin-tab:active:not(:disabled) {
+  transform: scale(0.96);
+}
+.admin-btn:disabled,
+.admin-btn-primary:disabled,
+.admin-action:disabled {
+  opacity: 0.35;
+  pointer-events: auto; /* keep not-allowed cursor */
+}
+
+/* Outline button: fills with ink on hover. */
+.admin-btn {
+  display: inline-block;
+  color: var(--color-ink);
+  border: 1px solid var(--rule);
+}
+.admin-btn:hover:not(:disabled) {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  border-color: var(--color-ink);
+}
+
+/* Primary button: solid ink, inverts to an outlined paper button. */
+.admin-btn-primary {
+  display: inline-block;
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  border: 1px solid var(--color-ink);
+}
+.admin-btn-primary:hover:not(:disabled) {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* Text actions (EDIT, DUPLICATE, ↑ ↓, REMOVE, VIEW...): get a chip on hover. */
+.admin-action {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  margin: -0.25rem -0.25rem;
+  color: var(--color-body);
+}
+.admin-action-strong {
+  color: var(--color-ink);
+}
+.admin-action:hover:not(:disabled) {
+  background-color: var(--color-mute);
+  color: var(--color-ink);
+}
+/* Inside an ink-filled row, the chip inverts to paper. */
+.cms-ink-hover:hover .admin-action:hover:not(:disabled) {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+}
+/* Destructive: red chip in both themes and inside inverted rows. */
+.admin-action-danger:hover:not(:disabled),
+.cms-ink-hover:hover .admin-action-danger:hover:not(:disabled) {
+  background-color: var(--admin-danger);
+  color: var(--admin-danger-ink);
+}
+
+/* Nav / breadcrumb links. */
+.admin-link {
+  display: inline-block;
+  color: var(--color-body);
+  text-underline-offset: 6px;
+}
+.admin-link:hover {
+  color: var(--color-ink);
+  text-decoration: underline;
+}
+.admin-link-current {
+  color: var(--color-ink);
+}
+
+/* Status toggle tabs. */
+.admin-tab:not([aria-selected="true"]):hover {
+  background-color: var(--color-mute);
+  color: var(--color-ink);
+}
+
+/* Editor cards: highlight the card you are in. */
+.admin-card {
+  transition: border-color 150ms ease;
+}
+.admin-card:hover,
+.admin-card:focus-within {
+  border-color: var(--color-strong);
+}

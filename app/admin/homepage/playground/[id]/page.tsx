@@ -24,11 +24,11 @@ export default async function EditPlaygroundItem({
   return (
     <div className="flex flex-col gap-8">
       <div className="t-micro text-body flex items-center gap-2">
-        <Link href="/admin/homepage" className="hover:text-ink">
+        <Link href="/admin/homepage" className="admin-link">
           / HOMEPAGE
         </Link>
         <span aria-hidden>·</span>
-        <Link href="/admin/homepage/playground" className="hover:text-ink">
+        <Link href="/admin/homepage/playground" className="admin-link">
           PLAYGROUND
         </Link>
         <span aria-hidden>·</span>

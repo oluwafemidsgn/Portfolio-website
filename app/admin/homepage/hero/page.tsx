@@ -39,7 +39,7 @@ export default async function HeroAdminList() {
         </div>
         <Link
           href="/admin/homepage/hero/new"
-          className="bg-ink text-paper px-5 py-3 t-nav hover:opacity-90 transition-opacity justify-self-start lg:justify-self-end"
+          className="admin-btn-primary px-5 py-3 t-nav justify-self-start lg:justify-self-end"
         >
           NEW TILE +
         </Link>
@@ -120,7 +120,7 @@ export default async function HeroAdminList() {
                       <Link
                         href={`/projects/${study.slug}`}
                         target="_blank"
-                        className="text-ink hover:underline"
+                        className="admin-link admin-link-current"
                       >
                         /{study.slug}
                       </Link>
@@ -134,7 +134,7 @@ export default async function HeroAdminList() {
                         <button
                           type="submit"
                           disabled={i === 0}
-                          className="t-micro text-body hover:text-ink disabled:opacity-30"
+                          className="t-micro admin-action"
                           aria-label="Move up"
                         >
                           ↑
@@ -144,7 +144,7 @@ export default async function HeroAdminList() {
                         <button
                           type="submit"
                           disabled={i === tiles.length - 1}
-                          className="t-micro text-body hover:text-ink disabled:opacity-30"
+                          className="t-micro admin-action"
                           aria-label="Move down"
                         >
                           ↓
@@ -152,14 +152,14 @@ export default async function HeroAdminList() {
                       </form>
                       <Link
                         href={`/admin/homepage/hero/${t.id}`}
-                        className="t-micro text-body hover:text-ink"
+                        className="t-micro admin-action"
                       >
                         EDIT
                       </Link>
                       <form action={duplicateHeroAction.bind(null, t.id)}>
                         <button
                           type="submit"
-                          className="t-micro text-body hover:text-ink"
+                          className="t-micro admin-action"
                         >
                           DUPLICATE
                         </button>
@@ -185,7 +185,7 @@ export default async function HeroAdminList() {
 function Breadcrumb() {
   return (
     <div className="t-micro text-body flex items-center gap-2">
-      <Link href="/admin/homepage" className="hover:text-ink">
+      <Link href="/admin/homepage" className="admin-link">
         / HOMEPAGE
       </Link>
       <span aria-hidden>·</span>

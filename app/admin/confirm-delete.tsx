@@ -4,7 +4,7 @@ export function ConfirmDelete({ title }: { title: string }) {
   return (
     <button
       type="submit"
-      className="t-micro text-body hover:text-ink"
+      className="t-micro admin-action admin-action-danger"
       onClick={(e) => {
         if (
           !confirm(

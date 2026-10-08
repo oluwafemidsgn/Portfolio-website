@@ -31,11 +31,11 @@ export default async function EditHeroTile({
   return (
     <div className="flex flex-col gap-8">
       <div className="t-micro text-body flex items-center gap-2">
-        <Link href="/admin/homepage" className="hover:text-ink">
+        <Link href="/admin/homepage" className="admin-link">
           / HOMEPAGE
         </Link>
         <span aria-hidden>·</span>
-        <Link href="/admin/homepage/hero" className="hover:text-ink">
+        <Link href="/admin/homepage/hero" className="admin-link">
           HERO GRID
         </Link>
         <span aria-hidden>·</span>

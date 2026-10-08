@@ -23,7 +23,7 @@ export default async function PlaygroundAdminList() {
   return (
     <div className="flex flex-col gap-10">
       <div className="t-micro text-body flex items-center gap-2">
-        <Link href="/admin/homepage" className="hover:text-ink">
+        <Link href="/admin/homepage" className="admin-link">
           / HOMEPAGE
         </Link>
         <span aria-hidden>·</span>
@@ -41,7 +41,7 @@ export default async function PlaygroundAdminList() {
         </div>
         <Link
           href="/admin/homepage/playground/new"
-          className="bg-ink text-paper px-5 py-3 t-nav hover:opacity-90 transition-opacity justify-self-start lg:justify-self-end"
+          className="admin-btn-primary px-5 py-3 t-nav justify-self-start lg:justify-self-end"
         >
           NEW ENTRY +
         </Link>
@@ -118,7 +118,7 @@ export default async function PlaygroundAdminList() {
                       <button
                         type="submit"
                         disabled={i === 0}
-                        className="t-micro text-body hover:text-ink disabled:opacity-30"
+                        className="t-micro admin-action"
                         aria-label="Move up"
                       >
                         ↑
@@ -130,7 +130,7 @@ export default async function PlaygroundAdminList() {
                       <button
                         type="submit"
                         disabled={i === items.length - 1}
-                        className="t-micro text-body hover:text-ink disabled:opacity-30"
+                        className="t-micro admin-action"
                         aria-label="Move down"
                       >
                         ↓
@@ -138,14 +138,14 @@ export default async function PlaygroundAdminList() {
                     </form>
                     <Link
                       href={`/admin/homepage/playground/${p.id}`}
-                      className="t-micro text-body hover:text-ink"
+                      className="t-micro admin-action"
                     >
                       EDIT
                     </Link>
                     <form action={duplicatePlaygroundAction.bind(null, p.id)}>
                       <button
                         type="submit"
-                        className="t-micro text-body hover:text-ink"
+                        className="t-micro admin-action"
                       >
                         DUPLICATE
                       </button>
