@@ -43,13 +43,14 @@ export function SiteNav() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: EASE_OUT_EXPO, delay: 0.1 }}
     >
-      <ul className="hidden md:flex items-center justify-between gap-6 t-nav text-body">
+      <ul className="hidden md:flex items-center justify-between gap-4 lg:gap-6 t-nav text-body">
         {NAV_ITEMS.map((item) => (
           <li key={item.label}>
             <NavLink label={item.label} href={item.href} />
           </li>
         ))}
-        <li>
+        {/* Email needs the room — tablet widths overflow with it in. */}
+        <li className="hidden lg:block">
           <NavLink label={EMAIL} href={`mailto:${EMAIL.toLowerCase()}`} />
         </li>
         <li className="flex items-center">

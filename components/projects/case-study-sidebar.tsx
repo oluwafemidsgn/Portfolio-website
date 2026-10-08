@@ -35,7 +35,7 @@ export function CaseStudySidebar({
   ].filter((m) => m.v);
 
   return (
-    <aside className="p-5 sm:p-8 lg:p-6 xl:p-8 flex flex-col gap-6 lg:sticky lg:top-6 lg:self-start lg:max-h-[calc(100dvh-3rem)] lg:overflow-y-auto lg:overscroll-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+    <aside className="p-5 sm:p-8 lg:p-6 xl:p-8 flex flex-col gap-6 lg:sticky! lg:top-6 lg:self-start lg:max-h-[calc(100dvh-3rem)] lg:overflow-y-auto lg:overscroll-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
       <div>
         <motion.span
           className="t-micro text-body"
@@ -81,7 +81,7 @@ export function CaseStudySidebar({
         <Reveal delay={0.36}>
           <div>
             <div className="t-micro text-body mb-4">/ DETAILS</div>
-            <Accordion items={accordion} />
+            <Accordion items={accordion} compact />
           </div>
         </Reveal>
       )}

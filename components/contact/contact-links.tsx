@@ -58,7 +58,7 @@ export function ContactLinks() {
         className="cms-ink-hover block border border-[var(--rule)] p-6"
       >
         <p className="t-micro text-body">{DIRECT.label}</p>
-        <p className="mt-3 t-title">{DIRECT.value}</p>
+        <p className="mt-3 t-title [overflow-wrap:anywhere]">{DIRECT.value}</p>
         <p className="mt-4 t-micro text-body">TAP TO COMPOSE ↗</p>
       </motion.a>
 

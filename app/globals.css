@@ -150,7 +150,7 @@ body {
    first) gets a left rule. The rule starts collapsed along its long axis
    and grows in via CSS transition once the nearest ancestor flips
    `data-revealed="true"` (set by the <Frame> component on view-enter). */
-.grid-col-rules > * + * {
+.grid-col-rules > * {
   position: relative;
 }
 .grid-col-rules > * + *::before {

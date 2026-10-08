@@ -14,6 +14,8 @@ type Props = {
   items: AccordionEntry[];
   /** Start with the first item open. Defaults to true. */
   openFirst?: boolean;
+  /** Tighter rows and smaller body copy, for narrow sidebars. */
+  compact?: boolean;
 };
 
 /**
@@ -21,7 +23,7 @@ type Props = {
  * tight rows, uppercase micro labels on the left, a plus/minus glyph on
  * the right, and a height-animated body underneath.
  */
-export function Accordion({ items, openFirst = true }: Props) {
+export function Accordion({ items, openFirst = true, compact = false }: Props) {
   const reduce = useReducedMotion();
   const [open, setOpen] = useState<string | null>(
     openFirst && items[0] ? items[0].id : null,
@@ -32,7 +34,7 @@ export function Accordion({ items, openFirst = true }: Props) {
       {items.map((item, i) => {
         const isOpen = open === item.id;
         return (
-          <li key={item.id} className="py-5">
+          <li key={item.id} className={compact ? "py-4" : "py-5"}>
             <button
               type="button"
               onClick={() => setOpen(isOpen ? null : item.id)}
@@ -68,7 +70,11 @@ export function Accordion({ items, openFirst = true }: Props) {
                   transition={{ duration: 0.45, ease: EASE_OUT_EXPO }}
                   className="overflow-hidden"
                 >
-                  <p className="pt-4 pl-10 t-body text-strong max-w-[48ch] whitespace-pre-line">
+                  <p
+                    className={`t-body text-strong max-w-[48ch] whitespace-pre-line ${
+                      compact ? "pt-3 pl-8 text-sm!" : "pt-4 pl-10"
+                    }`}
+                  >
                     {item.body}
                   </p>
                 </motion.div>

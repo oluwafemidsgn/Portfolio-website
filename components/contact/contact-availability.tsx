@@ -43,7 +43,7 @@ export function ContactAvailability() {
           {ROWS.map((row, i) => (
             <motion.li
               key={row.q}
-              className="rule-h grid grid-cols-[90px_120px_1fr] items-baseline gap-4 py-3"
+              className="rule-h grid grid-cols-[64px_80px_minmax(0,1fr)] sm:grid-cols-[90px_120px_minmax(0,1fr)] items-baseline gap-3 sm:gap-4 py-3"
               initial={reduce ? false : { opacity: 0, y: 14 }}
               animate={
                 inView || reduce
