@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import type { AccordionItem, CaseStudy, Status } from "@/lib/types";
 import { BlocksEditor } from "./blocks-editor";
+import { UploadButton } from "./upload-button";
 
 /**
  * Editor form. Used by both /admin/new and /admin/[id]/edit. Dynamic
@@ -49,6 +50,7 @@ export function EditorForm({
       ? initial.accordion
       : defaultAccordion(),
   );
+  const [coverImage, setCoverImage] = useState(initial?.coverImage ?? "");
   const [status, setStatus] = useState<Status>(initial?.status ?? "draft");
   const [comingSoon, setComingSoon] = useState(initial?.comingSoon ?? false);
 
@@ -183,12 +185,16 @@ export function EditorForm({
             />
           </Field>
           <Field label="COVER MEDIA URL (IMAGE, GIF OR VIDEO)">
-            <input
-              name="coverImage"
-              defaultValue={initial?.coverImage ?? ""}
-              className={inputCls}
-              placeholder="https://..."
-            />
+            <div className="flex flex-wrap gap-2">
+              <input
+                name="coverImage"
+                value={coverImage}
+                onChange={(e) => setCoverImage(e.target.value)}
+                className={`${inputCls} flex-1 min-w-0`}
+                placeholder="https://..."
+              />
+              <UploadButton onUploaded={setCoverImage} />
+            </div>
           </Field>
         </div>
       </Section>

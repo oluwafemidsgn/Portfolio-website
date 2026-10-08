@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { Recommendation } from "@/lib/types";
+import { UploadButton } from "@/app/admin/upload-button";
 
 type Props = {
   action: (formData: FormData) => void | Promise<void>;
@@ -76,13 +77,16 @@ export function RecommendationForm({
             />
           </Field>
           <Field label="AVATAR URL (optional)">
-            <input
-              name="avatarUrl"
-              className={INPUT}
-              placeholder="https://cdn.../ada.jpg"
-              value={avatarUrl}
-              onChange={(e) => setAvatarUrl(e.target.value)}
-            />
+            <div className="flex flex-wrap gap-2">
+              <input
+                name="avatarUrl"
+                className={`${INPUT} flex-1 min-w-0`}
+                placeholder="https://cdn.../ada.jpg"
+                value={avatarUrl}
+                onChange={(e) => setAvatarUrl(e.target.value)}
+              />
+              <UploadButton accept="image" onUploaded={setAvatarUrl} />
+            </div>
           </Field>
         </div>
 

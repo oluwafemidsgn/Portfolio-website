@@ -3,6 +3,8 @@
 import { useState } from "react";
 import type { PlaygroundItem } from "@/lib/types";
 import { MediaAsset } from "@/components/media-asset";
+import { UploadButton } from "@/app/admin/upload-button";
+import { resolveMediaKind } from "@/lib/media";
 import { BlocksEditor } from "../../blocks-editor";
 
 type Props = {
@@ -77,25 +79,36 @@ export function PlaygroundForm({ action, initial, submitLabel = "SAVE" }: Props)
             </select>
           </Field>
           <Field label="MEDIA URL">
-            <input
-              name="mediaUrl"
-              className={INPUT}
-              placeholder="https://cdn.../orbits.mp4"
-              value={mediaUrl}
-              onChange={(e) => setMediaUrl(e.target.value)}
-            />
+            <div className="flex flex-wrap gap-2">
+              <input
+                name="mediaUrl"
+                className={`${INPUT} flex-1 min-w-0`}
+                placeholder="https://cdn.../orbits.mp4"
+                value={mediaUrl}
+                onChange={(e) => setMediaUrl(e.target.value)}
+              />
+              <UploadButton
+                onUploaded={(url) => {
+                  setMediaUrl(url);
+                  setMediaKind((k) => resolveMediaKind(k, url));
+                }}
+              />
+            </div>
           </Field>
         </div>
 
         {mediaKind === "video" && (
           <Field label="POSTER URL (video thumbnail)">
-            <input
-              name="posterUrl"
-              className={INPUT}
-              placeholder="https://cdn.../orbits-poster.jpg"
-              value={posterUrl}
-              onChange={(e) => setPosterUrl(e.target.value)}
-            />
+            <div className="flex flex-wrap gap-2">
+              <input
+                name="posterUrl"
+                className={`${INPUT} flex-1 min-w-0`}
+                placeholder="https://cdn.../orbits-poster.jpg"
+                value={posterUrl}
+                onChange={(e) => setPosterUrl(e.target.value)}
+              />
+              <UploadButton accept="image" onUploaded={setPosterUrl} />
+            </div>
           </Field>
         )}
 
