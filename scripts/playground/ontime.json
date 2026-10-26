@@ -1,0 +1,26 @@
+{
+  "slug": "ontime",
+  "item": {
+    "name": "ONTIME",
+    "label": "Desktop app",
+    "date": "2026",
+    "mediaKind": "image",
+    "media": "{media}/board-01_1920.jpg",
+    "liveUrl": "",
+    "description": "ontime is a desktop stage timer for live events such as church services and conferences. An operator builds a rundown and runs the clock from a Control window, while a clean full-screen Output window on a second screen shows the countdown, title and messages. The output shifts from normal to an amber warning to a flashing red TIME UP, with optional auto-advance between segments.",
+    "blocks": [
+      {
+        "kind": "full",
+        "image": "{media}/board-02_1920.jpg",
+        "alt": "ontime — Stage Display Warning State",
+        "caption": "STAGE DISPLAY WARNING STATE"
+      },
+      {
+        "kind": "full",
+        "image": "{media}/board-03_1920.jpg",
+        "alt": "ontime — Time Up Alert",
+        "caption": "TIME UP ALERT"
+      }
+    ]
+  }
+}

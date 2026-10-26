@@ -1,0 +1,13 @@
+{
+  "slug": "showface",
+  "item": {
+    "name": "SHOWFACE",
+    "label": "Web app",
+    "date": "2026",
+    "mediaKind": "image",
+    "media": "{media}/board-01_1920.jpg",
+    "liveUrl": "",
+    "description": "An invitee opens a campaign link, adds a photo, fits it into the event's branded frame, types their name and shares or downloads the finished graphic. All image compositing happens in the browser, so photos stay on the phone. Each event is a campaign defined by a template JSON, managed from an admin area.",
+    "blocks": []
+  }
+}

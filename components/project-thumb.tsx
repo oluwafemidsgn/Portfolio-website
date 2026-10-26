@@ -22,6 +22,8 @@ export type Project = {
   };
   /** Shows a "COMING SOON" badge and forces the tile to be non-clickable. */
   comingSoon?: boolean;
+  /** Small label pinned top-left, e.g. "PLAYGROUND". */
+  badge?: string;
   children?: ReactNode;
 };
 
@@ -41,6 +43,7 @@ export function ProjectThumb({
   aspect = "wide",
   media,
   comingSoon = false,
+  badge,
   children,
 }: Project) {
   if (comingSoon) href = null;
@@ -77,6 +80,11 @@ export function ProjectThumb({
         {comingSoon && (
           <span className="absolute top-3 left-3 bg-paper text-ink px-2 py-1 t-micro pointer-events-none">
             COMING SOON
+          </span>
+        )}
+        {!comingSoon && badge && (
+          <span className="absolute top-3 left-3 bg-ink text-paper px-2 py-1 t-micro pointer-events-none">
+            {badge}
           </span>
         )}
 

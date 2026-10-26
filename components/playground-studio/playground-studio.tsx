@@ -7,6 +7,7 @@ import { ColorPalette, type CanvasBg, CANVAS_BGS } from "./color-palette";
 import { DraggableCard } from "./draggable-card";
 import { DoodleLayer } from "./doodle-layer";
 import { CardModal } from "./card-modal";
+import { playgroundSlug } from "@/lib/playground-slug";
 import { SnakePanel } from "./snake-panel";
 
 type Layout = { x: number; y: number; rotate: number };
@@ -86,6 +87,23 @@ export function PlaygroundStudio({ items }: { items: PlaygroundItem[] }) {
   const stageRef = useRef<HTMLDivElement>(null);
 
   const drawing = tool !== "move";
+
+  // Deep link from the home grid: /playground?open=<slug> opens that card.
+  useEffect(() => {
+    const key = new URLSearchParams(window.location.search).get("open");
+    if (!key) return;
+    const match = items.find((i) => playgroundSlug(i.name) === key);
+    if (match) setActive(match);
+  }, [items]);
+
+  const closeModal = () => {
+    setActive(null);
+    const url = new URL(window.location.href);
+    if (url.searchParams.has("open")) {
+      url.searchParams.delete("open");
+      window.history.replaceState(null, "", url.pathname + url.search + url.hash);
+    }
+  };
 
   // Compute card layouts once the stage has been measured. Re-runs on
   // viewport resize so cards reflow into a fresh arrangement — keeps
@@ -208,7 +226,7 @@ export function PlaygroundStudio({ items }: { items: PlaygroundItem[] }) {
         </span>
       </div>
 
-      <CardModal item={active} onClose={() => setActive(null)} />
+      <CardModal item={active} onClose={closeModal} />
     </section>
   );
 }

@@ -85,7 +85,7 @@ export function CardModal({ item, onClose }: Props) {
 
             <div className="grid grid-cols-1 md:grid-cols-[1fr_320px]">
               {/* Media */}
-              <div className="relative aspect-[4/3] md:aspect-auto md:min-h-[480px] bg-mute overflow-hidden">
+              <div className="relative aspect-video md:self-start bg-mute overflow-hidden">
                 <MediaAsset
                   kind={item.mediaKind}
                   url={item.mediaUrl}

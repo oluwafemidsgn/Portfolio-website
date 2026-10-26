@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import { ProjectThumb } from "./project-thumb";
 import { EASE_OUT_EXPO } from "./motion/easing";
 import { Frame } from "./motion/frame";
-import type { HeroProject } from "@/lib/types";
+import type { HeroProject, PlaygroundItem } from "@/lib/types";
+import { playgroundSlug } from "@/lib/playground-slug";
 
 type Props = {
   tiles: HeroProject[];
@@ -16,6 +17,19 @@ type Props = {
   caseStudyHrefs: Record<string, string>;
   /** Case studies marked "coming soon" — tiles show a badge, no link. */
   comingSoonIds?: string[];
+  /** Side projects shown after the case studies, tagged PLAYGROUND; they open on /playground. */
+  playground?: PlaygroundItem[];
+};
+
+type Tile = {
+  key: string;
+  date: string;
+  title: string;
+  type: string;
+  href: string | null;
+  comingSoon: boolean;
+  badge?: string;
+  media: { kind: HeroProject["mediaKind"]; url: string; poster: string };
 };
 
 /**
@@ -25,12 +39,35 @@ type Props = {
  * the inter-column hairlines still fire with the same rhythm the Figma
  * comp was built around. Tile count is flexible — anything from 1 upward.
  */
-export function ProjectsSection({ tiles, caseStudyHrefs, comingSoonIds = [] }: Props) {
-  if (tiles.length === 0) return null;
+export function ProjectsSection({ tiles, caseStudyHrefs, comingSoonIds = [], playground = [] }: Props) {
+  const all: Tile[] = [
+    ...tiles.map((tile) => ({
+      key: tile.id,
+      date: tile.year,
+      title: tile.name,
+      type: tile.discipline,
+      href: tile.caseStudyId && caseStudyHrefs[tile.caseStudyId] ? `/projects/${caseStudyHrefs[tile.caseStudyId]}` : null,
+      comingSoon: tile.comingSoon || (!!tile.caseStudyId && comingSoonIds.includes(tile.caseStudyId)),
+      media: { kind: tile.mediaKind, url: tile.mediaUrl, poster: tile.posterUrl },
+    })),
+    ...playground
+      .filter((p) => p.mediaUrl)
+      .map((p) => ({
+        key: p.id,
+        date: p.date,
+        title: p.name,
+        type: p.label,
+        href: `/playground?open=${playgroundSlug(p.name)}`,
+        comingSoon: false,
+        badge: "PLAYGROUND",
+        media: { kind: p.mediaKind, url: p.mediaUrl, poster: p.posterUrl },
+      })),
+  ];
+  if (all.length === 0) return null;
 
-  const rows: HeroProject[][] = [];
-  for (let i = 0; i < tiles.length; i += 4) {
-    rows.push(tiles.slice(i, i + 4));
+  const rows: Tile[][] = [];
+  for (let i = 0; i < all.length; i += 4) {
+    rows.push(all.slice(i, i + 4));
   }
 
   return (
@@ -38,44 +75,25 @@ export function ProjectsSection({ tiles, caseStudyHrefs, comingSoonIds = [] }: P
       {rows.map((row, i) => (
         <Frame key={i} delay={i * 0.06}>
           <div className="grid grid-cols-2 lg:grid-cols-4 grid-col-rules">
-            {row.map((tile, j) => {
-              const href = tile.caseStudyId
-                ? caseStudyHrefs[tile.caseStudyId]
-                  ? `/projects/${caseStudyHrefs[tile.caseStudyId]}`
-                  : null
-                : null;
-
-              return (
-                <motion.div
-                  key={tile.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{
-                    duration: 0.7,
-                    ease: EASE_OUT_EXPO,
-                    delay: 0.2 + j * 0.06,
-                  }}
-                >
-                  <ProjectThumb
-                    date={tile.year}
-                    title={tile.name}
-                    type={tile.discipline}
-                    href={href}
-                    comingSoon={
-                      tile.comingSoon ||
-                      (!!tile.caseStudyId &&
-                        comingSoonIds.includes(tile.caseStudyId))
-                    }
-                    media={{
-                      kind: tile.mediaKind,
-                      url: tile.mediaUrl,
-                      poster: tile.posterUrl,
-                    }}
-                  />
-                </motion.div>
-              );
-            })}
+            {row.map((tile, j) => (
+              <motion.div
+                key={tile.key}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.7, ease: EASE_OUT_EXPO, delay: 0.2 + j * 0.06 }}
+              >
+                <ProjectThumb
+                  date={tile.date}
+                  title={tile.title}
+                  type={tile.type}
+                  href={tile.href}
+                  comingSoon={tile.comingSoon}
+                  badge={tile.badge}
+                  media={tile.media}
+                />
+              </motion.div>
+            ))}
           </div>
         </Frame>
       ))}

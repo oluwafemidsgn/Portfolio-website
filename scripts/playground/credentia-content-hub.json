@@ -1,0 +1,26 @@
+{
+  "slug": "credentia-content-hub",
+  "item": {
+    "name": "CREDENTIA CONTENT HUB",
+    "label": "Internal tool",
+    "date": "2026",
+    "mediaKind": "image",
+    "media": "{media}/board-01_1920.jpg",
+    "liveUrl": "",
+    "description": "Built for the Credentia team in Nigeria, the hub takes content from topic discovery through source-backed research to drafting and export. Writers attach citations, work in a Markdown editor, and use editorial approval gates before exporting Markdown, JSON or PDF packages. It works with the AI provider of your choice, with a monthly spend limit, and runs locally or hosted for the whole team.",
+    "blocks": [
+      {
+        "kind": "full",
+        "image": "{media}/board-02_1920.jpg",
+        "alt": "Credentia Content Hub — Topic Explorer",
+        "caption": "TOPIC EXPLORER — FIND THE QUESTIONS WORTH ANSWERING."
+      },
+      {
+        "kind": "full",
+        "image": "{media}/board-03_1920.jpg",
+        "alt": "Credentia Content Hub — Content Studio",
+        "caption": "CONTENT STUDIO — ONE PACKAGE, EVERY FORMAT."
+      }
+    ]
+  }
+}

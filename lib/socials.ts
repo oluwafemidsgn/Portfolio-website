@@ -14,5 +14,5 @@ export const SOCIALS: Social[] = [
   { key: "linkedin", label: "LinkedIn", handle: "in/oluwafemi-oduneye", href: "https://www.linkedin.com/in/oluwafemi-oduneye/" },
   { key: "behance", label: "Behance", handle: "/oluwafemi11", href: "https://www.behance.net/oluwafemi11" },
   { key: "github", label: "GitHub", handle: "/oluwafemidsgn", href: "https://github.com/oluwafemidsgn" },
-  { key: "whatsapp", label: "WhatsApp", handle: "+234 916 137 9900", href: "https://wa.me/2349161379900" },
+  { key: "whatsapp", label: "WhatsApp", handle: "+234 916 137 9900", href: "https://wa.me/2349161379900?text=" + encodeURIComponent("Hi Oluwafemi, I found you through your portfolio and I would like to talk about a project.") },
 ];

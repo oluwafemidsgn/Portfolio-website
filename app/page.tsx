@@ -57,6 +57,7 @@ export default async function HomePage() {
             tiles={heroTiles}
             caseStudyHrefs={publishedHrefs}
             comingSoonIds={comingSoonIds}
+            playground={playgroundItems}
           />
           <AboutSection />
           <ServicesSection />

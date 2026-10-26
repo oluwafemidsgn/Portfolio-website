@@ -1,0 +1,26 @@
+{
+  "slug": "intasect-client-portal",
+  "item": {
+    "name": "STUDIO PORTAL",
+    "label": "Agency platform",
+    "date": "2026",
+    "mediaKind": "image",
+    "media": "{media}/board-01_1920.jpg",
+    "liveUrl": "",
+    "description": "Studio Portal connects internal teams, clients, projects, deliverables and living brand systems in one controlled experience. The studio workspace runs the work (role-based homes, tasks, review lifecycle), while an explicit publish boundary decides what clients see in their simplified portal, including approvals and a published Brand Hub.",
+    "blocks": [
+      {
+        "kind": "full",
+        "image": "{media}/board-02_1920.jpg",
+        "alt": "Studio Portal — Client Portal",
+        "caption": "CLIENT PORTAL — ONLY WHAT NEEDS YOU."
+      },
+      {
+        "kind": "full",
+        "image": "{media}/board-03_1920.jpg",
+        "alt": "Studio Portal — Brand Hub",
+        "caption": "BRAND HUB — ONE SOURCE OF TRUTH."
+      }
+    ]
+  }
+}

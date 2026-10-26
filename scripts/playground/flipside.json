@@ -1,0 +1,32 @@
+{
+  "slug": "flipside",
+  "item": {
+    "name": "FLIPSIDE",
+    "label": "Live event tool",
+    "date": "2026",
+    "mediaKind": "image",
+    "media": "{media}/board-01_1920.jpg",
+    "liveUrl": "",
+    "description": "Flipside is a browser-based game show controller for live audience quiz sessions, built to run from a laptop on a projector. A team picks a number, a prompt fills the screen, a ring timer counts down with sound, and the card flips in 3D to reveal the answer before the operator scores it. It is fully keyboard-driven, has no backend, and keeps questions and state in the browser.",
+    "blocks": [
+      {
+        "kind": "full",
+        "image": "{media}/board-02_1920.jpg",
+        "alt": "Flipside — Prompt And Countdown",
+        "caption": "PROMPT AND COUNTDOWN"
+      },
+      {
+        "kind": "full",
+        "image": "{media}/board-03_1920.jpg",
+        "alt": "Flipside — Flipped Answer Reveal",
+        "caption": "FLIPPED ANSWER REVEAL"
+      },
+      {
+        "kind": "full",
+        "image": "{media}/board-04_1920.jpg",
+        "alt": "Flipside — Confetti Score",
+        "caption": "CONFETTI SCORE"
+      }
+    ]
+  }
+}

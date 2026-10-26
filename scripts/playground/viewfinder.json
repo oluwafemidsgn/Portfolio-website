@@ -1,0 +1,32 @@
+{
+  "slug": "viewfinder",
+  "item": {
+    "name": "VIEWFINDER",
+    "label": "Creative tool",
+    "date": "2026",
+    "mediaKind": "image",
+    "media": "{media}/board-00_1920.jpg",
+    "liveUrl": "",
+    "description": "Viewfinder is a personal, browser-based studio for turning screenshots and screen recordings into polished 3D product photos and videos. You drop in a screen, set the camera angle, lens blur, lighting and backdrop, and export a PNG or video rendered by the same code as the preview. Everything runs locally with no server or accounts.",
+    "blocks": [
+      {
+        "kind": "full",
+        "image": "{media}/board-01_1920.jpg",
+        "alt": "Viewfinder — Editor: Perspective On Navy",
+        "caption": "EDITOR — DROP IN A SCREEN, SET THE SHOT."
+      },
+      {
+        "kind": "full",
+        "image": "{media}/board-02_1920.jpg",
+        "alt": "Viewfinder — Hero Camera Angle",
+        "caption": "HERO ANGLE — ONE CLICK, A NEW CAMERA."
+      },
+      {
+        "kind": "full",
+        "image": "{media}/board-03_1920.jpg",
+        "alt": "Viewfinder — Isometric On Light Backdrop",
+        "caption": "ISOMETRIC — ON A LIGHT BACKDROP."
+      }
+    ]
+  }
+}
