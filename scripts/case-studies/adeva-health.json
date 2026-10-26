@@ -1,0 +1,69 @@
+{
+  "study": {
+    "slug": "adeva-health",
+    "title": "Adeva Health",
+    "subtitle": "A lab information system and owner console for Nigerian diagnostic labs, built around a single idea: show the owner the money they're losing.",
+    "client": "EM & David",
+    "role": "Generalist Designer and Developer",
+    "year": "2026",
+    "type": "Brand · Website · Product design",
+    "coverImage": "https://res.cloudinary.com/dognbegiw/video/upload/v1791359305/01-logo-build_1920_dqqfs7.mp4",
+    "overview": "Adeva Health runs a diagnostic lab end to end, from the patient walking in to the result in their hands. It's built for MLSCN-accredited labs, single-branch or multi-branch. I designed the whole thing: the brand, the marketing website, and the product, which is two apps. One for the people on the floor, one for the owner.",
+    "accordion": [
+      { "title": "Challenge", "body": "Most labs run on paper, WhatsApp and a spreadsheet only one person understands. Results go missing between the bench and the front desk, rejected samples are re-run for free, stockouts surface when a patient is already waiting, and accreditation week turns into a paper hunt. The losses are real but invisible." },
+      { "title": "Approach", "body": "Split the product by who's using it. The floor gets a fast, permission-scoped LIS for registering, billing, collecting, testing, validating and delivering. The owner gets a console that answers one question across every branch: is the lab healthy?" },
+      { "title": "Process", "body": "Brand first, then the marketing site, then the product, with one visual language (deep green, signal lime, Sentient and Stack Sans Text) running through all three." },
+      { "title": "Impact", "body": "A complete brand identity, a marketing website, a staff LIS and an owner console covering onboarding, multi-branch management, finance, catalogue, staff and permissions." }
+    ],
+    "blocks": [
+      { "kind": "full", "image": "{media}/motion/02-hero-reveal_1920.mp4", "alt": "Adeva Health owner console home", "caption": "HOME — THE OWNER'S CONSOLE." },
+      { "kind": "full", "image": "{media}/motion/01-logo-build_1920.mp4", "alt": "Adeva Health logo building from five shapes", "caption": "THE MARK — FIVE SHAPES, ONE LOCKUP." },
+      { "kind": "full", "image": "{media}/frames/02-brand-system_1920.png", "alt": "Adeva Health identity: mark, type, palette", "caption": "IDENTITY — MARK, TYPE, PALETTE." },
+
+      { "kind": "section", "eyebrow": "01 · THE PROBLEM", "heading": "THE LOSSES NOBODY COUNTS.", "body": "A rejected specimen that's never recollected. A test cancelled after payment. A request that's never paid. Each one is small, none of them were tracked, and together they're the difference between a lab that grows and one that doesn't." },
+      { "kind": "duo", "left": "{media}/frames/03a-challenge-image_960.png", "right": "{media}/frames/03b-where-it-breaks_960.png", "leftAlt": "A lab desk run on paper, chat and spreadsheets", "rightAlt": "Where the work falls through", "caption": "BEFORE — PAPER, CHAT, SPREADSHEET. / WHERE THE WORK FALLS THROUGH." },
+
+      { "kind": "section", "eyebrow": "02 · STRUCTURE", "heading": "ONE PRODUCT, TWO SIDES.", "body": "The floor and the owner need different things from the same data. Staff see only what their permissions allow. The owner sees every branch, side by side." },
+      { "kind": "full", "image": "{media}/frames/04-two-sides_1920.png", "alt": "LIS for the floor and console for the owner", "caption": "LIS FOR THE FLOOR · CONSOLE FOR THE OWNER." },
+
+      { "kind": "section", "eyebrow": "03 · THE FLOOR", "heading": "FRONT DESK TO RESULT.", "body": "Seven steps, each recorded with the person who did it. Price is locked at ordering, an unconfirmed payment never blocks work, labels print at collection and stock comes off the shelf automatically, and abnormal values flag themselves." },
+      { "kind": "full", "image": "{media}/frames/05-the-flow_1920.png", "alt": "The seven-step flow", "caption": "THE FLOW — SEVEN STEPS, ONE RECORD." },
+      { "kind": "full", "image": "{media}/motion/03-request-states_1920.mp4", "alt": "One request moving through six states", "caption": "MOTION — ONE REQUEST MOVING THROUGH SIX STATES." },
+      { "kind": "full", "image": "{media}/motion/09-joining-a-lab_1920.mp4", "alt": "Signing in, setting a password and picking a branch", "caption": "ACCESS — SIGN IN, SET A PASSWORD, PICK A BRANCH." },
+      { "kind": "full", "image": "{media}/frames/16-staff-first-day_1920.png", "alt": "Staff first-day walkthrough", "caption": "DAY ONE — HOW THE WORK MOVES, BEFORE THE FIRST SAMPLE." },
+      { "kind": "full", "image": "{media}/motion/10-bench-worklist_1920.mp4", "alt": "Bench worklist sorted by urgency", "caption": "THE BENCH — MOST URGENT FIRST, TIME LEFT ON EVERY SAMPLE." },
+
+      { "kind": "section", "eyebrow": "04 · THE CORE IDEA", "heading": "SHOW WHAT'S BEING LOST.", "body": "Any system shows you revenue. Adeva prices leakage in naira (rejected specimens, cancelled tests, unpaid requests) and breaks it down by reason, so an owner can trace a loss back to its cause. Every number is clickable and opens the worklist with the filters already applied." },
+      { "kind": "full", "image": "{media}/motion/04-leakage_1920.mp4", "alt": "Leakage broken down by reason", "caption": "FINANCE — MONEY NOT COLLECTED, BY REASON." },
+
+      { "kind": "section", "eyebrow": "05 · THE OWNER'S CONSOLE", "heading": "ONE SCREEN ANSWERS \"IS THE LAB HEALTHY?\"", "body": "Home puts revenue, leakage and turnaround side by side, shows where the work is stage by stage, and lists what needs attention. Finance breaks revenue down by payment method and flags the transfers that still need confirming." },
+      { "kind": "full", "image": "{media}/motion/08-dashboard-tour_1920.mp4", "alt": "A guided pass through the owner dashboard", "caption": "HOME — A GUIDED PASS THROUGH THE OWNER'S DASHBOARD." },
+      { "kind": "full", "image": "{media}/motion/12-finance-walkthrough_1920.mp4", "alt": "Finance walkthrough", "caption": "FINANCE — REVENUE, PAYMENTS, LEAKAGE, RECEIPTS." },
+      { "kind": "full", "image": "{media}/motion/11-catalogue-per-branch_1920.mp4", "alt": "Catalogue set once, ticked per branch", "caption": "CATALOGUE — SET ONCE. EACH BRANCH TICKS WHAT IT RUNS." },
+      { "kind": "full", "image": "{media}/frames/21-people-and-settings_1920.png", "alt": "Users and settings", "caption": "ADMIN — USERS AND SETTINGS." },
+
+      { "kind": "section", "eyebrow": "06 · TRUST", "heading": "BUILT FOR THE AUDIT YOU HAVEN'T HAD YET.", "body": "The person who enters a result can never approve it. That's enforced on the server, and no permission overrides it. Nothing is deleted. Mistakes are voided with a reason and replaced, and every action keeps its actor and time." },
+      { "kind": "duo", "left": "{media}/motion/05-two-pairs-of-eyes_960.mp4", "right": "{media}/frames/09-audit-trail_960.png", "leftAlt": "Two pairs of eyes validation rule", "rightAlt": "Audit trail", "caption": "VALIDATION RULE. / THE RECORD." },
+
+      { "kind": "section", "eyebrow": "07 · SCALE", "heading": "ONE BRANCH OR EIGHT.", "body": "Add a lab in a minute, invite the staff, and compare branches on the same tests and measures from one screen. Pricing is per lab, not per user, because per-user pricing pushes labs into shared logins, and shared logins break the audit trail the product depends on." },
+      { "kind": "full", "image": "{media}/motion/07-branches_1920.mp4", "alt": "Every branch on one screen", "caption": "LABS — EVERY BRANCH, ONE SCREEN." },
+      { "kind": "duo", "left": "{media}/frames/11-onboarding_960.png", "right": "{media}/motion/06-permissions_960.mp4", "leftAlt": "Six-step onboarding", "rightAlt": "Permissions by capability", "caption": "FIRST RUN — SIX STEPS. / STAFF — PERMISSION, NOT JOB TITLE." },
+      { "kind": "full", "image": "{media}/frames/13-setup-forms_1920.png", "alt": "Setup forms for lab, test, patient and staff", "caption": "SETUP — LAB, TEST, PATIENT, STAFF." },
+
+      { "kind": "section", "eyebrow": "08 · WEBSITE", "heading": "SELLING THE IDEA BEFORE THE PRODUCT.", "body": "The marketing site leads with the problem (\"Your lab is losing money it can't see\") and uses the product's own screens to explain it." },
+      { "kind": "full", "image": "{media}/frames/14-website_1920.png", "alt": "Adeva Health marketing website", "caption": "MARKETING SITE — HOME." },
+      { "kind": "full", "image": "{media}/frames/23-product-index_1920.png", "alt": "The product, screen by screen", "caption": "TWO APPS, ONE SYSTEM — THE PRODUCT, SCREEN BY SCREEN." },
+      { "kind": "full", "image": "{media}/frames/15-closing-montage_1920.png", "alt": "Adeva Health brand, website and product", "caption": "ADEVA HEALTH — BRAND, WEBSITE, PRODUCT." }
+    ],
+    "status": "published",
+    "comingSoon": false
+  },
+  "heroTile": {
+    "year": "2026",
+    "name": "Adeva Health",
+    "discipline": "Product design",
+    "mediaKind": "video",
+    "mediaUrl": "{media}/motion/02-hero-reveal_1920.mp4",
+    "posterUrl": "{media}/frames/01-hero_1920.png"
+  }
+}

@@ -1,4 +1,4 @@
-import { create, getBySlug } from "./case-studies";
+import { create, getBySlug, listAll } from "./case-studies";
 import {
   createHeroProject,
   createPlaygroundItem,
@@ -597,16 +597,15 @@ const RECOMMENDATION_SEEDS: Omit<RecommendationInput, "displayOrder">[] = [
 ];
 
 /**
- * Ensures every seed slug exists in the DB. Idempotent: existing rows
- * are left alone so admin edits survive a redeploy.
+ * Seeds a fresh database so the site has something to render.
  *
- * Home-content tables (hero / playground / recommendations) are only
- * seeded when their table is empty — once an admin starts editing,
- * reseeding would fight them.
+ * Every table — case studies included — is only seeded when it is empty.
+ * Once real content exists, nothing is re-created: deleting a placeholder
+ * study in the admin keeps it deleted, and admin edits survive redeploys.
  */
 export async function ensureSeed(): Promise<void> {
-  for (const item of ITEMS) {
-    if (!(await getBySlug(item.slug))) await create(item);
+  if ((await listAll()).length === 0) {
+    for (const item of ITEMS) await create(item);
   }
 
   if ((await listHeroProjects()).length === 0) {

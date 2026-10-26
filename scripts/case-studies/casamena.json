@@ -1,0 +1,72 @@
+{
+  "study": {
+    "slug": "casamena",
+    "title": "Casamena",
+    "subtitle": "A brand, motion language and website for a private real estate practice that sells homes through introductions, not listings.",
+    "client": "Casamena",
+    "role": "Design & development",
+    "year": "2026",
+    "type": "Brand identity · Motion · Website",
+    "coverImage": "{media}/frames/01-cover.jpg",
+    "overview": "The best homes in Lagos were never listed. They moved between people who knew each other, through introductions and conversations in the right rooms. Casamena was built to work the same way: an off-market practice for waterfront residences, penthouses and fractional investment. The brief was to give that quiet network a public face, a brand that signals access without ever shouting about it.",
+    "accordion": [
+      { "title": "Challenge", "body": "Luxury property marketing in Lagos is loud: glossy listings, price tags, crowded portals. Casamena needed a public face for a private network, one that signals access without shouting about it." },
+      { "title": "Strategy", "body": "Private access. Perfectly handled. A network, not a database, with restraint as the luxury signal. Three steps carry it: Introduction, Selection, Handled. Voice: \"We keep the best ones quiet.\"" },
+      { "title": "The idea", "body": "Unlocking doors. The mark is a Lagos skyline drawn as one continuous line with a door at its centre. From it comes a family of doorway shapes that frame every property. Nothing is shown in full. You get a glimpse, the way an introduction works." },
+      { "title": "Outcome", "body": "An unreleased concept, 2026. 30+ brand touchpoints, 8 motion pieces and 1 website designed and built (8 homepage sections, desktop and mobile). A record of the design output rather than business results." }
+    ],
+    "blocks": [
+      { "kind": "full", "image": "{media}/frames/01-cover.jpg", "alt": "Casamena: Unlocking doors", "caption": "CASAMENA — UNLOCKING DOORS." },
+      { "kind": "full", "image": "{media}/frames/02-statement.jpg", "alt": "The best homes in Lagos were never listed", "caption": "THE BEST HOMES IN LAGOS WERE NEVER LISTED." },
+
+      { "kind": "section", "eyebrow": "01 · STRATEGY", "heading": "PRIVATE ACCESS. PERFECTLY HANDLED.", "body": "Luxury property marketing in Lagos is loud: glossy listings, price tags, crowded portals. We positioned Casamena as the opposite. A network, not a database. Restraint as the luxury signal.\n\nIntroduction: we take time to understand a client's lifestyle, not just the specification. Selection: only what is right, drawn from a private network before any public listing. Handled: private viewing, negotiation and full transaction management. You handle the keys." },
+
+      { "kind": "section", "eyebrow": "02 · THE IDEA", "heading": "EVERY FRAME IS A DOORWAY.", "body": "\"Unlocking doors\" became the organising idea. The mark is a Lagos skyline drawn as a single continuous line with a door at its centre. From it we cut a family of doorway shapes (gables, arches, keyholes) that act as windows into each property. Nothing is shown in full." },
+      { "kind": "full", "image": "{media}/motion/02-casamena-door-open.mp4", "alt": "Image opening through a doorway shape", "caption": "THE DOOR OPENS — EVERY IMAGE ENTERS THROUGH A DOORWAY." },
+
+      { "kind": "section", "eyebrow": "03 · LOGO", "heading": "A SKYLINE WITH A DOOR IN IT.", "body": "The symbol traces Lagos' waterfront towers in one unbroken line, with a doorway at the centre. In gold it reads as a key. The wordmark is set in a calm, open grotesk so the symbol carries the character." },
+      { "kind": "full", "image": "{media}/frames/03-logo.png", "alt": "Casamena logo", "caption": "THE MARK." },
+      { "kind": "full", "image": "{media}/motion/01-casamena-logo-sting.mp4", "alt": "Casamena logo sting", "caption": "LOGO STING — THE LINE DRAWS THE SKYLINE." },
+      { "kind": "full", "image": "{media}/frames/04-logo-system.png", "alt": "Casamena logo system", "caption": "LOGO SYSTEM — SYMBOL, LOCKUPS, COLOURWAYS." },
+      { "kind": "full", "image": "{media}/frames/05-logo-in-place.jpg", "alt": "Casamena logo in place", "caption": "IN PLACE." },
+
+      { "kind": "section", "eyebrow": "04 · COLOUR & TYPE", "heading": "LAGOS AT DUSK, AFTER THE LIGHTS COME ON.", "body": "Maroon is the dominant field, like the doors and wood of old Lagos homes. Sunset orange is the voice, used for headlines. Gold is reserved for the symbol, like a key. Zodiak sets headlines large and calm; Archivo carries body, navigation and data." },
+      { "kind": "full", "image": "{media}/motion/04-casamena-colour.mp4", "alt": "Casamena colour palette in motion", "caption": "COLOUR — MAROON, SUNSET, LINEN, INK, KEY GOLD." },
+      { "kind": "full", "image": "{media}/frames/06-colour.png", "alt": "Casamena colour palette", "caption": "PRIMARY AND SECONDARY PALETTE." },
+      { "kind": "full", "image": "{media}/frames/07-typography.png", "alt": "Zodiak and Archivo", "caption": "TYPE — ZODIAK AND ARCHIVO." },
+
+      { "kind": "section", "eyebrow": "05 · VISUAL SYSTEM", "heading": "ONE LINE, MANY THRESHOLDS.", "body": "Three tools run the system: the skyline line (pattern), the doorway shapes (image frames) and a strict hairline grid borrowed from architectural drawings. Together they let a single designer build on-brand layouts in minutes." },
+      { "kind": "full", "image": "{media}/frames/08-doorways.png", "alt": "Doorway shapes framing photography", "caption": "DOORWAYS — SIX APERTURES THAT FRAME PHOTOGRAPHY." },
+      { "kind": "full", "image": "{media}/motion/03-casamena-skyline.mp4", "alt": "Skyline line drawing itself", "caption": "THE LINE DRAWS — LEFT TO RIGHT, LIKE A SIGNATURE." },
+      { "kind": "full", "image": "{media}/motion/05-casamena-pattern.mp4", "alt": "Skyline pattern in motion", "caption": "PATTERN — THE SKYLINE, CROPPED AT ANY SCALE." },
+      { "kind": "full", "image": "{media}/frames/09-pattern.png", "alt": "Casamena skyline pattern", "caption": "THE PATTERN." },
+
+      { "kind": "section", "eyebrow": "06 · MOTION", "heading": "NOTHING RUSHES. EVERYTHING OPENS.", "body": "Motion follows the brand's manners: slow to start, decisive in the middle, soft to land. Images enter through a doorway that grows from a hairline outline into a full photograph. The skyline draws as a single stroke. Headlines rise 24px and fade in line by line, staggered 80ms.\n\nEasing cubic-bezier(0.7, 0, 0.2, 1) · 600 / 900 / 1200 ms · stagger 80 ms." },
+      { "kind": "full", "image": "{media}/frames/10-motion-brand.png", "alt": "Brand motion storyboard", "caption": "MOTION — BRAND." },
+      { "kind": "full", "image": "{media}/frames/11-motion-social.png", "alt": "Social motion storyboard", "caption": "MOTION — SOCIAL." },
+
+      { "kind": "section", "eyebrow": "07 · SOCIAL", "heading": "A FEED THAT READS LIKE A PRIVATE CATALOGUE.", "body": "Three post types (statement, listing and story) run on the same hairline grid. Copy does the selling, and photography is only ever glimpsed through a doorway or a grid cell." },
+      { "kind": "full", "image": "{media}/motion/06-casamena-social-post.mp4", "alt": "Animated social post", "caption": "ANIMATED POST." },
+      { "kind": "full", "image": "{media}/motion/07-casamena-social-feed.mp4", "alt": "Social feed in motion", "caption": "THE FEED." },
+      { "kind": "full", "image": "{media}/frames/18-social.jpg", "alt": "Casamena social posts", "caption": "STATEMENT, LISTING, STORY." },
+
+      { "kind": "section", "eyebrow": "08 · MARKETING & CAMPAIGN", "heading": "\"SOME HOMES WERE NEVER LISTED.\"", "body": "The launch campaign turns discretion into intrigue. Out-of-home placements show almost nothing: a doorway, a line, a URL. Print and digital carry the second message: fractional access to investment-grade property." },
+      { "kind": "full", "image": "{media}/frames/12-stationery.jpg", "alt": "Casamena stationery", "caption": "STATIONERY." },
+      { "kind": "full", "image": "{media}/frames/13-signage.jpg", "alt": "Casamena signage", "caption": "SIGNAGE." },
+      { "kind": "full", "image": "{media}/frames/14-billboard.jpg", "alt": "Casamena billboard concept", "caption": "OUT OF HOME — CONCEPT PLACEMENT." },
+      { "kind": "full", "image": "{media}/frames/15-tote-keys.jpg", "alt": "Casamena tote and keys", "caption": "TOTE & KEYS." },
+      { "kind": "full", "image": "{media}/motion/09-casamena-ad-banners.mp4", "alt": "Casamena ad banners in motion", "caption": "DIGITAL BANNERS." },
+
+      { "kind": "section", "eyebrow": "09 · WEBSITE", "heading": "A WEBSITE THAT BEHAVES LIKE A PRIVATE VIEWING.", "body": "livecasamena.com is designed to slow visitors down. No search bar, no price filters, no listing grid. Each property is a short story told through doorway-framed imagery, and every call to action leads to a person, not a form. The mobile site is the primary experience: one thumb, one door at a time, and a sticky \"Enquire privately\" button." },
+      { "kind": "full", "image": "{media}/frames/16-phone.jpg", "alt": "Casamena website on a phone", "caption": "LIVECASAMENA.COM." },
+      { "kind": "full", "image": "{media}/motion/08-casamena-mobile.mp4", "alt": "Casamena mobile site in motion", "caption": "MOBILE — ONE THUMB, ONE DOOR AT A TIME." },
+      { "kind": "full", "image": "{media}/frames/19-mobile.png", "alt": "Casamena mobile screens", "caption": "MOBILE SCREENS." },
+
+      { "kind": "section", "eyebrow": "10 · OUTCOME", "heading": "FROM STRATEGY TO CODE, BUILT END TO END.", "body": "An unreleased concept, 2026. 30+ brand touchpoints, 8 motion pieces and 1 website designed and built." },
+      { "kind": "full", "image": "{media}/frames/20-outcome.png", "alt": "30+ touchpoints, 8 motion pieces, 1 website", "caption": "30+ TOUCHPOINTS · 8 MOTION PIECES · 1 WEBSITE." },
+      { "kind": "full", "image": "{media}/frames/21-closing.jpg", "alt": "The door is open", "caption": "THE DOOR IS OPEN." }
+    ],
+    "status": "published",
+    "comingSoon": false
+  }
+}
