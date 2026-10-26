@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { EASE_OUT_EXPO } from "./motion/easing";
 import { ThemeToggle } from "./theme/theme-toggle";
+import { MobileMenu } from "./mobile-menu";
 
 const NAV_ITEMS = [
   { label: "HOME", href: "/" },
@@ -43,29 +44,29 @@ export function SiteNav() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: EASE_OUT_EXPO, delay: 0.1 }}
     >
-      <ul className="hidden md:flex items-center justify-between gap-4 lg:gap-6 t-nav text-body">
+      {/* Full link row needs desktop width; phones and tablets get the menu. */}
+      <ul className="hidden lg:flex items-center justify-between gap-6 t-nav text-body">
         {NAV_ITEMS.map((item) => (
           <li key={item.label}>
             <NavLink label={item.label} href={item.href} />
           </li>
         ))}
-        {/* Email needs the room — tablet widths overflow with it in. */}
-        <li className="hidden lg:block">
+        <li>
           <NavLink label={EMAIL} href={`mailto:${EMAIL.toLowerCase()}`} />
         </li>
         <li className="flex items-center">
           <ThemeToggle />
         </li>
       </ul>
-      <ul className="flex md:hidden items-center justify-between t-nav text-body">
-        <li className="text-ink">OLUWAFEMI</li>
-        <li className="flex items-center gap-4">
-          <a href={`mailto:${EMAIL.toLowerCase()}`} className="text-strong">
-            CONTACT
-          </a>
+      <div className="flex lg:hidden items-center justify-between t-nav text-body">
+        <a href="/" className="text-ink outline-none focus-visible:underline">
+          OLUWAFEMI
+        </a>
+        <div className="flex items-center gap-5">
           <ThemeToggle />
-        </li>
-      </ul>
+          <MobileMenu items={NAV_ITEMS} email={EMAIL} />
+        </div>
+      </div>
     </motion.nav>
   );
 }
