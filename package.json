@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "publish:case-study": "node scripts/publish-case-study.mjs",
+    "import:case-study": "node scripts/import-case-study.mjs"
   },
   "dependencies": {
     "@libsql/client": "^0.17.3",

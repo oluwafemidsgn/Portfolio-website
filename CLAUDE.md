@@ -168,3 +168,12 @@ Repeatedly verified:
 - SQLite under `data/` is fine for local/single-instance usage.
 - For multi-instance production, move content storage to a hosted DB.
 - Keep `ADMIN_PASSWORD` and `ADMIN_SESSION_SECRET` set in production environment.
+
+## Publishing a case study (Cloudinary + Turso, one command)
+
+1. Export the visuals into one folder with `frames/` (PNG/JPG stills, 1920×1080 full / 960×1080 duo) and `motion/` (MP4 loops, same sizes).
+2. Write `scripts/case-studies/<slug>.json`: the case-study fields plus blocks, with media written as `{media}/frames/<file>` or `{media}/motion/<file>` (see `ltif-2026.json`).
+3. Put production credentials in `.env.local` (Cloudinary key/secret, `TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN`).
+4. `npm run publish:case-study -- scripts/case-studies/<slug>.json --from="<export folder>" --hero` (add `--dry` first to preview).
+
+The script uploads each referenced file to `portfolio/<slug>/frames|motion` on Cloudinary (exact filenames, overwrite-safe), checks every URL answers, then upserts the study by slug (and the home-page tile with `--hero`). Re-running updates in place; edits afterwards happen in `/admin` as usual. Without Turso env vars it writes to the local `data/portfolio.db`.

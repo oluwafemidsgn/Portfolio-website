@@ -1,0 +1,66 @@
+{
+  "mediaBase": "/case-studies/ltif",
+  "study": {
+    "slug": "ltif-2026",
+    "title": "LTIF 2026",
+    "subtitle": "The website for a free two-day forum in Accra for founders, investors and policymakers, designed in Figma and built with Claude.",
+    "client": "Ministry of Commerce, LoveWorld Kingdom",
+    "role": "Design · AI-assisted build",
+    "year": "2026",
+    "type": "Web design",
+    "coverImage": "{media}/frames/01-hero_poster_1920.png",
+    "overview": "LTIF 2026 is the website for the Loveworld Trade & Investment Forum, held at the Ohene Konadu Auditorium, UPSA, Accra on October 6–7. Five pages (Home, Speakers, Schedule, About and Contact) share one header, menu, footer and motion layer. I designed the base in Figma, then used Claude to finish the build and fine-tune every motion. In seven days the site had 13K unique page views, 16K visits and 4K+ online registrations, and 2K+ people came to the forum in person.",
+    "accordion": [
+      { "title": "Challenge", "body": "The 2025 forum drew 1,700+ attendees. The 2026 edition needed one site that filled seats, brought in sponsors and kept a speaker list and agenda current while they were still changing days before the event." },
+      { "title": "Approach", "body": "Every action points to one free registration on Tix Africa. The site reuses the forum's own imagery (2025 event photography cut into circles), and the ticket becomes the main call-to-action shape." },
+      { "title": "Process", "body": "The layout was designed in Figma on a 1920px artboard. Claude turned it into code, where every measurement is a multiple of one design pixel, so the page scales proportionally from phone to 4K. Then came the motion pass: GSAP, ScrollTrigger and Lenis." },
+      { "title": "Impact", "body": "13K unique page views, 16K visits and 4K+ registrations in seven days, and 2K+ people in the room in Accra." }
+    ],
+    "blocks": [
+      { "kind": "full", "image": "{media}/motion/01-hero_1920.mp4", "alt": "LTIF homepage intro on desktop and mobile", "caption": "HOME — DESKTOP 1520 AND MOBILE 390." },
+      { "kind": "full", "image": "{media}/motion/02-results_1920.mp4", "alt": "Results: 13K unique page views, 16K visits, 4K+ registrations, 2K+ attendance", "caption": "IN 7 DAYS — 13K UNIQUE VIEWS · 16K VISITS · 4K+ REGISTRATIONS · 2K+ IN THE ROOM." },
+
+      { "kind": "section", "eyebrow": "01 · VISUAL SYSTEM", "heading": "NAVY, SIGNAL YELLOW AND ONE CURVE.", "body": "One bezier from the Figma file joins every section. Scalloped ticket edges mark anything you can act on. Every photo is a circle crop, so people come first. Headlines rise word by word out of a mask." },
+      { "kind": "full", "image": "{media}/frames/03-visual-system_1920.png", "alt": "LTIF palette, type and graphic devices", "caption": "IDENTITY — PALETTE, TYPE, DEVICES." },
+      { "kind": "duo", "left": "{media}/frames/04a-circles_960.png", "right": "{media}/frames/04b-ticket_960.png", "leftAlt": "2025 event photos cut into circles", "rightAlt": "Become a sponsor ticket with a peeled corner", "caption": "THE CIRCLE. / THE TICKET." },
+
+      { "kind": "section", "eyebrow": "02 · THE HOMEPAGE", "heading": "FIFTEEN SECTIONS, ONE SCROLL.", "body": "Every section has its own motion, recorded here from the live build at 60 frames a second: desktop at 1520 next to the same section at 390." },
+      { "kind": "full", "image": "{media}/motion/05-intro-countdown_1920.mp4", "alt": "Hero headline reveal and live countdown", "caption": "INTRO — WORDS RISE, THE TYPE CATCHES THE LIGHT, THE COUNTDOWN TICKS." },
+      { "kind": "full", "image": "{media}/motion/06-proof_1920.mp4", "alt": "Stats counting up and the arc of photos", "caption": "PROOF — THE 2025 NUMBERS COUNT UP, PHOTOS DRIFT ON AN ARC." },
+      { "kind": "full", "image": "{media}/motion/07-accra-orbit_1920.mp4", "alt": "Two photo wheels turning beside the Why Ghana headline", "caption": "WHY ACCRA — TWO PHOTO WHEELS IN ORBIT." },
+      { "kind": "full", "image": "{media}/motion/08-formats-pin_1920.mp4", "alt": "Pinned section scrolling sideways through five formats", "caption": "THE LTIF EXPERIENCE — PINNED, THEN SIDEWAYS." },
+      { "kind": "full", "image": "{media}/motion/09-begin_1920.mp4", "alt": "BEGIN ticket with floating bubbles", "caption": "BEGIN — STRUCTURED. FUNDABLE. INVESTMENT-READY." },
+      { "kind": "full", "image": "{media}/motion/10-who-should-attend_1920.mp4", "alt": "Audience cards sliding in with the active card in blue", "caption": "A SEAT FOR YOU — ONE AUDIENCE AT A TIME." },
+
+      { "kind": "section", "eyebrow": "03 · SCROLL AS A MATERIAL", "heading": "THE PAGE REACTS TO HOW YOU SCROLL.", "body": "Marquees speed up with scroll velocity. The hinge between the speaker sections works like a spring. Testimonials pile up on desktop and become a swipe row on phones." },
+      { "kind": "full", "image": "{media}/motion/11-speakers-spring_1920.mp4", "alt": "Speaker headline drifting apart and the spring hinge", "caption": "SPEAKERS — THE WORDS DRIFT, THE HINGE SPRINGS." },
+      { "kind": "full", "image": "{media}/motion/12-testimonials_1920.mp4", "alt": "Testimonial cards landing on a pile", "caption": "TESTIMONIALS — EACH QUOTE LANDS ON THE PILE." },
+      { "kind": "duo", "left": "{media}/motion/13a-mobile-quotes_960.mp4", "right": "{media}/motion/13b-mobile-menu_960.mp4", "leftAlt": "Testimonials as a swipe row on mobile", "rightAlt": "Full-screen mobile menu", "caption": "MOBILE — A SWIPE ROW. / A FULL-SCREEN MENU." },
+      { "kind": "full", "image": "{media}/motion/14-sponsor-peel_1920.mp4", "alt": "Sponsor ticket peeling back on hover", "caption": "BECOME A SPONSOR — THE CORNER PEELS BACK." },
+      { "kind": "full", "image": "{media}/motion/15-join-footer_1920.mp4", "alt": "Join ticket sheen and footer marquee", "caption": "JOIN US IN ACCRA — A SHEEN, THEN THE THEME ON A LOOP." },
+      { "kind": "full", "image": "{media}/motion/16-header_1920.mp4", "alt": "Header hiding and returning on scroll", "caption": "HEADER — OUT OF THE WAY, BACK WHEN NEEDED." },
+
+      { "kind": "section", "eyebrow": "04 · THE INNER PAGES", "heading": "SPEAKERS, SCHEDULE, ABOUT, CONTACT.", "body": "The speaker grid filters with FLIP and opens profiles in a drawer. The schedule clock fills as you scroll and marks the session running now. About converges into a Venn diagram. Contact checks itself inline." },
+      { "kind": "full", "image": "{media}/motion/17-speakers-page_1920.mp4", "alt": "Speaker filters and profile drawer", "caption": "SPEAKERS — FILTERS GLIDE, PROFILES SLIDE IN." },
+      { "kind": "full", "image": "{media}/motion/18-schedule-page_1920.mp4", "alt": "Schedule day switch and scroll clock", "caption": "SCHEDULE — THE CLOCK FILLS AS YOU SCROLL." },
+      { "kind": "full", "image": "{media}/motion/19-about-page_1920.mp4", "alt": "About page Venn, journey and gallery lightbox", "caption": "ABOUT — VENN, JOURNEY, GALLERY." },
+      { "kind": "full", "image": "{media}/motion/20-contact-page_1920.mp4", "alt": "Contact doors, topic chips and inline validation", "caption": "CONTACT — DOORS, CHIPS, INLINE CHECKS." },
+
+      { "kind": "section", "eyebrow": "05 · EVERY SCREEN", "heading": "FIVE PAGES, TOP TO BOTTOM.", "body": "" },
+      { "kind": "full", "image": "{media}/motion/21-all-pages_1920.mp4", "alt": "All five pages scrolling top to bottom", "caption": "ALL FIVE PAGES AT 1520." },
+      { "kind": "full", "image": "{media}/frames/22-mobile-screens_1920.png", "alt": "All five pages on mobile", "caption": "THE SAME FIVE AT 390." },
+      { "kind": "full", "image": "{media}/motion/23-full-take_1920.mp4", "alt": "The whole homepage in one continuous scroll", "caption": "THE WHOLE HOMEPAGE IN ONE TAKE." },
+      { "kind": "full", "image": "{media}/frames/24-closing_1920.png", "alt": "See you in Accra", "caption": "LTIF 2026 — SEE YOU IN ACCRA." }
+    ],
+    "status": "published",
+    "comingSoon": false
+  },
+  "heroTile": {
+    "year": "2026.09",
+    "name": "LTIF 2026",
+    "discipline": "Web design",
+    "mediaKind": "video",
+    "mediaUrl": "{media}/motion/01-hero_1920.mp4",
+    "posterUrl": "{media}/frames/01-hero_poster_1920.png"
+  }
+}
