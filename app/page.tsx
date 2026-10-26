@@ -60,7 +60,7 @@ export default async function HomePage() {
           />
           <AboutSection />
           <ServicesSection />
-          <PlaygroundSection items={playgroundItems} />
+          {playgroundItems.length > 0 && <PlaygroundSection items={playgroundItems} />}
           <RecommendationsSection items={recommendations} />
           <CtaSection />
           <EmailBanner />

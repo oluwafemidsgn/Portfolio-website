@@ -2,9 +2,40 @@
 
 import { motion } from "framer-motion";
 import { Reveal } from "./motion/reveal";
-import { ProjectThumb } from "./project-thumb";
 import { EASE_OUT_EXPO } from "./motion/easing";
 import { Frame } from "./motion/frame";
+
+/**
+ * Photos for the About block. Paste a URL (Cloudinary) into `src` and the
+ * slot fills; empty slots keep the neutral placeholder so the grid holds.
+ */
+const ABOUT_PHOTOS = {
+  main: { src: "", alt: "" },
+  pair: [
+    { src: "", alt: "", caption: "" },
+    { src: "", alt: "", caption: "" },
+  ],
+};
+
+function PhotoSlot({ src, alt, caption }: { src: string; alt: string; caption?: string }) {
+  return (
+    <figure className="thumb-card group flex flex-col p-2">
+      <div className="thumb relative w-full aspect-[432/298] overflow-hidden bg-mute">
+        {src && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={src}
+            alt={alt}
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+          />
+        )}
+      </div>
+      {caption && <figcaption className="mt-2 t-micro text-strong">{caption}</figcaption>}
+    </figure>
+  );
+}
 
 export function AboutSection() {
   return (
@@ -18,7 +49,12 @@ export function AboutSection() {
               whileInView={{ scale: 1 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 1.2, ease: EASE_OUT_EXPO }}
-            />
+            >
+              {ABOUT_PHOTOS.main.src && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={ABOUT_PHOTOS.main.src} alt={ABOUT_PHOTOS.main.alt} className="absolute inset-0 h-full w-full object-cover" loading="lazy" decoding="async" />
+              )}
+            </motion.div>
           </div>
 
           <div className="flex flex-col">
@@ -56,8 +92,9 @@ export function AboutSection() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 grid-col-rules">
-              <ProjectThumb date="2024.11" title="FORM STUDIO" type="Case study" />
-              <ProjectThumb date="2024.08" title="NOIR" type="Case study" />
+              {ABOUT_PHOTOS.pair.map((p, i) => (
+                <PhotoSlot key={i} {...p} />
+              ))}
             </div>
           </div>
         </div>

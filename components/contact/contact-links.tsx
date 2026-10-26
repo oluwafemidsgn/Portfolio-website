@@ -3,6 +3,8 @@
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef } from "react";
 import { EASE_OUT_EXPO } from "../motion/easing";
+import { SOCIALS } from "@/lib/socials";
+import { SocialIcon } from "../social-icon";
 
 const DIRECT = {
   label: "EMAIL",
@@ -10,12 +12,6 @@ const DIRECT = {
   href: "mailto:hey@oluwafemidsgn.com",
 };
 
-const SOCIALS = [
-  { label: "TWITTER / X", handle: "@OLUWAFEMIDSGN", href: "https://x.com/" },
-  { label: "INSTAGRAM", handle: "@OLUWAFEMIDSGN", href: "https://instagram.com/" },
-  { label: "READ.CV", handle: "/OLUWAFEMIDSGN", href: "https://read.cv/" },
-  { label: "LINKEDIN", handle: "/IN/OLUWAFEMIDSGN", href: "https://linkedin.com/" },
-];
 
 const FAQS = [
   {
@@ -68,7 +64,7 @@ export function ContactLinks() {
         <ul className="flex flex-col">
           {SOCIALS.map((s, i) => (
             <motion.li
-              key={s.label}
+              key={s.key}
               initial={reduce ? false : { opacity: 0, y: 14 }}
               animate={show ? { opacity: 1, y: 0 } : {}}
               transition={{
@@ -82,10 +78,13 @@ export function ContactLinks() {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor="zoom"
-                className="rule-h cms-ink-hover flex items-baseline justify-between gap-6 py-4"
+                className="rule-h cms-ink-hover flex items-center justify-between gap-6 py-4 px-1"
               >
-                <span className="t-nav text-ink">{s.label}</span>
-                <span className="t-micro text-body">{s.handle} ↗</span>
+                <span className="flex items-center gap-3 t-nav">
+                  <SocialIcon name={s.key} size={18} />
+                  {s.label.toUpperCase()}
+                </span>
+                <span className="t-micro text-body">{s.handle.toUpperCase()} ↗</span>
               </a>
             </motion.li>
           ))}

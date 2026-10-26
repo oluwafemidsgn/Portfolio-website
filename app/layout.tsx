@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeScript } from "@/components/theme/theme-script";
+import { SITE_URL } from "@/lib/site";
 
 const nohemi = localFont({
   variable: "--font-nohemi",
@@ -15,15 +16,21 @@ const nohemi = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Oduneye Oluwafemi — Creative Designer",
+  title: "Oduneye Oluwafemi — Product Designer & Design Engineer",
   description:
     "Designer partnering with brands across 3D, motion, and visual design. Specializing in embedded, long-term collaborations.",
-  metadataBase: new URL("https://oluwafemidsgn.com"),
+  metadataBase: new URL(SITE_URL),
   openGraph: {
-    title: "Oduneye Oluwafemi — Creative Designer",
+    title: "Oduneye Oluwafemi — Product Designer & Design Engineer",
     description:
       "Designer partnering with brands across 3D, motion, and visual design.",
     type: "website",
+    siteName: "Oduneye Oluwafemi",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Oduneye Oluwafemi — Product Designer & Design Engineer",
+    creator: "@OluwafemiDsgn",
   },
 };
 

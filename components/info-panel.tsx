@@ -42,7 +42,7 @@ export function InfoPanel() {
   }, []);
 
   const cells = [
-    { label: "ROLE", value: "Creative Designer" },
+    { label: "ROLE", value: "Product Designer & Design Engineer" },
     { label: "AVAILABILITY", value: "Open to freelance" },
     { label: "LOCATION", value: "Lagos, Nigeria" },
   ];

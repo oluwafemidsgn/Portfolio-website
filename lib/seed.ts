@@ -597,16 +597,16 @@ const RECOMMENDATION_SEEDS: Omit<RecommendationInput, "displayOrder">[] = [
 ];
 
 /**
- * Seeds a fresh database so the site has something to render.
+ * Seeds a brand-new, empty database so the site has something to render.
  *
- * Every table — case studies included — is only seeded when it is empty.
- * Once real content exists, nothing is re-created: deleting a placeholder
- * study in the admin keeps it deleted, and admin edits survive redeploys.
+ * Runs only when there are no case studies at all (a fresh install). Once
+ * real content exists nothing is ever re-created, so deleting placeholder
+ * studies, tiles, playground items or quotes in the admin keeps them gone.
  */
 export async function ensureSeed(): Promise<void> {
-  if ((await listAll()).length === 0) {
-    for (const item of ITEMS) await create(item);
-  }
+  if ((await listAll()).length > 0) return;
+
+  for (const item of ITEMS) await create(item);
 
   if ((await listHeroProjects()).length === 0) {
     for (const [i, seed] of HERO_SEEDS.entries()) {
