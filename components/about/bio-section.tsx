@@ -13,7 +13,7 @@ const META = [
 ];
 
 /** Portrait for the bio panel — paste a URL (Cloudinary) to fill it. */
-const PORTRAIT = { src: "", alt: "Oluwafemi Oduneye" };
+const PORTRAIT = { src: "https://res.cloudinary.com/dognbegiw/image/upload/f_auto,q_auto,w_1400/portfolio/about/portrait-agbada.jpg", alt: "Oluwafemi Oduneye in Yorùbá attire and fila", position: "50% 20%" };
 
 export function BioSection() {
   return (
@@ -31,7 +31,7 @@ export function BioSection() {
             >
               {PORTRAIT.src && (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={PORTRAIT.src} alt={PORTRAIT.alt} className="absolute inset-0 h-full w-full object-cover" loading="lazy" decoding="async" />
+                <img src={PORTRAIT.src} alt={PORTRAIT.alt} style={{ objectPosition: PORTRAIT.position }} className="absolute inset-0 h-full w-full object-cover" loading="lazy" decoding="async" />
               )}
             </motion.div>
           </div>

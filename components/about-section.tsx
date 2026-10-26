@@ -10,14 +10,14 @@ import { Frame } from "./motion/frame";
  * slot fills; empty slots keep the neutral placeholder so the grid holds.
  */
 const ABOUT_PHOTOS = {
-  main: { src: "", alt: "" },
+  main: { src: "https://res.cloudinary.com/dognbegiw/image/upload/f_auto,q_auto,w_1400/portfolio/about/portrait-smile.jpg", alt: "Oluwafemi Oduneye smiling, seated in a navy shirt against a red backdrop", position: "50% 30%" },
   pair: [
-    { src: "", alt: "", caption: "" },
-    { src: "", alt: "", caption: "" },
+    { src: "https://res.cloudinary.com/dognbegiw/image/upload/f_auto,q_auto,w_1400/portfolio/about/portrait-chair.jpg", alt: "Oluwafemi Oduneye seated in a wooden chair", caption: "", position: "50% 22%" },
+    { src: "https://res.cloudinary.com/dognbegiw/image/upload/f_auto,q_auto,w_1400/portfolio/about/portrait-agbada.jpg", alt: "Oluwafemi Oduneye in Yorùbá attire and fila", caption: "", position: "50% 18%" },
   ],
 };
 
-function PhotoSlot({ src, alt, caption }: { src: string; alt: string; caption?: string }) {
+function PhotoSlot({ src, alt, caption, position }: { src: string; alt: string; caption?: string; position?: string }) {
   return (
     <figure className="thumb-card group flex flex-col p-2">
       <div className="thumb relative w-full aspect-[432/298] overflow-hidden bg-mute">
@@ -26,6 +26,7 @@ function PhotoSlot({ src, alt, caption }: { src: string; alt: string; caption?: 
           <img
             src={src}
             alt={alt}
+            style={{ objectPosition: position }}
             loading="lazy"
             decoding="async"
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
@@ -52,7 +53,7 @@ export function AboutSection() {
             >
               {ABOUT_PHOTOS.main.src && (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={ABOUT_PHOTOS.main.src} alt={ABOUT_PHOTOS.main.alt} className="absolute inset-0 h-full w-full object-cover" loading="lazy" decoding="async" />
+                <img src={ABOUT_PHOTOS.main.src} alt={ABOUT_PHOTOS.main.alt} style={{ objectPosition: ABOUT_PHOTOS.main.position }} className="absolute inset-0 h-full w-full object-cover" loading="lazy" decoding="async" />
               )}
             </motion.div>
           </div>
