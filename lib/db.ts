@@ -147,8 +147,13 @@ async function addColumnIfMissing(
   });
   const cols = result.rows as unknown as { name: string }[];
   if (cols.some((c) => c.name === column)) return;
-  await db.execute({
-    sql: `ALTER TABLE ${table} ADD COLUMN ${column} ${definition}`,
-    args: [],
-  });
+  try {
+    await db.execute({
+      sql: `ALTER TABLE ${table} ADD COLUMN ${column} ${definition}`,
+      args: [],
+    });
+  } catch (err) {
+    // Another cold-started instance may have added it between our check and here.
+    if (!String(err).includes("duplicate column name")) throw err;
+  }
 }
