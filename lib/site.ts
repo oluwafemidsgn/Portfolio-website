@@ -13,3 +13,5 @@ export const SITE_INTRO =
 
 /** Availability — always shown, everywhere it appears. */
 export const AVAILABILITY = "Open to new projects";
+export const REPLY_TIME = "Replies in under 24 hours";
+export const TIMEZONE = "Africa/Lagos";

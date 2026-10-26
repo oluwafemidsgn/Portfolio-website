@@ -7,6 +7,7 @@ import { Frame } from "./motion/frame";
 import { SOCIALS, type Social } from "@/lib/socials";
 import { SocialIcon } from "./social-icon";
 import { SITE_INTRO } from "@/lib/site";
+import { LagosClockPanel } from "./lagos-clock-panel";
 
 const EASE = "ease-[cubic-bezier(0.22,1,0.36,1)]";
 
@@ -77,12 +78,14 @@ export function SiteFooter() {
 
           <div className="p-2 flex">
             <motion.div
-              className="thumb w-full min-h-[240px] relative overflow-hidden"
-              initial={{ scale: 1.06 }}
-              whileInView={{ scale: 1 }}
+              className="w-full flex"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 1.2, ease: EASE_OUT_EXPO }}
-            />
+              transition={{ duration: 1, ease: EASE_OUT_EXPO }}
+            >
+              <LagosClockPanel />
+            </motion.div>
           </div>
         </div>
       </Frame>

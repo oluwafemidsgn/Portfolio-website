@@ -444,3 +444,8 @@ body {
   line-height: 1;
   color: var(--color-strong);
 }
+
+/* Clock colon in the footer panel. */
+@keyframes blink {
+  to { opacity: 0.25; }
+}

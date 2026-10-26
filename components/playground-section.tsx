@@ -8,6 +8,17 @@ import { EASE_OUT_EXPO } from "./motion/easing";
 import { Frame } from "./motion/frame";
 import type { PlaygroundItem } from "@/lib/types";
 
+/**
+ * Boards are 16:9 and this panel is taller. Cloudinary pads the image out
+ * with its own edge colour, so the panel can cover-fit without cropping
+ * the board itself.
+ */
+function padToPanel(url: string) {
+  return url.includes("res.cloudinary.com") && url.includes("/image/upload/")
+    ? url.replace("/image/upload/", "/image/upload/c_pad,b_auto:border,w_1400,h_1600,f_auto,q_auto/")
+    : url;
+}
+
 type Props = {
   items: PlaygroundItem[];
 };
@@ -87,7 +98,7 @@ export function PlaygroundSection({ items }: Props) {
                 <div className="absolute inset-0 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]">
                   <MediaAsset
                     kind={featured.mediaKind}
-                    url={featured.mediaUrl}
+                    url={padToPanel(featured.mediaUrl)}
                     poster={featured.posterUrl}
                     alt={featured.name}
                   />
