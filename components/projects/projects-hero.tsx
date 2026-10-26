@@ -38,7 +38,7 @@ export function ProjectsHero({ count }: Props) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: EASE_OUT_EXPO, delay: 1 }}
         >
-          A running catalogue of work across brand, 3D, motion, and product.
+          A running catalogue of product, web and brand work.
           Click through for a closer read on how each one was made.
         </motion.p>
       </div>

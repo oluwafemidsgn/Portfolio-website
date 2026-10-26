@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { EASE_OUT_EXPO } from "./motion/easing";
 import { ThemeToggle } from "./theme/theme-toggle";
 import { MobileMenu } from "./mobile-menu";
+import { EMAIL as SITE_EMAIL } from "@/lib/site";
 
 const NAV_ITEMS = [
   { label: "HOME", href: "/" },
@@ -13,7 +14,7 @@ const NAV_ITEMS = [
   { label: "CONTACT", href: "/contact" },
 ];
 
-const EMAIL = "HEY@OLUWAFEMIDSGN.COM";
+const EMAIL = SITE_EMAIL.toUpperCase();
 
 function NavLink({ label, href }: { label: string; href: string }) {
   return (

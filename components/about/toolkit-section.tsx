@@ -7,15 +7,16 @@ import { EASE_OUT_EXPO } from "../motion/easing";
 
 type Tool = { name: string; use: string };
 
+// From the CV.
 const TOOLS: Tool[] = [
   { name: "Figma", use: "Interface & systems" },
-  { name: "Blender", use: "3D direction & render" },
-  { name: "Cinema 4D", use: "Motion, occasionally" },
-  { name: "After Effects", use: "Motion polish" },
-  { name: "Illustrator", use: "Type & marks" },
-  { name: "Webflow", use: "Marketing sites" },
-  { name: "Next.js", use: "Production frontend" },
-  { name: "Framer Motion", use: "Interaction" },
+  { name: "Cursor", use: "Design-to-code" },
+  { name: "Claude Code", use: "AI-assisted builds" },
+  { name: "v0", use: "Rapid live prototypes" },
+  { name: "GitHub", use: "Git workflows" },
+  { name: "VS Code", use: "Front-end UI" },
+  { name: "Vercel", use: "Deployment" },
+  { name: "Illustrator", use: "Brand & marks" },
 ];
 
 function ToolCard({ tool, i }: { tool: Tool; i: number }) {

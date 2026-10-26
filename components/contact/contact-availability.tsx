@@ -1,79 +1,35 @@
 "use client";
 
-import { motion, useInView, useReducedMotion } from "framer-motion";
-import { useRef } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { EASE_OUT_EXPO } from "../motion/easing";
-
-const ROWS = [
-  {
-    q: "Q1 2026",
-    status: "BOOKED",
-    note: "Two long-term brand engagements — wrapping in March.",
-  },
-  {
-    q: "Q2 2026",
-    status: "OPEN",
-    note: "Two slots available for 6–10 week sprints.",
-  },
-  {
-    q: "Q3 2026",
-    status: "WAITLIST",
-    note: "Accepting a shortlist of embedded collaborations.",
-  },
-];
+import { AVAILABILITY } from "@/lib/site";
 
 /**
- * A small status table showing what quarters are open, so people don't
- * have to email just to find out. Fits the site's tabular, editorial feel.
+ * Always-on availability line: a live dot and one sentence, so people know
+ * they can get in touch without checking dates.
  */
 export function ContactAvailability() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-10% 0px" });
   const reduce = useReducedMotion();
-
   return (
     <section className="page-gutter">
-      <div
-        ref={ref}
-        className="border-y border-[var(--rule)] pt-8 pb-6 grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-6"
+      <motion.div
+        className="border-y border-[var(--rule)] py-6 grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-4 lg:gap-6 items-center"
+        initial={reduce ? false : { opacity: 0, y: 14 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: EASE_OUT_EXPO, delay: 0.3 }}
       >
         <h2 className="t-micro text-body">AVAILABILITY</h2>
-
-        <ul className="flex flex-col">
-          {ROWS.map((row, i) => (
-            <motion.li
-              key={row.q}
-              className="rule-h grid grid-cols-[64px_80px_minmax(0,1fr)] sm:grid-cols-[90px_120px_minmax(0,1fr)] items-baseline gap-3 sm:gap-4 py-3"
-              initial={reduce ? false : { opacity: 0, y: 14 }}
-              animate={
-                inView || reduce
-                  ? { opacity: 1, y: 0 }
-                  : { opacity: 0, y: 14 }
-              }
-              transition={{
-                duration: 0.65,
-                delay: 0.06 * i,
-                ease: EASE_OUT_EXPO,
-              }}
-            >
-              <span className="t-nav text-ink tabular-nums">{row.q}</span>
-              <span
-                className={
-                  "t-micro " +
-                  (row.status === "OPEN"
-                    ? "text-ink"
-                    : row.status === "BOOKED"
-                      ? "text-body line-through decoration-from-font"
-                      : "text-strong")
-                }
-              >
-                {row.status}
-              </span>
-              <span className="t-body text-strong">{row.note}</span>
-            </motion.li>
-          ))}
-        </ul>
-      </div>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <p className="flex items-center gap-3 t-nav text-ink">
+            <span className="relative flex h-2.5 w-2.5" aria-hidden>
+              {!reduce && <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#22c55e] opacity-60" />}
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#22c55e]" />
+            </span>
+            {AVAILABILITY.toUpperCase()}
+          </p>
+          <p className="t-body text-strong">Product design, design engineering and MVP builds.</p>
+        </div>
+      </motion.div>
     </section>
   );
 }

@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { EASE_OUT_EXPO } from "./motion/easing";
+import { AVAILABILITY } from "@/lib/site";
 
 type Cell = { label: string; value: string };
 
@@ -43,7 +44,7 @@ export function InfoPanel() {
 
   const cells = [
     { label: "ROLE", value: "Product Designer & Design Engineer" },
-    { label: "AVAILABILITY", value: "Open to freelance" },
+    { label: "AVAILABILITY", value: AVAILABILITY },
     { label: "LOCATION", value: "Lagos, Nigeria" },
   ];
 

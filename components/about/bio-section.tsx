@@ -6,11 +6,14 @@ import { EASE_OUT_EXPO } from "../motion/easing";
 import { Frame } from "../motion/frame";
 
 const META = [
-  { k: "BORN", v: "1997 · Lagos" },
-  { k: "FIRST TOOL", v: "Figma, 2018" },
-  { k: "EDUCATION", v: "Self-taught" },
+  { k: "BORN", v: "2002 · Lagos" },
+  { k: "DESIGNING SINCE", v: "2021" },
+  { k: "STUDYING", v: "University of Lagos" },
   { k: "LANGUAGES", v: "English, Yorùbá" },
 ];
+
+/** Portrait for the bio panel — paste a URL (Cloudinary) to fill it. */
+const PORTRAIT = { src: "", alt: "Oluwafemi Oduneye" };
 
 export function BioSection() {
   return (
@@ -25,7 +28,12 @@ export function BioSection() {
               whileInView={{ scale: 1 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 1.2, ease: EASE_OUT_EXPO }}
-            />
+            >
+              {PORTRAIT.src && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={PORTRAIT.src} alt={PORTRAIT.alt} className="absolute inset-0 h-full w-full object-cover" loading="lazy" decoding="async" />
+              )}
+            </motion.div>
           </div>
 
           {/* Bio copy + specimen rows. */}
@@ -41,21 +49,20 @@ export function BioSection() {
               </Reveal>
               <Reveal delay={0.2}>
                 <p className="mt-8 t-lead text-body max-w-[720px]">
-                  I design at the seam between the tangible and the digital.
-                  Logos that sit comfortably on a business card and on a
-                  render pass. Interfaces that feel like objects. Motion that
-                  moves with purpose, not decoration.
+                  I design and build products end to end, from strategy and
+                  research through UX, UI and design systems to
+                  production-ready front-end code.
                 </p>
               </Reveal>
               <Reveal delay={0.3}>
                 <p className="mt-6 t-body text-body max-w-[640px]">
-                  I grew up in Lagos drawing letterforms and later fell for
-                  Blender after a particularly bad MBTI rabbit-hole. Today I
-                  split my time between long-term brand partners and a
-                  rotating cast of independent studios. I believe the best
-                  work comes from staying in the kitchen — being embedded
-                  with a team long enough to understand the dish we&apos;re
-                  actually cooking.
+                  I started designing products in Lagos in 2021, leading UX and
+                  UI for a logistics ecosystem. Since then I&apos;ve worked
+                  across social, e-commerce, fintech and marketplaces, for
+                  agencies in Lagos and startups in the US and Canada. Today I
+                  lead product design at Intasect and prototype in code with
+                  Cursor, v0 and Claude Code, so a team can test how a product
+                  feels within days, not weeks.
                 </p>
               </Reveal>
             </div>

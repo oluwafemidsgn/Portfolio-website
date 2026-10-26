@@ -37,9 +37,8 @@ export function PlaygroundSection({ items }: Props) {
               </Reveal>
               <Reveal delay={0.15}>
                 <p className="mt-6 t-body text-body max-w-[528px]">
-                  Experiments across 3D, motion, and visual design. A
-                  sketchbook for ideas that don&apos;t fit anywhere else —
-                  yet.
+                  Side projects and experiments, designed and built end to
+                  end. Live products, prototypes and ideas still taking shape.
                 </p>
               </Reveal>
             </div>

@@ -15,9 +15,9 @@ export function AboutCta() {
             </Reveal>
             <Reveal delay={0.1}>
               <p className="mt-6 t-body text-strong max-w-[420px]">
-                If any of this sounds like your kind of trouble, I&apos;d love
-                to hear from you. Embedded engagements, identity sprints, or
-                a weird idea you can&apos;t shake — all welcome.
+                If any of this sounds like your kind of work, I&apos;d love to
+                hear from you. A new product, a website, an MVP, or an idea
+                you can&apos;t shake: all welcome.
               </p>
             </Reveal>
           </div>

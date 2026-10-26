@@ -4,12 +4,13 @@ import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef } from "react";
 import { EASE_OUT_EXPO } from "../motion/easing";
 import { SOCIALS } from "@/lib/socials";
+import { EMAIL } from "@/lib/site";
 import { SocialIcon } from "../social-icon";
 
 const DIRECT = {
   label: "EMAIL",
-  value: "HEY@OLUWAFEMIDSGN.COM",
-  href: "mailto:hey@oluwafemidsgn.com",
+  value: EMAIL.toUpperCase(),
+  href: `mailto:${EMAIL}`,
 };
 
 

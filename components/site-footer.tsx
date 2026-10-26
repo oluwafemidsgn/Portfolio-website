@@ -6,6 +6,7 @@ import { EASE_OUT_EXPO } from "./motion/easing";
 import { Frame } from "./motion/frame";
 import { SOCIALS, type Social } from "@/lib/socials";
 import { SocialIcon } from "./social-icon";
+import { SITE_INTRO } from "@/lib/site";
 
 const EASE = "ease-[cubic-bezier(0.22,1,0.36,1)]";
 
@@ -63,8 +64,7 @@ export function SiteFooter() {
               </Reveal>
               <Reveal delay={0.15}>
                 <p className="mt-6 t-body text-body max-w-[528px]">
-                  Designer partnering with brands across 3D, motion, and visual
-                  design. Specializing in embedded, long-term collaborations.
+                  {SITE_INTRO}
                 </p>
               </Reveal>
             </div>

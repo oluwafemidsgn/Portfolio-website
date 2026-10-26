@@ -12,7 +12,7 @@ import { ProjectsHero } from "@/components/projects/projects-hero";
 export const metadata = {
   title: "Projects — Oduneye Oluwafemi",
   description:
-    "Selected case studies across brand, 3D, motion, and product work.",
+    "Selected case studies across product design, web and brand.",
 };
 
 export const dynamic = "force-dynamic";

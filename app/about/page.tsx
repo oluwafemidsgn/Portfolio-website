@@ -8,14 +8,14 @@ import { BioSection } from "@/components/about/bio-section";
 import { JourneySection } from "@/components/about/journey-section";
 import { PrinciplesSection } from "@/components/about/principles-section";
 import { ToolkitSection } from "@/components/about/toolkit-section";
-import { RecognitionSection } from "@/components/about/recognition-section";
+import { EducationSection } from "@/components/about/education-section";
 import { CurrentlySection } from "@/components/about/currently-section";
 import { AboutCta } from "@/components/about/about-cta";
 
 export const metadata = {
   title: "About — Oduneye Oluwafemi",
   description:
-    "Designer partnering with brands across 3D, motion, and visual design. A look at how I work, what I believe, and what I'm up to right now.",
+    "Product designer and design engineer based in Lagos, Nigeria. Experience, education, tools and how I work.",
 };
 
 export default function AboutPage() {
@@ -31,7 +31,7 @@ export default function AboutPage() {
           <JourneySection />
           <PrinciplesSection />
           <ToolkitSection />
-          <RecognitionSection />
+          <EducationSection />
           <CurrentlySection />
           <AboutCta />
           <EmailBanner />

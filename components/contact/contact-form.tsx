@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { EASE_OUT_EXPO } from "../motion/easing";
+import { EMAIL as SITE_EMAIL } from "@/lib/site";
 
-const EMAIL = "hey@oluwafemidsgn.com";
+const EMAIL = SITE_EMAIL;
 
 const BUDGETS = [
   "Under $5k",
@@ -17,7 +18,7 @@ const BUDGETS = [
 
 const TIMELINES = ["< 4 weeks", "1 – 2 months", "2 – 3 months", "Q2 / later"];
 
-const DISCIPLINES = ["Brand identity", "Motion / 3D", "Product UI", "Other"];
+const DISCIPLINES = ["Product design", "Design engineering", "Website", "Brand identity", "Other"];
 
 /**
  * Contact form — client-side only. Submitting opens the user's mail

@@ -3,12 +3,13 @@
 import { motion } from "framer-motion";
 import { SplitLines } from "../motion/split-lines";
 import { EASE_OUT_EXPO } from "../motion/easing";
+import { AVAILABILITY } from "@/lib/site";
 
 const FACTS = [
   { label: "REPLY TIME", value: "~ 48 HRS" },
   { label: "TIMEZONE", value: "GMT+1 / LAGOS" },
-  { label: "AVAILABILITY", value: "OPEN Q2 2026" },
-  { label: "BEST FOR", value: "EMBEDDED SPRINTS" },
+  { label: "AVAILABILITY", value: AVAILABILITY.toUpperCase() },
+  { label: "BEST FOR", value: "PRODUCT & MVP WORK" },
 ];
 
 export function ContactHero() {
@@ -46,9 +47,9 @@ export function ContactHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: EASE_OUT_EXPO, delay: 1.05 }}
           >
-            I take on a small number of embedded engagements each quarter.
-            Send a note with what you&apos;re making and when you&apos;d like
-            to start — even a rough paragraph helps.
+            Building a product, a website or an MVP? Send a note with what
+            you&apos;re making and when you&apos;d like to start. Even a rough
+            paragraph helps.
           </motion.p>
         </div>
 

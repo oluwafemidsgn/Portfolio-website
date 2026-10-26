@@ -15,6 +15,10 @@ const SERVICES = [
     desc: "Creating user-centered interfaces that are both beautiful and functional.",
   },
   {
+    title: "Design Engineering",
+    desc: "Turning designs into live, testable products: rapid prototypes, component libraries and React front-ends.",
+  },
+  {
     title: "Website Design",
     desc: "Designing editorial, expressive marketing sites that perform.",
   },

@@ -7,26 +7,27 @@ import { EASE_OUT_EXPO } from "../motion/easing";
 
 type Mention = { year: string; title: string; where: string };
 
+// From the CV: schools first (newest first), then certifications.
 const MENTIONS: Mention[] = [
-  { year: "2024", title: "Featured project", where: "SiteInspire" },
-  { year: "2024", title: "Honorable mention", where: "Awwwards" },
-  { year: "2023", title: "Top 100 designers to watch", where: "Dribbble Annual" },
-  { year: "2023", title: "Interview: Designing in Lagos", where: "Brand New" },
-  { year: "2022", title: "Panelist, Africa Design Week", where: "ADW Lagos" },
+  { year: "2023 — 2028", title: "B.Eng. Surveying & Geoinformatics Engineering", where: "University of Lagos · expected" },
+  { year: "2021 — 2023", title: "National Diploma, Computer Science", where: "Yaba College of Technology" },
+  { year: "2017 — 2019", title: "SSCE, Photography & Graphic Design", where: "Immortal Glory College" },
+  { year: "Certificate", title: "Brand Strategy for Designers", where: "Certification" },
+  { year: "Certificate", title: "Designing Emotion: How to Use Design to Move People", where: "Certification" },
 ];
 
-export function RecognitionSection() {
+export function EducationSection() {
   return (
-    <section id="recognition" className="page-gutter">
+    <section id="education" className="page-gutter">
       <Frame>
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] grid-col-rules">
           <div className="p-8 md:p-12">
             <Reveal>
-              <span className="t-micro text-body">/ 05 · RECOGNITION</span>
+              <span className="t-micro text-body">/ 05 · EDUCATION</span>
             </Reveal>
             <Reveal delay={0.1}>
               <h2 className="t-title text-ink mt-6">
-                Kind words and quiet nods.
+                Education and certifications.
               </h2>
             </Reveal>
           </div>
@@ -47,11 +48,11 @@ export function RecognitionSection() {
                   delay: i * 0.05,
                 }}
               >
-                <span className="t-micro text-body tabular-nums shrink-0 md:w-[80px]">
+                <span className="t-micro text-body tabular-nums shrink-0 md:w-[110px] uppercase">
                   {m.year}
                 </span>
                 <span className="t-nav text-ink flex-1">{m.title}</span>
-                <span className="t-micro text-strong">{m.where}</span>
+                <span className="t-micro text-strong md:text-right">{m.where}</span>
               </motion.li>
             ))}
           </ul>

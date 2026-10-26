@@ -2,8 +2,9 @@
 
 import { Marquee } from "./motion/marquee";
 import { Frame } from "./motion/frame";
+import { EMAIL as SITE_EMAIL } from "@/lib/site";
 
-const EMAIL = "HEY@OLUWAFEMIDSGN.COM";
+const EMAIL = SITE_EMAIL.toUpperCase();
 const DIVIDER = (
   <span className="mx-8 md:mx-12 inline-block align-middle text-paper/40">
     ✦

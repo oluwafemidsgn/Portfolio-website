@@ -3,12 +3,13 @@
 import { motion } from "framer-motion";
 import { SplitLines } from "../motion/split-lines";
 import { EASE_OUT_EXPO } from "../motion/easing";
+import { AVAILABILITY } from "@/lib/site";
 
 const FACTS = [
   { label: "BASED", value: "LAGOS, NIGERIA" },
-  { label: "AVAILABILITY", value: "OPEN Q2 2026" },
-  { label: "DISCIPLINE", value: "BRAND · 3D · MOTION" },
-  { label: "YEARS IN CRAFT", value: "SEVEN" },
+  { label: "AVAILABILITY", value: AVAILABILITY.toUpperCase() },
+  { label: "DISCIPLINE", value: "PRODUCT · DESIGN ENGINEERING" },
+  { label: "YEARS IN CRAFT", value: "FIVE" },
 ];
 
 export function AboutHero() {
@@ -47,10 +48,10 @@ export function AboutHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: EASE_OUT_EXPO, delay: 1.05 }}
           >
-            I help brands, studios, and founders turn raw ideas into honest
-            products. For seven years I&apos;ve drifted between identity,
-            interface, and three-dimensional work — always looking for the
-            moment where craft meets clarity.
+            I help founders, agencies and teams turn ideas into products
+            people trust. For five years I&apos;ve worked across strategy,
+            UX, UI and front-end code, looking for the clearest version of
+            every product.
           </motion.p>
         </div>
 

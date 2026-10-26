@@ -7,47 +7,62 @@ import { EASE_OUT_EXPO } from "../motion/easing";
 
 type Entry = {
   year: string;
+  dates: string;
   role: string;
   org: string;
   location: string;
   note: string;
 };
 
+// From the CV, newest first.
 const ENTRIES: Entry[] = [
   {
-    year: "2025",
-    role: "Independent / Creative Designer",
-    org: "Self-directed",
+    year: "2024",
+    dates: "2024 — Present",
+    role: "Lead Product Designer",
+    org: "Intasect",
     location: "Lagos",
-    note: "Embedded brand + product partnerships with early-stage teams across Africa and Europe.",
+    note: "Lead product design across client engagements, from discovery to developer handoff. Shipped e-commerce, social commerce, mentorship and marketplace products, internal agency tools and marketing sites, prototyping in code to test ideas within days.",
   },
   {
     year: "2023",
-    role: "Senior Brand Designer",
-    org: "Form Studio",
-    location: "Remote",
-    note: "Led visual systems for three public launches. Shipped a design-ops handbook still in use by the team.",
+    dates: "Jun 2023 — 2024",
+    role: "Freelance Product Designer",
+    org: "Startups",
+    location: "USA · Remote",
+    note: "Designed brand identities and products for 5+ startups in fintech, e-commerce and social, from wireframes to high-fidelity prototypes and design systems.",
+  },
+  {
+    year: "2022",
+    dates: "Dec 2022 — May 2023",
+    role: "Creative Designer",
+    org: "EV.com",
+    location: "Canada · Remote",
+    note: "Redesigned the e-commerce site into a more professional, trust-driven experience.",
+  },
+  {
+    year: "2022",
+    dates: "Aug — Dec 2022",
+    role: "UI/UX & Product Designer",
+    org: "GoDigital, Inc",
+    location: "Lagos",
+    note: "Led end-to-end design of a social media app, from audience research and user flows to interactive prototypes, usability iterations and developer handoff.",
+  },
+  {
+    year: "2022",
+    dates: "Aug — Oct 2022",
+    role: "UI/UX & Brand Designer",
+    org: "NativeBrands",
+    location: "Lagos",
+    note: "Designed web UI, dashboards and brand guidelines, with responsive layouts and reusable components that kept web and dashboard experiences consistent.",
   },
   {
     year: "2021",
-    role: "Brand & Motion Designer",
-    org: "Noir Agency",
+    dates: "Jul 2021 — Jun 2022",
+    role: "Senior Product Designer",
+    org: "DiamondScripts",
     location: "Lagos",
-    note: "Owned the motion pipeline — from storyboards to final renders — for ten+ identity rollouts.",
-  },
-  {
-    year: "2019",
-    role: "Freelance",
-    org: "Various",
-    location: "Remote",
-    note: "Built a portfolio the hard way: cold emails, late nights, and a lot of unsolicited logos.",
-  },
-  {
-    year: "2018",
-    role: "First file opened",
-    org: "Figma · Blender",
-    location: "Lagos",
-    note: "Discovered the joy of a pen-tool. Haven't closed it since.",
+    note: "Led UX/UI for a logistics ecosystem serving drivers, dispatch teams and customers, backed by research with each, and built the design system that kept it consistent.",
   },
 ];
 
@@ -86,16 +101,14 @@ function Row({ entry, i }: { entry: Entry; i: number }) {
           </motion.h3>
           <div className="mt-2 t-micro text-body">
             {entry.org} · {entry.location}
+            <span className="md:hidden"> · {entry.dates}</span>
           </div>
           <p className="mt-4 t-body text-strong max-w-[560px]">{entry.note}</p>
         </div>
 
-        {/* Index badge on the right, desktop only. */}
-        <span
-          className="hidden md:block t-micro text-body tabular-nums self-start"
-          aria-hidden
-        >
-          / {String(i + 1).padStart(2, "0")}
+        {/* Exact dates on the right, desktop only (folded into the org line on phones). */}
+        <span className="hidden md:block t-micro text-body tabular-nums self-start text-right uppercase">
+          {entry.dates}
         </span>
       </motion.div>
     </motion.div>
@@ -113,15 +126,14 @@ export function JourneySection() {
             </Reveal>
             <Reveal delay={0.1}>
               <h2 className="t-title text-ink mt-6 max-w-[820px]">
-                Seven years, roughly four cities, and a stack of unfinished
-                sketchbooks.
+                Five years across agencies, startups and products of my own.
               </h2>
             </Reveal>
           </div>
 
           <div className="divide-y divide-[var(--rule)]">
             {ENTRIES.map((e, i) => (
-              <Row key={e.year + e.org} entry={e} i={i} />
+              <Row key={e.dates + e.org} entry={e} i={i} />
             ))}
           </div>
         </div>

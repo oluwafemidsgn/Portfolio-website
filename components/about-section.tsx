@@ -64,28 +64,25 @@ export function AboutSection() {
               </Reveal>
               <Reveal delay={0.2}>
                 <p className="mt-6 t-lead text-body max-w-[880px]">
-                  My design journey started with a passion for creating
-                  intuitive and visually captivating experiences, driven by the
-                  transformative impact of design in solving problems and
-                  enhancing user interactions with technology. My aim is to
-                  develop digital experiences that blend functionality with
-                  delight.
+                  I own the full stack of product work: strategy and research,
+                  UX, UI and design systems, through to production-ready
+                  front-end code. Clarity, trust and conversion guide every
+                  decision.
                 </p>
               </Reveal>
               <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
                 <Reveal delay={0.28}>
                   <p className="t-body text-body max-w-[368px]">
-                    My design philosophy focuses on crafting seamless, engaging
-                    user journeys that leave a lasting impression. I believe in
-                    the power of clear communication, user empathy, and a
-                    meticulous eye for detail to create high-quality websites.
+                    I work AI-native. With Cursor, v0 and Claude Code I turn
+                    Figma concepts into live builds within days, so people can
+                    test how a product actually feels before it ships.
                   </p>
                 </Reveal>
                 <Reveal delay={0.36}>
                   <p className="t-body text-body max-w-[368px]">
-                    When I&apos;m not designing or developing, I explore Lagos,
-                    seek inspiration in nature, and continuously learn new
-                    things to improve my design skills.
+                    Today I lead product design at Intasect, a product design
+                    and development agency in Lagos, and build my own products
+                    on the side, like Credentia.
                   </p>
                 </Reveal>
               </div>

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { InfoPanel } from "./info-panel";
 import { SplitLines } from "./motion/split-lines";
 import { EASE_OUT_EXPO } from "./motion/easing";
+import { SITE_INTRO } from "@/lib/site";
 
 export function Hero() {
   return (
@@ -30,8 +31,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: EASE_OUT_EXPO, delay: 0.9 }}
           >
-            Designer partnering with brands across 3D, motion, and visual
-            design. Specializing in embedded, long-term collaborations.
+            {SITE_INTRO}
           </motion.p>
         </div>
 
