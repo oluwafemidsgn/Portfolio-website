@@ -44,7 +44,9 @@ if (missing.length) {
   process.exit(1);
 }
 const kindOf = (f) => (/\.(mp4|mov|webm|m4v)$/i.test(f) ? "video" : "image");
-const urlOf = (f) => `https://res.cloudinary.com/${cloud}/${kindOf(f)}/upload/${folder}/${f}`;
+// Versioned once uploaded, so a re-publish over the same filename never shows a cached old image.
+const versions = {};
+const urlOf = (f) => `https://res.cloudinary.com/${cloud}/${kindOf(f)}/upload/${versions[f] ? `v${versions[f]}/` : ""}${folder}/${f}`;
 const target = process.env.TURSO_DATABASE_URL ? "Turso (live site)" : "local data/portfolio.db";
 console.log(`${refs.length} files → Cloudinary ${folder}/  ·  database: ${target}`);
 if (dry) {
@@ -63,6 +65,7 @@ for (const f of refs) {
   const res = await fetch(`https://api.cloudinary.com/v1_1/${cloud}/${kindOf(f)}/upload`, { method: "POST", body: form });
   const out = await res.json();
   if (!res.ok) { console.error(`upload failed for ${f}: ${out.error?.message || res.status}`); process.exit(1); }
+  versions[f] = out.version;
   console.log(`  ↑ ${f} (${(out.bytes / 1e6).toFixed(1)}MB)`);
 }
 for (const f of refs) {
@@ -85,7 +88,7 @@ if (existing) {
   await db.execute({
     sql: `UPDATE playground_items SET label=@label, date=@date, media_kind=@media_kind, media_url=@media_url, poster_url=@poster_url,
           live_url=@live_url, description=@description, blocks=@blocks, updated_at=@updated_at WHERE id=@id`,
-    args: { ...row, id: existing.id },
+    args: { ...Object.fromEntries(Object.entries(row).filter(([k]) => k !== "name")), id: existing.id },
   });
   console.log(`updated playground item "${it.name}"`);
 } else {
