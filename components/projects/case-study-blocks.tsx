@@ -119,13 +119,17 @@ export function CaseStudyBlocks({ blocks }: { blocks: Block[] }) {
           )}
 
           {b.kind === "section" && (
-            <div className="px-5 sm:px-8 md:px-12 py-10 md:py-16 flex flex-col gap-4 md:gap-5 max-w-[72ch]">
+            // Chapter type sits on the sidebar's scale (title 20px, copy 14px) so the
+            // 70% column never shouts louder than the page around it.
+            <div className="px-5 sm:px-8 md:px-12 py-9 md:py-14 flex flex-col gap-3 md:gap-4 max-w-[64ch]">
               {b.eyebrow && (
                 <div className="t-micro text-body">{b.eyebrow}</div>
               )}
-              <h3 className="t-title text-ink break-words">{b.heading}</h3>
+              <h3 className="[font-family:var(--font-display)] font-[800] uppercase tracking-tight text-ink break-words text-[20px] leading-[1.1] md:text-[22px] xl:text-[26px] xl:leading-[1.05]">
+                {b.heading}
+              </h3>
               {b.body && (
-                <p className="t-lead text-strong whitespace-pre-line break-words">
+                <p className="t-body text-[15px]! md:text-[16px]! leading-[1.55]! text-strong whitespace-pre-line break-words">
                   {b.body}
                 </p>
               )}
