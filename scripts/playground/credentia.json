@@ -1,0 +1,16 @@
+{
+  "slug": "credentia",
+  "item": {
+    "name": "CREDENTIA",
+    "label": "Live product",
+    "date": "2026",
+    "mediaKind": "image",
+    "media": "{media}/credentia-home_1920.jpg",
+    "liveUrl": "https://credentia.site",
+    "description": "A free directory of the documents Nigerians need at every stage of life, with 80+ checklists across 15 categories, including banking and KYC. Search a step, see every document it needs, why you need it and where to get it.",
+    "blocks": [
+      { "kind": "full", "image": "{media}/credentia-checklist_1920.jpg", "alt": "Credentia checklist page", "caption": "CHECKLISTS — EVERY DOCUMENT, WHY, AND WHERE TO GET IT." },
+      { "kind": "full", "image": "{media}/credentia-browse_1920.jpg", "alt": "Credentia browse page", "caption": "BROWSE — 15 CATEGORIES, FROM CIVIL IDENTITY TO BANKING." }
+    ]
+  }
+}

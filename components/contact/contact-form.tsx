@@ -7,16 +7,16 @@ import { EMAIL as SITE_EMAIL } from "@/lib/site";
 
 const EMAIL = SITE_EMAIL;
 
+// Naira in brackets at roughly ₦1,380 / $ (Oct 2026), rounded — update if the rate moves a lot.
 const BUDGETS = [
-  "Under $5k",
-  "$5k – $15k",
-  "$15k – $35k",
-  "$35k – $75k",
-  "$75k+",
+  "$2k – $5k (≈ ₦2.8M – ₦7M)",
+  "$5k – $10k (≈ ₦7M – ₦14M)",
+  "$10k – $20k (≈ ₦14M – ₦28M)",
+  "$20k – $35k (≈ ₦28M – ₦48M)",
   "Not sure yet",
 ];
 
-const TIMELINES = ["< 4 weeks", "1 – 2 months", "2 – 3 months", "Q2 / later"];
+const TIMELINES = ["1 week", "2 – 4 weeks", "1 – 2 months", "3+ months"];
 
 const DISCIPLINES = ["Product design", "Design engineering", "Website", "Brand identity", "Other"];
 
@@ -30,7 +30,7 @@ export function ContactForm() {
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
   const [discipline, setDiscipline] = useState(DISCIPLINES[0]);
-  const [budget, setBudget] = useState(BUDGETS[2]);
+  const [budget, setBudget] = useState(BUDGETS[0]);
   const [timeline, setTimeline] = useState(TIMELINES[1]);
   const [message, setMessage] = useState("");
   const [sent, setSent] = useState(false);

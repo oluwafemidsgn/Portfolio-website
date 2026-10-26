@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "publish:case-study": "node scripts/publish-case-study.mjs",
-    "import:case-study": "node scripts/import-case-study.mjs"
+    "import:case-study": "node scripts/import-case-study.mjs",
+    "publish:playground": "node scripts/publish-playground-item.mjs"
   },
   "dependencies": {
     "@libsql/client": "^0.17.3",

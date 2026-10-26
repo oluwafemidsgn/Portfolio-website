@@ -17,15 +17,11 @@ const DIRECT = {
 const FAQS = [
   {
     q: "Do you take on small projects?",
-    a: "Yes — if the work is focused and the brief is clear. A one-week visual sprint is fair game.",
+    a: "Yes. A one-week project is fair game if the brief is clear.",
   },
   {
     q: "Can you sign an NDA?",
-    a: "Happy to. Send a draft with your first note and I'll countersign before the kickoff call.",
-  },
-  {
-    q: "Do you work with agencies?",
-    a: "Occasionally, as a white-label partner. Standard rates and credit go to the agency.",
+    a: "Yes. Send it with your first note and I'll sign it before we start.",
   },
 ];
 

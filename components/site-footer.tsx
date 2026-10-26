@@ -68,7 +68,7 @@ export function SiteFooter() {
                 </p>
               </Reveal>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 grid-col-rules">
+            <div className="grid grid-cols-3 grid-col-rules [&>*:nth-child(n+4)]:border-t [&>*:nth-child(n+4)]:border-[var(--rule)]">
               {SOCIALS.map((s) => (
                 <SocialTile key={s.key} s={s} />
               ))}

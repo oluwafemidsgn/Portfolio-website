@@ -45,14 +45,37 @@ export function PlaygroundSection({ items }: Props) {
 
             {tiles.length > 0 ? (
               <TileGrid items={tiles} />
-            ) : (
-              <div className="p-8 md:p-10 t-body text-body">
-                No experiments pinned yet.
+            ) : featured ? (
+              // A single project: tell its story here instead of an empty grid.
+              <div className="p-8 md:p-10 flex flex-col gap-5 flex-1 justify-end">
+                <div className="flex items-center justify-between t-micro">
+                  <span className="text-mute tabular-nums">{featured.date}</span>
+                  <span className="text-strong">{featured.name} | {featured.label}</span>
+                </div>
+                {featured.description && (
+                  <p className="t-body text-strong max-w-[528px]">{featured.description}</p>
+                )}
+                <div className="flex flex-wrap gap-x-6 gap-y-2 t-nav">
+                  {featured.liveUrl && (
+                    <a href={featured.liveUrl} target="_blank" rel="noopener noreferrer" data-cursor="zoom" className="text-ink hover:underline">
+                      VIEW LIVE ↗
+                    </a>
+                  )}
+                  <a href="/playground" data-cursor="zoom" className="text-body hover:text-ink">
+                    SEE THE PLAYGROUND →
+                  </a>
+                </div>
               </div>
-            )}
+            ) : null}
           </div>
 
-          <div className="p-2 flex">
+          <a
+            href={featured?.liveUrl || "/playground"}
+            {...(featured?.liveUrl ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            aria-label={featured ? `${featured.name} — ${featured.liveUrl ? "view live" : "open the playground"}` : "Open the playground"}
+            data-cursor="zoom"
+            className="group p-2 flex outline-none focus-visible:ring-1 focus-visible:ring-ink"
+          >
             <motion.div
               className="thumb w-full min-h-[360px] relative overflow-hidden"
               initial={{ scale: 1.08 }}
@@ -61,15 +84,23 @@ export function PlaygroundSection({ items }: Props) {
               transition={{ duration: 1.2, ease: EASE_OUT_EXPO }}
             >
               {featured && (
-                <MediaAsset
-                  kind={featured.mediaKind}
-                  url={featured.mediaUrl}
-                  poster={featured.posterUrl}
-                  alt={featured.name}
-                />
+                <div className="absolute inset-0 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]">
+                  <MediaAsset
+                    kind={featured.mediaKind}
+                    url={featured.mediaUrl}
+                    poster={featured.posterUrl}
+                    alt={featured.name}
+                  />
+                </div>
               )}
+              <span
+                aria-hidden
+                className="absolute top-3 right-3 h-9 w-9 rounded-full bg-paper text-ink flex items-center justify-center opacity-0 scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100"
+              >
+                ↗
+              </span>
             </motion.div>
-          </div>
+          </a>
         </div>
       </Frame>
     </section>
@@ -91,6 +122,7 @@ function TileGrid({ items }: { items: PlaygroundItem[] }) {
             date={p.date}
             title={p.name}
             type={p.label}
+            href="/playground"
             media={{
               kind: p.mediaKind,
               url: p.mediaUrl,
@@ -107,6 +139,7 @@ function TileGrid({ items }: { items: PlaygroundItem[] }) {
               date={p.date}
               title={p.name}
               type={p.label}
+              href="/playground"
               media={{
                 kind: p.mediaKind,
                 url: p.mediaUrl,

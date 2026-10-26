@@ -11,7 +11,7 @@ import { ContactAvailability } from "@/components/contact/contact-availability";
 export const metadata = {
   title: "Contact — Oduneye Oluwafemi",
   description:
-    "Book a project, say hello, or send a reference deck. A note typically earns a reply within 48 hours.",
+    "Start a project or say hello. Replies within 24 hours.",
 };
 
 /**

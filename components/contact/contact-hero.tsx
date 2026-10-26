@@ -6,7 +6,7 @@ import { EASE_OUT_EXPO } from "../motion/easing";
 import { AVAILABILITY } from "@/lib/site";
 
 const FACTS = [
-  { label: "REPLY TIME", value: "~ 48 HRS" },
+  { label: "REPLY TIME", value: "UNDER 24 HRS" },
   { label: "TIMEZONE", value: "GMT+1 / LAGOS" },
   { label: "AVAILABILITY", value: AVAILABILITY.toUpperCase() },
   { label: "BEST FOR", value: "PRODUCT & MVP WORK" },

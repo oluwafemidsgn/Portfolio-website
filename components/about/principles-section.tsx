@@ -5,26 +5,28 @@ import { Frame } from "../motion/frame";
 
 type Principle = { n: string; title: string; desc: string };
 
+// Grounded in the CV profile: clarity, trust and conversion guide every
+// decision; AI-native, concept to live product in days; always learning.
 const PRINCIPLES: Principle[] = [
   {
     n: "01",
-    title: "Clarity over cleverness",
-    desc: "The clever idea is often the second one. The obvious one, executed well, almost always wins.",
+    title: "Clarity first",
+    desc: "If someone has to stop and think about how a screen works, it isn't finished. The clearest version wins over the cleverest.",
   },
   {
     n: "02",
-    title: "Systems that flex",
-    desc: "A good system survives its maker. It carries enough opinion to feel alive and enough room to be wrong in interesting ways.",
+    title: "Earn trust",
+    desc: "People hand products their money, documents and time. Every flow should feel safe, predictable and honest about what happens next.",
   },
   {
     n: "03",
-    title: "Craft as care",
-    desc: "Details are a love letter to whoever shows up next — a user, a teammate, a future version of yourself.",
+    title: "Design for conversion",
+    desc: "Good design moves people to act. I design pages and flows around the one thing each person came to do, and measure whether they did it.",
   },
   {
     n: "04",
-    title: "Ship honest work",
-    desc: "If the story matches the product, the rest takes care of itself. If it doesn't, no amount of polish will save it.",
+    title: "Prototype in code",
+    desc: "I work AI-native, taking ideas from concept to a live, testable product in days, and I keep learning as the craft evolves.",
   },
 ];
 

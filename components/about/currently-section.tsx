@@ -15,24 +15,21 @@ type Card = {
 const CARDS: Card[] = [
   {
     eyebrow: "READING",
-    title: "Herbert Bayer: Universal",
-    meta: "Princeton Architectural Press",
-    detail:
-      "A long look at a Bauhaus sensibility that refused to treat typography, furniture, and posters as separate problems.",
+    title: "How to Talk to Anyone, Anytime, Anywhere",
+    meta: "Larry King",
+    detail: "On listening first and asking better questions, useful in every client call and user interview.",
   },
   {
     eyebrow: "LISTENING",
     title: "Love, Damini",
     meta: "Burna Boy · 2022",
-    detail:
-      "On repeat whenever I'm color-grading late. Puts me in the right headspace for a long render.",
+    detail: "On repeat while I design.",
   },
   {
     eyebrow: "PLAYING",
-    title: "A Short Hike",
-    meta: "Adam Robinson-Yu · 2019",
-    detail:
-      "A small, generous game I keep coming back to. Reminds me that scale isn't the same thing as ambition.",
+    title: "No game right now",
+    meta: "—",
+    detail: "Nothing on the go at the moment.",
   },
 ];
 
