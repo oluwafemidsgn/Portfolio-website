@@ -1,0 +1,26 @@
+{
+  "slug": "intasect-pricing-calculator",
+  "item": {
+    "name": "PRICING CALCULATOR",
+    "label": "Internal tool",
+    "date": "2026",
+    "mediaKind": "image",
+    "media": "{media}/board-01_1920.jpg",
+    "liveUrl": "",
+    "description": "Sales configures a programme on a board, adding or removing deliverables and applying a discount while the total updates live. The scope can then be turned into a branded Quote or Invoice previewed beside the client form and exported to PDF. A catalogue page lets admins edit programme prices, the discount floor and individual service prices, and the app also has history, settings and a client-facing present mode.",
+    "blocks": [
+      {
+        "kind": "full",
+        "image": "{media}/board-02_1920.jpg",
+        "alt": "Pricing Calculator — Branded Quote Preview",
+        "caption": "BRANDED QUOTE PREVIEW"
+      },
+      {
+        "kind": "full",
+        "image": "{media}/board-03_1920.jpg",
+        "alt": "Pricing Calculator — Editable Catalogue",
+        "caption": "EDITABLE CATALOGUE"
+      }
+    ]
+  }
+}

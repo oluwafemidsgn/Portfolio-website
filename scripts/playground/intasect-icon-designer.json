@@ -1,0 +1,26 @@
+{
+  "slug": "intasect-icon-designer",
+  "item": {
+    "name": "EXTRUDO",
+    "label": "Internal tool",
+    "date": "2026",
+    "mediaKind": "image",
+    "media": "{media}/board-01_1920.jpg",
+    "liveUrl": "",
+    "description": "Upload a flat SVG and the app extrudes it into a 3D icon rendered in WebGL with Three.js. Controls cover depth, bevel, gradient shading, echo copies and shadow, camera presets, and eight brand palette groups plus a custom palette. Settings can be exported or imported as a recipe file, and the result exports as a high-resolution PNG.",
+    "blocks": [
+      {
+        "kind": "full",
+        "image": "{media}/board-02_1920.jpg",
+        "alt": "Extrudo — Echoes, Shadow And Palette",
+        "caption": "ECHOES, SHADOW AND PALETTE"
+      },
+      {
+        "kind": "full",
+        "image": "{media}/board-03_1920.jpg",
+        "alt": "Extrudo — Brand Palette Groups",
+        "caption": "BRAND PALETTE GROUPS"
+      }
+    ]
+  }
+}
