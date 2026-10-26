@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
-import { ShareCard, ogFonts } from "@/lib/og";
-import { SITE_ROLE } from "@/lib/site";
+import { OG_PORTRAIT, ShareCard, ogFonts } from "@/lib/og";
+import { AVAILABILITY, SITE_NAME, SITE_ROLE } from "@/lib/site";
 
 export const runtime = "nodejs";
 export const alt = `Oduneye Oluwafemi — ${SITE_ROLE}`;
@@ -9,7 +9,7 @@ export const contentType = "image/png";
 
 export default async function Image() {
   return new ImageResponse(
-    <ShareCard eyebrow="Portfolio" title={SITE_ROLE} meta={["Lagos, Nigeria", "Open to freelance"]} />,
+    <ShareCard eyebrow={SITE_NAME} title={SITE_ROLE} meta={["Lagos, Nigeria", AVAILABILITY]} photo={OG_PORTRAIT} />,
     { ...size, fonts: await ogFonts() },
   );
 }
