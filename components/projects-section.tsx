@@ -40,6 +40,10 @@ type Tile = {
  * comp was built around. Tile count is flexible — anything from 1 upward.
  */
 export function ProjectsSection({ tiles, caseStudyHrefs, comingSoonIds = [], playground = [] }: Props) {
+  const withMedia = playground.filter((p) => p.mediaUrl);
+  // Playground tiles top the grid up to whole rows of four; the rest live on /playground.
+  const spare = (4 - (tiles.length % 4)) % 4;
+  const fill = withMedia.length <= spare ? withMedia.length : spare + Math.floor((withMedia.length - spare) / 4) * 4;
   const all: Tile[] = [
     ...tiles.map((tile) => ({
       key: tile.id,
@@ -50,8 +54,8 @@ export function ProjectsSection({ tiles, caseStudyHrefs, comingSoonIds = [], pla
       comingSoon: tile.comingSoon || (!!tile.caseStudyId && comingSoonIds.includes(tile.caseStudyId)),
       media: { kind: tile.mediaKind, url: tile.mediaUrl, poster: tile.posterUrl },
     })),
-    ...playground
-      .filter((p) => p.mediaUrl)
+    ...withMedia
+      .slice(0, fill)
       .map((p) => ({
         key: p.id,
         date: p.date,

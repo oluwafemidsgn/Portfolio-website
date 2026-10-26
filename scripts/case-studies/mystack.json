@@ -1,0 +1,206 @@
+{
+  "study": {
+    "slug": "mystack",
+    "title": "MyStack",
+    "subtitle": "Product design for a creator commerce platform at Intasect Studio: the creator dashboard, buyer storefront and website.",
+    "client": "Intasect Studio",
+    "role": "Product design",
+    "year": "2025",
+    "type": "Product design",
+    "coverImage": "{media}/frames/01-hero_poster.png",
+    "overview": "A storefront, checkout and payout platform for creators who sell digital products such as templates, guides and presets. I designed the product at Intasect Studio: the creator dashboard, the buyer storefront on mobile and the marketing website. The brand identity is by Intasect Studio's brand team.",
+    "accordion": [
+      {
+        "title": "Challenge",
+        "body": "Selling a digital product usually means putting together a site builder, a payment provider, a file host and an email tool. MyStack's promise is that a creator can do all of it in one place: set up a store, upload a file, share a link and get paid. The product has to make each of those steps feel small."
+      },
+      {
+        "title": "Approach",
+        "body": "The dashboard follows the order a creator works in: Get started, Dashboard, Storefront, Orders, Products, Customers, Analytics, Earnings, Settings. Every list has an empty state that points to the next action, and every action that changes money (refunds, payouts, deletes) asks for confirmation and then confirms it's done. Buyers never see the dashboard. They get a clean mobile storefront that goes from product to purchase in a few screens."
+      },
+      {
+        "title": "Brand",
+        "body": "The identity was created by Intasect's brand team: \"Sell. Scale. Stack.\", the stacked-block motif, naira coins and a warm orange, maroon and pink palette set in Schibsted Grotesk. In the product, the stack appears where a creator achieves something: it builds behind sign-up, and again when the storefront goes live."
+      },
+      {
+        "title": "Scope",
+        "body": "Onboarding, the creator dashboard with its empty, filtered and populated states, the storefront editor, product and order management with refunds, analytics, earnings and payouts, notifications, search, settings, a buyer storefront on mobile, and the marketing website (home, pricing, contact)."
+      }
+    ],
+    "blocks": [
+      {
+        "kind": "full",
+        "image": "{media}/motion/01-hero_1920x1440.mp4",
+        "alt": "MyStack home page: Turn files into revenue",
+        "caption": "THE HOME PAGE: \"TURN FILES INTO REVENUE.\""
+      },
+      {
+        "kind": "section",
+        "heading": "SELL. SCALE. STACK.",
+        "eyebrow": "01 · BRAND (BY INTASECT STUDIO)",
+        "body": "The brand system the product is built on. Identity by Intasect Studio. See the full brand case study at intasectstudio.com/mystack."
+      },
+      {
+        "kind": "full",
+        "image": "{media}/motion/b1-type_intasect.mp4",
+        "alt": "Schibsted Grotesk type animation by Intasect Studio",
+        "caption": "SCHIBSTED GROTESK, THE TYPEFACE ACROSS BRAND AND PRODUCT."
+      },
+      {
+        "kind": "full",
+        "image": "{media}/motion/b2-logo-pattern_intasect.mp4",
+        "alt": "MyStack logo pattern by Intasect Studio"
+      },
+      {
+        "kind": "duo",
+        "left": "{media}/frames/b3a-creator-portrait_intasect.png",
+        "right": "{media}/frames/b3b-go-live_intasect.png",
+        "leftAlt": "Creator portrait brand image by Intasect Studio",
+        "rightAlt": "Go live brand image by Intasect Studio"
+      },
+      {
+        "kind": "full",
+        "image": "{media}/motion/b4-sell-scale-stack_intasect.mp4",
+        "alt": "Sell. Scale. Stack. by Intasect Studio"
+      },
+      {
+        "kind": "duo",
+        "left": "{media}/frames/b6a-tee_intasect.png",
+        "right": "{media}/frames/b6b-hoodie_intasect.png",
+        "leftAlt": "MyStack tee by Intasect Studio",
+        "rightAlt": "MyStack hoodie by Intasect Studio",
+        "caption": "BRAND IDENTITY: INTASECT STUDIO."
+      },
+      {
+        "kind": "section",
+        "heading": "FROM EMAIL TO STORE IN FOUR SCREENS.",
+        "eyebrow": "02 · GETTING STARTED",
+        "body": "Sign up with an email, confirm with a code and fill in four fields. The brand's stack builds behind the form, and steps aside when it's time to set up the profile."
+      },
+      {
+        "kind": "full",
+        "image": "{media}/motion/03-onboarding_1920x1140.mp4",
+        "alt": "Onboarding from email to store setup"
+      },
+      {
+        "kind": "section",
+        "heading": "NUMBERS THAT START AT ZERO.",
+        "eyebrow": "03 · THE DASHBOARD",
+        "body": "A new creator's dashboard is honest about being empty. Earnings, orders, sales and traffic all start at ₦0, with a prompt to create a first product. As sales come in, the same layout fills up, with the current month plotted against the last."
+      },
+      {
+        "kind": "full",
+        "image": "{media}/motion/04-dashboard_1920x1140.mp4",
+        "alt": "The creator dashboard filling up"
+      },
+      {
+        "kind": "duo",
+        "left": "{media}/motion/05-filter_1000x1228.mp4",
+        "right": "{media}/motion/06-calendar_1000x1228.mp4",
+        "leftAlt": "Filtering charts by product",
+        "rightAlt": "Custom date range comparison",
+        "caption": "FILTER EVERY CHART BY PRODUCT. / A CUSTOM RANGE, COMPARED AGAINST ANOTHER."
+      },
+      {
+        "kind": "section",
+        "heading": "A STOREFRONT YOU EDIT IN PLACE.",
+        "eyebrow": "04 · SELLING",
+        "body": "The storefront editor shows a live preview next to the fields. Change the header and the preview changes with it. Publishing replaces the editor's header with the store's new address."
+      },
+      {
+        "kind": "full",
+        "image": "{media}/motion/08-storefront_1920x1140.mp4",
+        "alt": "Storefront editor with live preview"
+      },
+      {
+        "kind": "section",
+        "heading": "ADD A PRODUCT WITHOUT LEAVING THE LIST.",
+        "body": "Products are created in a drawer over the product list: name, description, price, display images, the files themselves, a link and the button text. Each upload shows its progress, and the drawer ends on a clear \"Product successfully created.\""
+      },
+      {
+        "kind": "full",
+        "image": "{media}/motion/07-product_1920x1140.mp4",
+        "alt": "Creating a product in a drawer"
+      },
+      {
+        "kind": "section",
+        "heading": "REFUNDS THAT CONFIRM TWICE.",
+        "body": "Refunds start from the order. The drawer shows the customer and items, a modal asks once more, and the result is stated plainly."
+      },
+      {
+        "kind": "full",
+        "image": "{media}/motion/15-refund_1920x1140.mp4",
+        "alt": "Refunding an order"
+      },
+      {
+        "kind": "section",
+        "heading": "STAYING ON TOP.",
+        "eyebrow": "05"
+      },
+      {
+        "kind": "duo",
+        "left": "{media}/motion/09-notifications_1000x1228.mp4",
+        "right": "{media}/motion/10-search_1000x1228.mp4",
+        "leftAlt": "Notifications with an unread view",
+        "rightAlt": "Search answering as you type",
+        "caption": "NOTIFICATIONS, WITH AN UNREAD VIEW. / SEARCH THAT ANSWERS AS YOU TYPE."
+      },
+      {
+        "kind": "duo",
+        "left": "{media}/motion/12-analytics_1000x1228.mp4",
+        "right": "{media}/motion/11-settings_1000x1228.mp4",
+        "leftAlt": "Per-product analytics",
+        "rightAlt": "Notification preferences",
+        "caption": "EVERY PRODUCT HAS ITS OWN ANALYTICS. / NOTIFICATION PREFERENCES, ONE SWITCH EACH."
+      },
+      {
+        "kind": "full",
+        "image": "{media}/frames/16-screens_3840.png",
+        "alt": "Dashboard, orders, analytics, storefront, products and settings screens",
+        "caption": "DASHBOARD, ORDERS, ANALYTICS, STOREFRONT, PRODUCTS, SETTINGS."
+      },
+      {
+        "kind": "section",
+        "heading": "BROWSE, BUY, DONE.",
+        "eyebrow": "06 · THE BUYER'S SIDE",
+        "body": "Buyers land on the creator's storefront on their phone. They browse the store, open a product, check out, and get a confirmation that the item is theirs."
+      },
+      {
+        "kind": "full",
+        "image": "{media}/motion/13-buyer-app_1920x1140.mp4",
+        "alt": "Buyer storefront on mobile, from browse to purchase"
+      },
+      {
+        "kind": "full",
+        "image": "{media}/frames/17-mobile-set_3840.png",
+        "alt": "Buyer storefront screens on mobile"
+      },
+      {
+        "kind": "section",
+        "heading": "ONE PAGE, ONE PRICE.",
+        "eyebrow": "07 · THE WEBSITE",
+        "body": "The marketing site makes one promise and one price: a free plan, and 7% of each transaction."
+      },
+      {
+        "kind": "full",
+        "image": "{media}/motion/14-website_1920x1140.mp4",
+        "alt": "MyStack marketing website"
+      },
+      {
+        "kind": "full",
+        "image": "{media}/frames/18-closing_3840.png",
+        "alt": "MyStack closing frame"
+      }
+    ],
+    "status": "published",
+    "comingSoon": false
+  },
+  "heroTile": {
+    "year": "2025",
+    "name": "MyStack",
+    "discipline": "Product design",
+    "mediaKind": "video",
+    "mediaUrl": "{media}/motion/01-hero_1920x1440.mp4",
+    "posterUrl": "{media}/frames/01-hero_poster.png"
+  }
+}

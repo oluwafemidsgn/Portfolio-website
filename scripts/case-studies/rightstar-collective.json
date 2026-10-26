@@ -1,0 +1,189 @@
+{
+  "study": {
+    "slug": "rightstar-collective",
+    "title": "Rightstar Collective",
+    "subtitle": "A curated network and job board for creatives, designed in Figma and built end to end with Claude.",
+    "client": "Rightstar Collective",
+    "role": "Design · AI-assisted build",
+    "year": "2026",
+    "type": "Product design · Build",
+    "coverImage": "{media}/frames/01-hero_poster.png",
+    "overview": "A curated network and job board for creatives. Studios post roles, creatives publish their work and profiles, and a small team reviews everything before it goes live. I designed the product in Figma, then used Claude to build it end to end: a public site, a creative dashboard, a hiring dashboard and an admin console, built with Next.js, Payload CMS, Clerk, Tailwind and Postgres.",
+    "accordion": [
+      {
+        "title": "Challenge",
+        "body": "Rightstar has to work for three groups at once. Creatives want somewhere credible to show their work and find roles. Studios and companies want a shortlist they can trust. The team behind it needs to keep the quality bar without reviewing in a spreadsheet. If any one of those breaks, the other two stop showing up."
+      },
+      {
+        "title": "Approach",
+        "body": "Everything public goes through one review model. Every profile, project, role and company starts as In review. An admin approves it, and only then does it appear on the site. Applications follow their own path: Applied → Viewed → Shortlisted. Each persona has its own dashboard, but all three use the same status language."
+      },
+      {
+        "title": "Identity",
+        "body": "The site is black and white and led by type. Frank Ruhl Libre carries the headlines and Public Sans runs the interface. Each page gets one colour moment: peach for the board, lime for a role, ice and lavender for supporting panels. People are shown in star-shaped cut-outs, which is the most recognisable element of the brand."
+      },
+      {
+        "title": "Outcome",
+        "body": "The result is a working product: 14 public pages, a creative dashboard, a hiring dashboard and an in-house moderation console. All of it runs on one CMS that serves as the source of truth, and an end-to-end test suite covers the full marketplace loop."
+      }
+    ],
+    "blocks": [
+      {
+        "kind": "full",
+        "image": "{media}/motion/01-hero_1920x1440.mp4",
+        "alt": "Rightstar home page with star-shaped portraits",
+        "caption": "HOME, WITH THE STARS TURNING AT THEIR OWN SPEEDS."
+      },
+      {
+        "kind": "section",
+        "heading": "SUBMIT. REVIEW. LIVE.",
+        "eyebrow": "01 · THE LOOP",
+        "body": "Nothing reaches the public site until someone has looked at it. A creative submits a project, it shows up in the admin queue, one click approves it, and it lands on /projects. The status on the creative's own dashboard flips to Live at the same moment."
+      },
+      {
+        "kind": "full",
+        "image": "{media}/motion/02-loop_1920x1140.mp4",
+        "alt": "A project moving from submission to admin approval to live"
+      },
+      {
+        "kind": "section",
+        "heading": "TYPE FIRST, ONE COLOUR PER PAGE.",
+        "eyebrow": "02 · IDENTITY"
+      },
+      {
+        "kind": "duo",
+        "left": "{media}/motion/03-type_1000x1228.mp4",
+        "right": "{media}/motion/04-colour_1000x1228.mp4",
+        "leftAlt": "Frank Ruhl Libre and Public Sans type specimen",
+        "rightAlt": "Black and white with one colour moment",
+        "caption": "FRANK RUHL LIBRE FOR DISPLAY, PUBLIC SANS FOR INTERFACE. ONE FLUID SCALE, NO BREAKPOINT OVERRIDES. / BLACK AND WHITE, WITH ONE COLOUR MOMENT PER PAGE."
+      },
+      {
+        "kind": "section",
+        "heading": "NOT EVERYTHING SHOULD SHOUT.",
+        "body": "Buttons, chips, tags and badges each have one job. There is one primary action per view. Row actions are text only. Choices are soft pills, read-only tags are outlined, and status badges are the only filled colour in a list."
+      },
+      {
+        "kind": "full",
+        "image": "{media}/motion/14-hierarchy_1920x1140.mp4",
+        "alt": "Buttons, chips, tags and badges in their hierarchy"
+      },
+      {
+        "kind": "section",
+        "heading": "THE BOARD, FILTERED IN PLACE.",
+        "eyebrow": "03 · WEBSITE",
+        "body": "Filters live in a sidebar of collapsible groups. Opening a group, picking a discipline or clearing it updates the list and the count immediately."
+      },
+      {
+        "kind": "full",
+        "image": "{media}/motion/05-board_1920x1140.mp4",
+        "alt": "The job board filtering in place"
+      },
+      {
+        "kind": "section",
+        "heading": "A DIRECTORY OF PEOPLE, NOT LOGOS.",
+        "body": "Every creative card leads with the person. On hover the photo pushes in. Filtering by industry reflows the grid rather than reloading it."
+      },
+      {
+        "kind": "full",
+        "image": "{media}/motion/07-creatives_1920x1140.mp4",
+        "alt": "The creatives directory reflowing as it filters"
+      },
+      {
+        "kind": "section",
+        "heading": "BUILT FOR THE PHONE IN YOUR HAND."
+      },
+      {
+        "kind": "full",
+        "image": "{media}/motion/13-mobile_1920x1140.mp4",
+        "alt": "Rightstar on mobile"
+      },
+      {
+        "kind": "full",
+        "image": "{media}/frames/15-pages_3840.png",
+        "alt": "Home, the board, a role, the creatives and projects pages",
+        "caption": "HOME, THE BOARD, A ROLE, THE CREATIVES, PROJECTS."
+      },
+      {
+        "kind": "full",
+        "image": "{media}/frames/16-mobile-set_3840.png",
+        "alt": "The same pages at mobile width",
+        "caption": "THE SAME PAGES AT 390."
+      },
+      {
+        "kind": "section",
+        "heading": "APPLY WITHOUT LEAVING THE ROLE.",
+        "eyebrow": "04 · PRODUCT",
+        "body": "A role page opens its own application panel: a short note, an optional portfolio link, and send. Once it's sent, the button turns into a lime confirmation, and a reload won't let you apply twice."
+      },
+      {
+        "kind": "full",
+        "image": "{media}/motion/06-apply_1920x1140.mp4",
+        "alt": "Applying to a role from its own page"
+      },
+      {
+        "kind": "section",
+        "heading": "A PROFILE THAT TELLS YOU WHERE IT STANDS."
+      },
+      {
+        "kind": "duo",
+        "left": "{media}/motion/08-profile_1000x1228.mp4",
+        "right": "{media}/motion/09-status_1000x1228.mp4",
+        "leftAlt": "Creative profile editor with single-choice chips",
+        "rightAlt": "Status badges across the dashboards",
+        "caption": "SINGLE-CHOICE CHIPS FOR INDUSTRY AND LEVEL. THE DIRECTORY CARD SHOWS IN REVIEW UNTIL IT GOES LIVE. / ONE STATUS LANGUAGE ACROSS EVERY DASHBOARD."
+      },
+      {
+        "kind": "section",
+        "heading": "HIRING, FROM VERIFIED TO SHORTLIST.",
+        "body": "Companies get their own dashboard. A new company is marked Verification pending until the team approves it. Applicants are grouped under each listing, and a studio can mark someone as viewed or shortlist them in place."
+      },
+      {
+        "kind": "full",
+        "image": "{media}/motion/11-hire_1920x1140.mp4",
+        "alt": "The hiring dashboard shortlisting an applicant"
+      },
+      {
+        "kind": "section",
+        "heading": "ONE QUEUE FOR EVERYTHING WAITING.",
+        "body": "The admin console is built with the site's own design system. Creatives, companies, projects, roles and blog posts all wait in one queue, and the count drops to \"All caught up\" as items are approved."
+      },
+      {
+        "kind": "full",
+        "image": "{media}/motion/10-approvals_1920x1140.mp4",
+        "alt": "The admin approval queue emptying"
+      },
+      {
+        "kind": "section",
+        "heading": "THE CREATIVE'S DAY, AT A GLANCE.",
+        "body": "The dashboard home shows live numbers, a feed of what changed (shortlisted, applied, approved, live) and a profile-health checklist."
+      },
+      {
+        "kind": "full",
+        "image": "{media}/motion/12-dashboard_1920x1140.mp4",
+        "alt": "The creative dashboard home"
+      },
+      {
+        "kind": "full",
+        "image": "{media}/frames/17-signed-in_3840.png",
+        "alt": "Creative, business and admin views",
+        "caption": "CREATIVE, BUSINESS AND ADMIN VIEWS."
+      },
+      {
+        "kind": "full",
+        "image": "{media}/frames/18-closing_3840.png",
+        "alt": "Rightstar Collective closing frame"
+      }
+    ],
+    "status": "published",
+    "comingSoon": false
+  },
+  "heroTile": {
+    "year": "2026",
+    "name": "Rightstar Collective",
+    "discipline": "Product design",
+    "mediaKind": "video",
+    "mediaUrl": "{media}/motion/01-hero_1920x1440.mp4",
+    "posterUrl": "{media}/frames/01-hero_poster.png"
+  }
+}
